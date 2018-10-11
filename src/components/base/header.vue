@@ -23,6 +23,7 @@ export default {
     right: 0;
     padding: .2rem;
     background-color: @theme_background;
+    color: @base_color;
     text-align: center;
   }
 </style>

@@ -1,7 +1,6 @@
 <template>
   <div class="wrapper">
     <Header :tabname="tabname"></Header>
-    <noPage></noPage>
     <div class="index"></div>
     <scrollTop></scrollTop>
     <Footer :urlRouter="$route.path" :cartnum='cartLength' ref="footer"></Footer>
@@ -10,7 +9,6 @@
 
 <script>
 import Header from './base/header'
-import noPage from './base/noPage'
 import scrollTop from './base/scrollTop'
 import Footer from './base/footer'
 export default {
@@ -22,7 +20,6 @@ export default {
   },
   components: {
     Header,
-    noPage,
     scrollTop,
     Footer
   }
@@ -30,7 +27,4 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.index {
-  height: 8000px;
-}
 </style>

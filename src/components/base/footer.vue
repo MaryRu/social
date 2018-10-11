@@ -3,19 +3,19 @@
     <div class="footer-item" :class="{active:urlRouter == '/index' || urlRouter == '/'}">
       <router-link to='./index'>
         <i class="icon footerIcon footerHomeIcon"></i>
-        <p class="footer-title">首页</p>
+        <p class="footer-title">招待</p>
       </router-link>
     </div>
     <div class="footer-item" :class="{active:urlRouter == '/group'}">
       <router-link to='./group'>
         <i class="icon footerIcon footerGroupIcon"></i>
-        <p class="footer-title">拼团</p>
+        <p class="footer-title">颜络社</p>
       </router-link>
     </div>
     <div class="footer-item" :class="{active:urlRouter == '/cart'}">
       <router-link to='./cart'>
         <i class="icon footerIcon footerCartIcon"></i>
-        <p class="footer-title">购物车</p>
+        <p class="footer-title">颜粉圈</p>
       </router-link>
       <transition name="bullet">
         <div class="cart-num" v-show="showNum">{{cartnum}}</div>
