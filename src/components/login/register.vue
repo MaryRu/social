@@ -4,18 +4,30 @@
       <img src="../../assets/images/login.png" alt="">
     </div>
     <div class="login-cont">
-      <div class="flex-center flex-align-center content">
-        <i class="icon icon-phone"></i> <el-input class="name" v-model="phone" placeholder="请输入手机号码"></el-input>
+      <div class="flex-align-center content">
+        <i class="icon icon-phone"></i>
+        <input type="number" placeholder="请输入手机号码" v-model="phone">
       </div>
-      <div class="flex-center flex-align-center content">
-        <i class="icon icon-password"></i><el-input class="name" v-model="password" placeholder="请输入密码"></el-input>
+      <div class="flex-align-center content code">
+        <i class="icon icon-code"></i>
+        <input type="number" placeholder="请输入验证码" v-model="code">
+        <span :class="{'haveSend':isSend}" @click="sendCode">{{verificationCodeTxt}}</span>
+      </div>
+      <div class="flex-align-center content">
+        <i class="icon icon-password"></i>
+        <input type="number" placeholder="请输入密码" v-model="password">
+      </div>
+      <div class="flex-align-center content">
+        <i class="icon icon-againword"></i>
+        <input type="number" placeholder="确认密码" v-model="againword">
       </div>
     </div>
     <div class="login-bottom">
-      <el-row class=""><el-button type="danger" class="button">登&nbsp;&nbsp;录</el-button></el-row>
-      <div class="flex-between login-forget">
-        <router-link to="/"><p>忘记密码</p></router-link>
-        <router-link to="/"><p>立即注册</p></router-link>
+      <router-link to="/login">
+        <el-row class=""><el-button type="danger" class="button">注&nbsp;&nbsp;册</el-button></el-row>
+      </router-link>
+      <div class="desc">
+        注册代表您已阅读并同意 <span>青沫茶颜用户协议</span>
       </div>
     </div>
   </div>
@@ -23,17 +35,58 @@
 
 <style lang="less" scoped>
 @import '../../assets/less/login/login';
-.el-input__inner {
-  background-color: transparent;
-}
 </style>
 
 <script>
+import { Toast } from 'mint-ui'
 export default {
   data () {
     return {
       phone: '',
-      password: ''
+      password: '',
+      againword: '',
+      code: '',
+      isSend: false,
+      verificationCodeTxt: '获取验证码',
+      z_tel: /^1(3|4|5|6|7|8|9)\d{9}$/
+    }
+  },
+  created () {
+  },
+  methods: {
+    // 倒计时
+    ctimer (time) {
+      var t = time
+      var that = this
+      if (t > 0) {
+        this.isSend = true
+        this.verificationCodeTxt = t + 's后重发'
+        t--
+        setTimeout(function () {
+          that.ctimer(t)
+        }, 1000)
+      } else {
+        this.isSend = false
+        this.verificationCodeTxt = '获取验证码'
+      }
+    },
+    // 点击发送验证码
+    sendCode () {
+      if (!this.phone) {
+        Toast('请填写电话号码!')
+        return false
+      }
+      if (this.z_tel.test(this.phone) === false) {
+        Toast('您的电话号码格式有误!')
+        return false
+      }
+      if (this.isSend) {
+        Toast('请稍后点击！')
+        return false
+      } else {
+        // 调取发送短信接口
+        this.ctimer(60)
+      }
     }
   }
 }

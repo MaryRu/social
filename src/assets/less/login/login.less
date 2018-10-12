@@ -8,8 +8,11 @@
   bottom: 0;
   left: 0;
   right: 0;
+  span {
+    color: @font_color;
+  }
   .login-top {
-    margin-top: 2rem;
+    margin-top: 1.2rem;
     text-align: center;
     img{
       width: 2rem;
@@ -21,16 +24,17 @@
     .content {
       width: 80%;
       margin: 0.2rem auto 0;
+      padding: 0 .2rem;
       border-bottom: 1px solid #ccc;
       i {
         margin-right: .2rem;
       }
-      .name {
+      input {
+        color: #fff;
         background-color: transparent;
-        width: 80%;
-        input {
-          background-color: transparent;
-        }
+      }
+      input::-webkit-input-placeholder {
+        color: #ccc;
       }
     }
   }
@@ -39,6 +43,11 @@
     margin: .8rem auto 0;
     .button {
       width: 100%;
+    }
+    .desc {
+      position: fixed;
+      bottom: .2rem;
+      color: #ccc;
     }
     .login-forget {
       margin-top: .2rem;
