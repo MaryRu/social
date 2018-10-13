@@ -3,7 +3,7 @@
     <div class="footer-item" :class="{active:urlRouter == '/index' || urlRouter == '/'}">
       <router-link to='./index'>
         <i class="icon footerIcon footerHomeIcon"></i>
-        <p class="footer-title">招待</p>
+        <p class="footer-title">首页</p>
       </router-link>
     </div>
     <div class="footer-item" :class="{active:urlRouter == '/group'}">
@@ -12,14 +12,16 @@
         <p class="footer-title">颜络社</p>
       </router-link>
     </div>
-    <div class="footer-item" :class="{active:urlRouter == '/cart'}">
-      <router-link to='./cart'>
-        <i class="icon footerIcon footerCartIcon"></i>
+    <div class="footer-item flex-center" @click="add">
+      <div class="addButton flex-center flex-align-center">
+        <i class="icon footerIcon footerAddIcon"></i>
+      </div>
+    </div>
+    <div class="footer-item" :class="{active:urlRouter == '/societyNews'}">
+      <router-link to='./societyNews'>
+        <i class="icon footerIcon footerNewsIcon"></i>
         <p class="footer-title">颜粉圈</p>
       </router-link>
-      <transition name="bullet">
-        <div class="cart-num" v-show="showNum">{{cartnum}}</div>
-      </transition>
     </div>
     <div class="footer-item" :class="{active:urlRouter == '/member'}">
       <router-link to='./member'>
@@ -27,6 +29,25 @@
         <p class="footer-title">我的</p>
       </router-link>
     </div>
+    <mt-popup v-model="popupVisible" popup-transition="popup-fade" class="flex-end" >
+      <div class="pop-box flex-align-end flex-wrap">
+        <div class="flex pop-content">
+          <div class="list-box">
+            <router-link to="/">
+              <img src="../../assets/images/drink.png" alt="">
+              <p>点单</p>
+            </router-link>
+          </div>
+          <div class="list-box">
+            <router-link to="/group">
+              <img src="../../assets/images/giftCard.png" alt="">
+              <p>礼品卡</p>
+            </router-link>
+          </div>
+        </div>
+        <div class="icon icon-close pop-bottom" @click="close"></div>
+      </div>
+    </mt-popup>
   </footer>
 </template>
 
@@ -35,16 +56,15 @@ export default {
   props: ['urlRouter', 'cartnum'],
   data () {
     return {
-      showNum: false
+      popupVisible: false
     }
   },
-  watch: {
-    showNum () {
-      if (this.showNum) {
-        setTimeout(() => {
-          this.showNum = false
-        }, 800)
-      }
+  methods: {
+    add () {
+      this.popupVisible = true
+    },
+    close () {
+      this.popupVisible = false
     }
   }
 }
@@ -62,24 +82,88 @@ footer {
   box-shadow: 0 -2px 9px rgba(0, 0, 0, .1);
 }
 .footer-item {
-  width: 25%;
+  width: 20%;
   text-align: center;
   position: relative;
 }
-.cart-num {
-  position: absolute;
-  background: @theme_background;
-  color: @base_color;
-  text-align: center;
-  top: -.2rem;
-  right: .3rem;
-  width: .5rem;
-  height: .4rem;
-  line-height: .4rem;
-  border-radius: 0.8rem;
-  margin: auto;
+.icon {
+  display: inline-block;
+  background: url('../../assets/images/icon.png') no-repeat;
+  background-size: 400px 400px;
+  &.footerHomeIcon {
+    width: 30px;
+    height: 30px;
+    background-position: -60px 0;
+  }
+  &.footerGroupIcon {
+    width: 30px;
+    height: 30px;
+    background-position: -60px -30px;
+  }
+  &.footerAddIcon {
+    width: 40px;
+    height: 40px;
+    background-position: -150px 0;
+  }
+  &.footerNewsIcon {
+    width: 30px;
+    height: 30px;
+    background-position: -60px -60px;
+  }
+  &.footerMemberIcon {
+    width: 30px;
+    height: 30px;
+    background-position: -60px -90px;
+  }
+  &.icon-close {
+    width: 30px;
+    height: 30px;
+    background-position: 0 -60px;
+  }
+}
+.active .footer-title{
+  color: @theme_color;
+}
+.active .footerHomeIcon {
+  background-position: -90px 0;
+}
+.active .footerGroupIcon {
+  background-position: -90px -30px;
+}
+.active .footerNewsIcon {
+  background-position: -90px -60px;
+}
+.active .footerMemberIcon {
+  background-position: -90px -90px;
+}
+.addButton {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: @theme_background;
 }
 .footer-title {
   color: @base_textColor;
+}
+.mint-popup {
+  width: 100%;
+  height: 100%;
+}
+.pop-bottom {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  margin-left: -15px;
+}
+.pop-box {
+  margin-bottom: 3.5rem;
+  .list-box {
+    // margin-top: 2.5rem;
+    height: 50%;
+    text-align: center;
+    img {
+      width: 50%;
+    }
+  }
 }
 </style>

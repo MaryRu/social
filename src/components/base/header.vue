@@ -6,11 +6,7 @@
 
 <script>
 export default {
-  props: ['tabname'],
-  data () {
-    return {
-    }
-  }
+  props: ['tabname']
 }
 </script>
 
