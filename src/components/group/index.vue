@@ -35,7 +35,7 @@
               </div>
               <i class="icon icon-more"></i>
             </div>
-            <div class="list-content">
+            <div class="list-content mb">
               <div class="text">
                 <router-link to="/">{{item.content}}</router-link>
               </div>
@@ -47,21 +47,21 @@
                 </figure>
               </div>
             </div>
-            <div class="list-bottom">
-              <span class="like">
+            <div class="list-bottom flex-align-center flex-between">
+              <span class="like flex-align-center">
                 <div class="VueStar" :class="[item.is_like == 1 ? 'islike' : '']">
                   <div class="VueStar__ground">
                     <div class="VueStar__icon" @click="islike(item.id, index)" :class="{'animated tada': !!item.is_like}">
-                      <i class="icon like-icon"></i>
+                      <i class="icon icon-like"></i>
                     </div>
                     <div class="VueStar__decoration" :class="{ 'VueStar__decoration--active': !!item.is_like }"></div>
                   </div>
                 </div>
                 {{item.likes_size}}
               </span>
-              <router-link :to="'/post/'+item.id">
-                <span class="comment">
-                  <i class="icon comment-icon"></i>{{item.comment_size}}</span>
+              <router-link to="/">
+                <span class="comment flex-align-center">
+                  <i class="icon icon-comment"></i>{{item.comment_size}}</span>
               </router-link>
             </div>
           </li>
@@ -104,6 +104,60 @@ export default {
             {
               file_name: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658'
             },
+            {
+              file_name: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658'
+            }
+          ],
+          is_like: '1',
+          likes_size: '123',
+          comment_size: '555'
+        },
+        {
+          id: '1',
+          img: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658',
+          name: '没头脑的不高兴不开心',
+          time: '2018-10-13',
+          content: '这里是描述内容这里是描述内容这里是描述内容述内容这里是描述内容这里是描述内容这里是描述内容',
+          files: [
+            {
+              file_name: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658'
+            },
+            {
+              file_name: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658'
+            },
+            {
+              file_name: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658'
+            }
+          ],
+          is_like: '1',
+          likes_size: '123',
+          comment_size: '555'
+        },
+        {
+          id: '1',
+          img: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658',
+          name: '没头脑的不高兴不开心',
+          time: '2018-10-13',
+          content: '这里是描述内容这里是描述内容这里是描述内容述内容这里是描述内容这里是描述内容这里是描述内容',
+          files: [
+            {
+              file_name: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658'
+            },
+            {
+              file_name: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658'
+            }
+          ],
+          is_like: '1',
+          likes_size: '123',
+          comment_size: '555'
+        },
+        {
+          id: '1',
+          img: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658',
+          name: '没头脑的不高兴不开心',
+          time: '2018-10-13',
+          content: '这里是描述内容这里是描述内容这里是描述内容述内容这里是描述内容这里是描述内容这里是描述内容',
+          files: [
             {
               file_name: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658'
             }

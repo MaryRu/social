@@ -147,7 +147,7 @@ footer {
 }
 .mint-popup {
   width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 .pop-bottom {
   position: fixed;
@@ -162,7 +162,7 @@ footer {
     height: 50%;
     text-align: center;
     img {
-      width: 50%;
+      width: 30%;
     }
   }
 }
