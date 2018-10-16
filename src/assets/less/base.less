@@ -177,7 +177,7 @@ input:focus{
 .container {
   flex: 1;
   margin-top: .8rem;
-  margin-bottom: .88rem;
+  margin-bottom: 1rem;
 }
 
 .right {
@@ -237,10 +237,8 @@ input:focus{
   margin-right: .2rem;
 }
 .text-ellipsis {
-  // overflow: hidden;
-  // text-overflow: ellipsis;
-  // white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -345,5 +343,10 @@ input:focus{
     width: 30px;
     height: 30px;
     background-position: -60px -150px;
+  }
+  &.icon-addFriend {
+    width: 20px;
+    height: 20px;
+    background-position: -380px 0;
   }
 }

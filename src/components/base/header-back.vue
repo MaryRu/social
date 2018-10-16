@@ -26,6 +26,9 @@ export default {
     background-color: @theme_background;
     color: @base_color;
     text-align: center;
+    i {
+      color: #fff;
+    }
     p {
       text-align: center;
     }

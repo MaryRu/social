@@ -6,6 +6,9 @@ import register from '@/components/login/register'
 import group from '@/components/group/index'
 import societyNews from '@/components/societyNews/index'
 import member from '@/components/member/index'
+import available from '@/components/home/available'
+import entertain from '@/components/home/entertain'
+import intimate from '@/components/home/intimate'
 
 Vue.use(Router)
 
@@ -44,6 +47,21 @@ export default new Router({
       path: '/member',
       name: 'member',
       component: member
+    },
+    {
+      path: '/available',
+      name: 'available',
+      component: available
+    },
+    {
+      path: '/entertain',
+      name: 'entertain',
+      component: entertain
+    },
+    {
+      path: '/intimate',
+      name: 'intimate',
+      component: intimate
     }
   ]
 })
