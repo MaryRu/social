@@ -1,7 +1,8 @@
 <template>
   <header class="head">
-    <div class="search-input">
-      <router-link to="search">
+    <div class="search-input flex-align-center ">
+      <a href="javascript:history.go(-1)" class="left"><i class="el-icon-arrow-left"></i></a>
+      <router-link to="search" class="search">
         <div class="inputBox">
           <label class="icon icon-search searchIcon" for="search"></label>
           <input type="text" id='search' placeholder='搜索商品' />
@@ -12,50 +13,42 @@
 </template>
 
 <style lang="less" scoped>
+@import '../../assets/less/variable';
 header{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    background-color: #fff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+  background-color: @theme_background;
+  height: 0.85rem;
+  border-bottom: 1px solid #ececec;
+}
+.left {
+  color: #fff;
+  margin-right: .2rem;
+}
+.search {
+  width: 85%;
+}
+.search-input{
+  width: 100%;
+  padding: .19rem;
+  .inputBox{
+    border-radius: 0.2rem;
+    padding-left: 0.19rem;
     display: flex;
     align-items: center;
-    height: 0.85rem;
-    padding-left: 0.2rem;
-    border-bottom: 1px solid #ececec;
-    .search-button{
-      border: none;
-      background: none;
-      font-size: .25rem;
-      color: #999;
-      margin-left: .2rem;
-      &:focus{
-        border: none;
-        outline: -webkit-focus-ring-color auto 0;
-      }
-    }
-  }
-  .search-input{
-    padding: .19rem;
-    width: 80%;
-    .inputBox{
+    background-color: #fff;
+    input{
       border-radius: 0.2rem;
-      padding-left: 0.19rem;
-      display: flex;
-      align-items: center;
-      background-color: #ededed;
-      input{
-        border-radius: 0.2rem;
-        border: none;
-        height: 0.49rem;
-        // width: 90%;
-        background-color: #ededed;
-        &:focus{
-          outline-offset: 0;
-          outline: none;
-        }
+      border: none;
+      height: 0.49rem;
+      background-color: #fff;
+      &:focus{
+        outline-offset: 0;
+        outline: none;
       }
     }
   }
+}
 </style>

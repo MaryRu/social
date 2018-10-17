@@ -1,22 +1,39 @@
 <template>
   <div class="processing">
     <!-- 进行中 -->
-    <ul>
-      <li v-for="(item,index) in processList" :key="index">
+    <ul class="mt">
+      <li v-for="(item,index) in processList" :key="index" class="mb">
         <div class="imgBox">
           <img :src="item.img" alt="">
+        </div>
+        <div class="flex-align-center flex-around condition">
+          <div class="modify btn"><router-link to="/">修改条件</router-link></div>
+          <div class="deleat btn">删除</div>
         </div>
       </li>
     </ul>
   </div>
 </template>
+<style lang="less" scoped>
+@import '../../assets/less/group/available';
+</style>
+
 <script>
 export default {
   data () {
     return {
       processList: [
         {
-          img: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658'
+          img: 'http://ofkzpykzq.bkt.clouddn.com/card1.jpg'
+        },
+        {
+          img: 'http://ofkzpykzq.bkt.clouddn.com/card1.png'
+        },
+        {
+          img: 'http://ofkzpykzq.bkt.clouddn.com/card2.png'
+        },
+        {
+          img: 'http://ofkzpykzq.bkt.clouddn.com/card3.png'
         }
       ]
     }

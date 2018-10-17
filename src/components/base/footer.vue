@@ -33,13 +33,13 @@
       <div class="pop-box flex-align-end flex-wrap">
         <div class="flex pop-content">
           <div class="list-box">
-            <router-link to="/">
+            <router-link to="/mall">
               <img src="../../assets/images/drink.png" alt="">
               <p>点单</p>
             </router-link>
           </div>
           <div class="list-box">
-            <router-link to="/group">
+            <router-link to="/card">
               <img src="../../assets/images/giftCard.png" alt="">
               <p>礼品卡</p>
             </router-link>

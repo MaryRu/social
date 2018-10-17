@@ -22,6 +22,7 @@ export default {
     top: 0;
     left: 0;
     right: 0;
+    z-index: 9999;
     padding: .2rem;
     background-color: @theme_background;
     color: @base_color;

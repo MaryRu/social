@@ -9,16 +9,22 @@
       </mt-navbar>
       <mt-tab-container v-model="selected">
         <mt-tab-container-item id="1">
+          <Progress></Progress>
         </mt-tab-container-item>
         <mt-tab-container-item id="2">
+          <Pending></Pending>
         </mt-tab-container-item>
         <mt-tab-container-item id="3">
+          <Complete></Complete>
         </mt-tab-container-item>
       </mt-tab-container>
     </div>
   </div>
 </template>
 <script>
+import Progress from './processing'
+import Pending from './Pending'
+import Complete from './Complete'
 import Header from '../base/header-back'
 export default {
   data () {
@@ -28,7 +34,10 @@ export default {
     }
   },
   components: {
-    Header
+    Header,
+    Progress,
+    Pending,
+    Complete
   }
 }
 </script>
