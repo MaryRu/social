@@ -12,6 +12,7 @@ import intimate from '@/components/home/intimate'
 import card from '@/components/card/index'
 import mycard from '@/components/card/mycard'
 import mall from '@/components/order/index'
+import classify from '@/components/order/classify'
 
 Vue.use(Router)
 
@@ -80,6 +81,11 @@ export default new Router({
       path: '/mall',
       name: 'mall',
       component: mall
+    },
+    {
+      path: '/classify',
+      name: 'classify',
+      component: classify
     }
   ]
 })
