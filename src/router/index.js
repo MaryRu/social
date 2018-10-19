@@ -13,6 +13,9 @@ import card from '@/components/card/index'
 import mycard from '@/components/card/mycard'
 import mall from '@/components/order/index'
 import classify from '@/components/order/classify'
+import homePage from '@/components/member/homePage'
+import personal from '@/components/login/personal'
+import lable from '@/components/login/lable'
 
 Vue.use(Router)
 
@@ -86,6 +89,21 @@ export default new Router({
       path: '/classify',
       name: 'classify',
       component: classify
+    },
+    {
+      path: '/homePage',
+      name: 'homePage',
+      component: homePage
+    },
+    {
+      path: '/personal',
+      name: 'personal',
+      component: personal
+    },
+    {
+      path: '/lable',
+      name: 'lable',
+      component: lable
     }
   ]
 })

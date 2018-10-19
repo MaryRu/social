@@ -1,10 +1,13 @@
 <template>
   <div class="wrapper">
     <div class="member">
-      <router-link to="/">
+      <router-link to="/homePage">
         <div class="name-box flex-align-center">
           <img :src="userInfo.img" alt="" />
-          <p class="ml">{{userInfo.name}}</p>
+          <div>
+            <p class="ml">{{userInfo.name}}</p>
+            <span class="ml">查看个人主页</span>
+          </div>
         </div>
       </router-link>
       <div class="member-list">
@@ -12,49 +15,49 @@
           <li>
             <router-link to="/" class="flex-align-center">
               <i class="icon icon-msg mr"></i>
-              <span>会员信息</span>
+              <p>会员信息</p>
             </router-link>
           </li>
           <li>
             <router-link to="/" class="flex-align-center">
               <i class="icon icon-record mr"></i>
-              <span>消费记录</span>
+              <p>消费记录</p>
             </router-link>
           </li>
           <li>
             <router-link to="/" class="flex-align-center">
               <i class="icon icon-card mr"></i>
-              <span>会员卡</span>
+              <p>会员卡</p>
             </router-link>
           </li>
           <li>
             <router-link to="/" class="flex-align-center">
               <i class="icon icon-coupon mr"></i>
-              <span>优惠券</span>
+              <p>优惠券</p>
             </router-link>
           </li>
           <li>
             <router-link to="/" class="flex-align-center">
               <i class="icon icon-activity mr"></i>
-              <span>我的活动</span>
+              <p>我的活动</p>
             </router-link>
           </li>
           <li>
             <router-link to="/" class="flex-align-center">
               <i class="icon icon-certify mr"></i>
-              <span>实名认证</span>
+              <p>实名认证</p>
             </router-link>
           </li>
           <li>
             <router-link to="/" class="flex-align-center">
               <i class="icon icon-invite mr"></i>
-              <span>邀请有奖</span>
+              <p>邀请有奖</p>
             </router-link>
           </li>
           <li>
             <router-link to="/" class="flex-align-center">
               <i class="icon icon-service mr"></i>
-              <span>客服中心</span>
+              <p>客服中心</p>
             </router-link>
           </li>
         </ul>
