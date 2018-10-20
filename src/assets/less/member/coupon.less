@@ -1,0 +1,95 @@
+// out:false
+@import '../variable.less';
+.coupon {
+  .coupon-list{
+    width: 100%;
+    margin-top: .1rem;
+    ul{
+      li{
+        margin-bottom: .15rem;
+        background-color: #fff;
+        .quan-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          // padding: 0 .2rem;
+          height: 1.613rem;
+          .q-price {
+            padding: .2rem;
+            width: 1.5rem;
+            border-right: 1px dashed #ccc;
+            text-align: center;
+            p{
+              color: @theme_color;
+              strong{
+                font: 400 34px arial;
+                vertical-align: top;
+              }
+            }
+          }
+          .q-type {
+            padding:.2rem;
+            width: 55%;
+            .q-tips{
+              display: flex;
+              justify-content: flex-end;
+              span{
+                display: inline-block;
+                padding: 0 .1rem;
+                background-color: @theme_color;
+                color: #fff;
+                text-align: center;
+                border-radius: 5rem;
+              }
+            }
+            .q-title{
+              margin: .1rem 0;
+            }
+            .q-time {
+              color: #a8a6a8;
+            }
+          }
+          .q-ops-box {
+            background-color:  @theme_color;
+            height: 100%;
+            width: 15%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            .q-opbtns{
+              .btn{
+                b{
+                  position: absolute;
+                  z-index: 2;
+                  top: 0;
+                  left: -1px;
+                  display: block;
+                  width: 3px;
+                  height: 100%;
+                  background: url(//misc.360buyimg.com/user/quan/3.0.0/widget/quan-index/i/small-circle.png) top left repeat-y;
+                }
+                span{
+                  color: #fff;
+                }
+              }
+            }
+          }
+        }
+      }
+      .useless{
+        .quan-item {
+          .q-price {
+            color: #ccc;
+            p{
+              color: #ccc;
+            }
+          }
+          .q-ops-box{
+            background-color: #ccc;
+          }
+        }
+      }
+    }
+  }
+}

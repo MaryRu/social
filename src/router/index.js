@@ -9,13 +9,19 @@ import member from '@/components/member/index'
 import available from '@/components/home/available'
 import entertain from '@/components/home/entertain'
 import intimate from '@/components/home/intimate'
-import card from '@/components/card/index'
-import mycard from '@/components/card/mycard'
+import giftcard from '@/components/giftcard/index'
+import mycard from '@/components/giftcard/mycard'
 import mall from '@/components/order/index'
 import classify from '@/components/order/classify'
 import homePage from '@/components/member/homePage'
 import personal from '@/components/login/personal'
 import lable from '@/components/login/lable'
+import record from '@/components/member/record'
+import membership from '@/components/member/membership'
+import bill from '@/components/member/bill'
+import coupon from '@/components/member/coupon'
+import active from '@/components/member/active'
+import verified from '@/components/member/verified'
 
 Vue.use(Router)
 
@@ -71,9 +77,9 @@ export default new Router({
       component: intimate
     },
     {
-      path: '/card',
-      name: 'card',
-      component: card
+      path: '/giftcard',
+      name: 'giftcard',
+      component: giftcard
     },
     {
       path: '/mycard',
@@ -104,6 +110,36 @@ export default new Router({
       path: '/lable',
       name: 'lable',
       component: lable
+    },
+    {
+      path: '/record',
+      name: 'record',
+      component: record
+    },
+    {
+      path: '/membership',
+      name: 'membership',
+      component: membership
+    },
+    {
+      path: '/bill',
+      name: 'bill',
+      component: bill
+    },
+    {
+      path: '/coupon',
+      name: 'coupon',
+      component: coupon
+    },
+    {
+      path: '/active',
+      name: 'active',
+      component: active
+    },
+    {
+      path: '/verified',
+      name: 'verified',
+      component: verified
     }
   ]
 })

@@ -5,23 +5,23 @@
       <el-container style="height: 9.6rem">
         <el-aside width="1.2rem" class="aside">
           <ul>
-            <li>分类一</li>
-            <li>分类一</li>
-            <li>分类一</li>
-            <li>分类一</li>
-            <li>分类一</li>
-            <li>分类一</li>
-            <li>分类一</li>
-            <li>分类一</li>
-            <li>分类一</li>
-            <li>分类一</li>
-            <li>分类一</li>
-            <li>分类一</li>
-            <li>分类一</li>
-            <li>分类一</li>
-            <li>分类一</li>
-            <li>分类一</li>
-            <li>分类一</li>
+            <li>茶1</li>
+            <li>茶2</li>
+            <li>茶3</li>
+            <li>茶4</li>
+            <li>茶5</li>
+            <li>茶</li>
+            <li>茶</li>
+            <li>茶</li>
+            <li>茶</li>
+            <li>茶</li>
+            <li>茶</li>
+            <li>茶</li>
+            <li>茶</li>
+            <li>茶</li>
+            <li>茶</li>
+            <li>茶</li>
+            <li>茶</li>
           </ul>
         </el-aside>
         <el-main>

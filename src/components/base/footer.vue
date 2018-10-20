@@ -39,7 +39,7 @@
             </router-link>
           </div>
           <div class="list-box">
-            <router-link to="/card">
+            <router-link to="/giftcard">
               <img src="../../assets/images/giftCard.png" alt="">
               <p>礼品卡</p>
             </router-link>

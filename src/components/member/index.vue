@@ -12,38 +12,38 @@
       </router-link>
       <div class="member-list">
         <ul>
-          <li>
+          <!-- <li>
             <router-link to="/" class="flex-align-center">
               <i class="icon icon-msg mr"></i>
               <p>会员信息</p>
             </router-link>
-          </li>
+          </li> -->
           <li>
-            <router-link to="/" class="flex-align-center">
+            <router-link to="/record" class="flex-align-center">
               <i class="icon icon-record mr"></i>
               <p>消费记录</p>
             </router-link>
           </li>
           <li>
-            <router-link to="/" class="flex-align-center">
+            <router-link to="/membership" class="flex-align-center">
               <i class="icon icon-card mr"></i>
               <p>会员卡</p>
             </router-link>
           </li>
           <li>
-            <router-link to="/" class="flex-align-center">
+            <router-link to="/coupon" class="flex-align-center">
               <i class="icon icon-coupon mr"></i>
               <p>优惠券</p>
             </router-link>
           </li>
           <li>
-            <router-link to="/" class="flex-align-center">
+            <router-link to="/active" class="flex-align-center">
               <i class="icon icon-activity mr"></i>
               <p>我的活动</p>
             </router-link>
           </li>
           <li>
-            <router-link to="/" class="flex-align-center">
+            <router-link to="/verified" class="flex-align-center">
               <i class="icon icon-certify mr"></i>
               <p>实名认证</p>
             </router-link>
