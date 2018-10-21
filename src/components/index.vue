@@ -33,7 +33,7 @@
           </router-link>
         </li>
         <li class="nav">
-          <router-link to="/card">
+          <router-link to="/giftcard">
             <div class="nav-content">
               <img src="../assets/images/nav_04.png" alt="">
               <p class="mt">礼品卡</p>

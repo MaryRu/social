@@ -22,6 +22,7 @@ import bill from '@/components/member/bill'
 import coupon from '@/components/member/coupon'
 import active from '@/components/member/active'
 import verified from '@/components/member/verified'
+import otherHome from '@/components/member/otherHome'
 
 Vue.use(Router)
 
@@ -140,6 +141,11 @@ export default new Router({
       path: '/verified',
       name: 'verified',
       component: verified
+    },
+    {
+      path: '/otherHome',
+      name: 'otherHome',
+      component: otherHome
     }
   ]
 })

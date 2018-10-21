@@ -24,7 +24,7 @@
           </li>
           <li>
             <div class="">
-              <router-link to="/">
+              <router-link to="/mycard">
                 <i class="icon icon-package"></i>
                 <p>我的卡包</p>
               </router-link>

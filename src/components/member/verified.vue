@@ -17,7 +17,7 @@
           </ul>
         </div>
       </div>
-      <div class="img-box">
+      <div class="idcard-box">
         <ul class="flex-align-center flex-between">
           <li>
             <img src="../../assets/images/card-zheng.png" alt="">
@@ -37,6 +37,17 @@
 </template>
 <style lang="less" scoped>
 @import '../../assets/less/member/index';
+.idcard-box {
+  padding: .2rem;
+  li {
+    width: 50%;
+    text-align: center;
+    img {
+      width: 95%;
+      height: 2rem;
+    }
+  }
+}
 </style>
 <script>
 import Header from '../base/header-back'
