@@ -23,6 +23,7 @@ import coupon from '@/components/member/coupon'
 import active from '@/components/member/active'
 import verified from '@/components/member/verified'
 import otherHome from '@/components/member/otherHome'
+import forgetPsd from '@/components/login/forgetPassword'
 
 Vue.use(Router)
 
@@ -146,6 +147,11 @@ export default new Router({
       path: '/otherHome',
       name: 'otherHome',
       component: otherHome
+    },
+    {
+      path: '/forgetPsd',
+      name: 'forgetPsd',
+      component: forgetPsd
     }
   ]
 })

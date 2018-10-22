@@ -2,6 +2,8 @@ import axios from 'axios'
 import { Toast } from 'mint-ui'
 
 var url = 'http://115.158.20.211:8080/social_project/'
+// var token = localStorage.getItem('token')
+var uId = localStorage.getItem('uId')
 
 // axios 配置
 axios.defaults.timeout = 5000
@@ -68,5 +70,29 @@ export default {
   getSsm (params) {
     // 发送验证码
     return Post('/send/getSsm', params)
+  },
+  login (params) {
+    // 登录
+    return Post('/user/login', params)
+  },
+  forgetPsd (params) {
+    // 忘记密码
+    return Post('/user/editPassword', params)
+  },
+  index () {
+    // 首页
+    return Post('/index/getIndexDetail', uId)
+  },
+  editUser (params) {
+    // 创建名片
+    return Post('/user/editUser', params)
+  },
+  upload (params) {
+    // 上传头像
+    return Post('/picture/upload', params)
+  },
+  lable () {
+    // 上传头像
+    return Post('/label/getlabel')
   }
 }

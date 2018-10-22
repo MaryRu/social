@@ -104,6 +104,10 @@ export default {
         Toast('您的电话号码格式有误!')
         return false
       }
+      if (!this.code) {
+        Toast('请填写验证码')
+        return false
+      }
       if (!this.password) {
         Toast('请填写密码!')
         return false
@@ -116,15 +120,23 @@ export default {
         Toast('您两次输入的密码不同，请重新输入')
         this.password = ''
         this.againword = ''
+        return false
       }
-      // let form = this.$qs.stringify({
-      //   uTel: this.phone,
-      //   uPassword: this.password
-      // })
-      // api.register(form)
-      //   .then((res) => {
-      //     console.log(res)
-      //   })
+      let form = this.$qs.stringify({
+        uTel: this.phone,
+        uPassword: this.password,
+        code: this.code
+      })
+      api.register(form)
+        .then((res) => {
+          console.log(res)
+          if (res.data.status === 400) {
+            Toast(res.data.msg)
+          } else {
+            localStorage.setItem('uId', res.data.data.uId)
+            this.$router.replace('/personal')
+          }
+        })
     }
   }
 }
