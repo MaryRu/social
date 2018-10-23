@@ -4,7 +4,7 @@
     <div class="mall container">
       <mt-swipe :auto="4000" class="swiper">
         <mt-swipe-item v-for="(swiper,index) in swiperList" :key="index">
-          <img :src="swiper.img" alt="">
+          <img :src="swiper.rPic" alt="">
         </mt-swipe-item>
       </mt-swipe>
       <div class="order mt">
@@ -142,27 +142,35 @@ li {
 </style>
 <script>
 import Header from '../base/header-search'
+import api from '../../assets/js/api'
 export default {
   data () {
     return {
       swiperList: [
         {
-          img: 'http://ofkzpykzq.bkt.clouddn.com/card1.jpg'
+          rPic: 'http://ofkzpykzq.bkt.clouddn.com/card1.jpg'
         },
         {
-          img: 'http://ofkzpykzq.bkt.clouddn.com/card1.jpg'
+          rPic: 'http://ofkzpykzq.bkt.clouddn.com/card1.jpg'
         },
         {
-          img: 'http://ofkzpykzq.bkt.clouddn.com/card1.jpg'
+          rPic: 'http://ofkzpykzq.bkt.clouddn.com/card1.jpg'
         },
         {
-          img: 'http://ofkzpykzq.bkt.clouddn.com/card1.jpg'
+          rPic: 'http://ofkzpykzq.bkt.clouddn.com/card1.jpg'
         }
       ]
     }
   },
   components: {
     Header
-  }
+  },
+  created () {
+    api.getHotProduct()
+      .then((res) => {
+        console.log(res)
+        this.swiperList = res.data.rollpicsList
+      })
+  },
 }
 </script>

@@ -73,10 +73,10 @@
             <div class="list-top mb flex-between">
               <div class="flex-between">
                 <div class="img-box">
-                  <img :src="item.img" alt="">
+                  <img :src="item.uimg" alt="">
                 </div>
                 <div class="name-box ml">
-                  <p class="mb title">{{item.name}}</p>
+                  <p class="mb title">{{item.uname}}</p>
                   <span>{{item.tAddtime}}</span>
                 </div>
               </div>
@@ -87,9 +87,9 @@
                 <router-link to="/">{{item.tTitle}}</router-link>
               </div>
               <div class="thumbnails my-gallery">
-                <figure v-for="(img, index) in item.list" :key="index" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="thumbnail">
-                  <a :href="img.file_name" itemprop="contentUrl" :data-size="img.file_name | dataSize">
-                    <img :src="img.file_name + '?imageView2/5/w/100/h/100'" itemprop="thumbnail" alt="" />
+                <figure v-for="(img, index) in item.tiebaPictureslist" :key="index" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="thumbnail">
+                  <a :href="img.ptPic" itemprop="contentUrl" :data-size="img.ptPic | dataSize">
+                    <img :src="img.ptPic + '?imageView2/5/w/100/h/100'" itemprop="thumbnail" alt="" />
                   </a>
                 </figure>
               </div>
@@ -126,6 +126,7 @@ import scrollTop from './base/scrollTop'
 import Footer from './base/footer'
 import group from './base/group'
 import api from '../assets/js/api'
+var uId = localStorage.getItem('uId')
 export default {
   data () {
     return {
@@ -179,7 +180,7 @@ export default {
           content: '这里是描述内容这里是描述内容这里是描述内容述内容这里是描述内容这里是描述内容这里是描述内容',
           files: [
             {
-              file_name: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658'
+              ptPic: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658'
             },
             {
               file_name: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658'
@@ -280,12 +281,15 @@ export default {
     let _l = this.cardList.length
     // this.S_width = _l * 1.28 + (_l - 1) * 0.26
     this.S_width = _l * 2 + (_l - 1) * 1
-    api.index()
+    let form = this.$qs.stringify({
+      uId: uId
+    })
+    api.index(form)
       .then((res) => {
         console.log(res)
-        this.swiperList = res.data.data.pixlist
-        this.cardList = res.data.data.giftlist
-        this.listDetail = res.data.data.tiebalist
+        this.swiperList = res.data.pixlist
+        this.cardList = res.data.giftlist
+        this.listDetail = res.data.tiebalist
       })
   }
 }

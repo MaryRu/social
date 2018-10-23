@@ -24,6 +24,8 @@ import active from '@/components/member/active'
 import verified from '@/components/member/verified'
 import otherHome from '@/components/member/otherHome'
 import forgetPsd from '@/components/login/forgetPassword'
+import demo from '@/components/giftcard/demo'
+import pullup from '@/components/giftcard/pull-up'
 
 Vue.use(Router)
 
@@ -152,6 +154,16 @@ export default new Router({
       path: '/forgetPsd',
       name: 'forgetPsd',
       component: forgetPsd
+    },
+    {
+      path: '/demo',
+      name: 'demo',
+      component: demo
+    },
+    {
+      path: '/pullup',
+      name: 'pullup',
+      component: pullup
     }
   ]
 })

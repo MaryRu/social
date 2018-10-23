@@ -115,7 +115,7 @@ export default {
         api.upload(form)
           .then((res) => {
             console.log(res)
-            this.img = res.data.data.url
+            this.img = res.data.url
           })
       }
       reader.readAsDataURL(file)
@@ -156,13 +156,9 @@ export default {
       api.editUser(form)
         .then((res) => {
           console.log(res)
-          if (res.data.status === 400) {
-            Toast(res.data.msg)
-          } else {
-            localStorage.setItem('token', res.data.data.token)
-            localStorage.setItem('uId', res.data.data.uId)
-            this.$router.replace('/lable')
-          }
+          localStorage.setItem('token', res.data.token)
+          localStorage.setItem('uId', res.data.uId)
+          this.$router.replace('/lable')
         })
     }
   }

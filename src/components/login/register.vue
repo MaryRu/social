@@ -90,7 +90,7 @@ export default {
         api.getSsm(code)
           .then((res) => {
             console.log(res)
-            Toast(res.data.msg)
+            Toast(res.msg)
           })
         this.ctimer(60)
       }
@@ -130,10 +130,10 @@ export default {
       api.register(form)
         .then((res) => {
           console.log(res)
-          if (res.data.status === 400) {
-            Toast(res.data.msg)
+          if (res.status === 400) {
+            Toast(res.msg)
           } else {
-            localStorage.setItem('uId', res.data.data.uId)
+            localStorage.setItem('uId', res.data.uId)
             this.$router.replace('/personal')
           }
         })

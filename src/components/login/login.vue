@@ -62,8 +62,8 @@ export default {
       api.login(form)
         .then((res) => {
           console.log(res)
-          localStorage.setItem('uId', res.data.data.uId)
-          localStorage.setItem('token', res.data.data.token)
+          localStorage.setItem('uId', res.data.uId)
+          localStorage.setItem('token', res.data.token)
           this.$router.replace('/')
         })
     }

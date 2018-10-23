@@ -3,7 +3,7 @@ import { Toast } from 'mint-ui'
 
 var url = 'http://115.158.20.211:8080/social_project/'
 // var token = localStorage.getItem('token')
-var uId = localStorage.getItem('uId')
+// var uId = localStorage.getItem('uId')
 
 // axios 配置
 axios.defaults.timeout = 5000
@@ -14,7 +14,6 @@ export function Post (url, params) {
   return new Promise((resolve, reject) => {
     axios.post(url, params)
       .then(response => {
-        resolve(response)
         if (response.data.status === 200) {
           resolve(response.data)
         } else {
@@ -79,9 +78,9 @@ export default {
     // 忘记密码
     return Post('/user/editPassword', params)
   },
-  index () {
+  index (params) {
     // 首页
-    return Post('/index/getIndexDetail', uId)
+    return Post('/index/getIndexDetail', params)
   },
   editUser (params) {
     // 创建名片
@@ -92,7 +91,27 @@ export default {
     return Post('/picture/upload', params)
   },
   lable () {
-    // 上传头像
+    // 查看所有标签
     return Post('/label/getlabel')
+  },
+  addlabel (params) {
+    // 添加标签
+    return Post('/labelusers/addlabel', params)
+  },
+  getAllTieba (params) {
+    // 颜络社
+    return Post('/tieba/getAllTieba', params)
+  },
+  getAllgift (params) {
+    // 礼品卡
+    return Post('/gift/getAllgift', params)
+  },
+  getHotProduct () {
+    // 热销商品和商品轮播图
+    return Post('/product/getHotProduct')
+  },
+  selectByUId (params) {
+    // 我的礼品卡
+    return Post('/gift/selectByUId', params)
   }
 }

@@ -1,8 +1,9 @@
 <template>
   <div class="wrapper">
     <Header :tabname="tabname"></Header>
+    <noPage v-show="nopage"></noPage>
     <div class="container">
-      <ul class="mt">
+      <ul class="mt" v-show="!nopage">
         <li v-for="(item,index) in cardImg" :key="index" class="mb">
           <div class="cardImg">
             <img :src="item.img" alt="">
@@ -40,9 +41,13 @@ li {
 
 <script>
 import Header from '../base/header-back'
+import noPage from '../base/noPage'
+import api from '../../assets/js/api'
+let uId = localStorage.getItem('uId')
 export default {
   data () {
     return {
+      nopage: false,
       tabname: '我的礼品卡',
       cardImg: [
         {
@@ -64,7 +69,22 @@ export default {
     }
   },
   components: {
-    Header
+    Header,
+    noPage
+  },
+  created () {
+    let form = this.$qs.stringify({
+      uId: uId
+    })
+    api.selectByUId(form)
+      .then((res) => {
+        console.log(res.data.giftOrderitemsList)
+        if (res.data.giftOrderitemsList.length === 0) {
+          this.nopage = true
+        } else {
+          this.cardImg = res.data.giftOrderitemsList
+        }
+      })
   }
 }
 </script>

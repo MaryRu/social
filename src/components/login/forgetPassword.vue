@@ -87,7 +87,7 @@ export default {
         api.getSsm(code)
           .then((res) => {
             console.log(res)
-            Toast(res.data.msg)
+            Toast(res.msg)
           })
         this.ctimer(60)
       }
@@ -127,13 +127,9 @@ export default {
       api.forgetPsd(form)
         .then((res) => {
           console.log(res)
-          if (res.data.status === 400) {
-            Toast(res.data.msg)
-          } else {
-            localStorage.setItem('uId', res.data.data.uId)
-            Toast(res.data.msg)
-            this.$router.replace('/login')
-          }
+          localStorage.setItem('uId', res.data.uId)
+          Toast(res.msg)
+          this.$router.replace('/login')
         })
     }
   }
