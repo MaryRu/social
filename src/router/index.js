@@ -4,6 +4,8 @@ import index from '@/components/index'
 import login from '@/components/login/login'
 import register from '@/components/login/register'
 import group from '@/components/group/index'
+import detail from '@/components/group/detail'
+import reload from '@/components/group/reload'
 import societyNews from '@/components/societyNews/index'
 import member from '@/components/member/index'
 import available from '@/components/home/available'
@@ -24,8 +26,7 @@ import active from '@/components/member/active'
 import verified from '@/components/member/verified'
 import otherHome from '@/components/member/otherHome'
 import forgetPsd from '@/components/login/forgetPassword'
-import demo from '@/components/giftcard/demo'
-import pullup from '@/components/giftcard/pull-up'
+// import demo from '@/components/giftcard/demo'
 
 Vue.use(Router)
 
@@ -54,6 +55,11 @@ export default new Router({
       path: '/group',
       name: 'group',
       component: group
+    },
+    {
+      path: '/detail/:id', // 帖子详情
+      name: 'detail',
+      component: detail
     },
     {
       path: '/societyNews',
@@ -156,14 +162,14 @@ export default new Router({
       component: forgetPsd
     },
     {
-      path: '/demo',
-      name: 'demo',
-      component: demo
-    },
-    {
-      path: '/pullup',
-      name: 'pullup',
-      component: pullup
+      path: '/reload/:id',
+      name: 'reload',
+      component: reload
     }
+    // {
+    //   path: '/demo',
+    //   name: 'demo',
+    //   component: demo
+    // }
   ]
 })

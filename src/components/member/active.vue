@@ -8,30 +8,32 @@
       </mt-navbar>
       <mt-tab-container v-model="selected" class="active-list">
         <mt-tab-container-item id="1">
-          <ul>
+          <noPage v-show="nopage"></noPage>
+          <ul v-show="!nopage">
             <li v-for="(item,index) in activeList" :key="index" >
               <router-link to="/" class="flex-align-center">
                 <div class="img-box mr">
-                  <img :src="item.img" alt="">
+                  <img :src="item.r1" alt="">
                 </div>
                 <div class="content">
-                  <p class="title mb">{{item.title}}</p>
-                  <span>{{item.time}}</span>
+                  <p class="title mb">{{item.aTitle}}</p>
+                  <span>{{item.aAddtime}}</span>
                 </div>
               </router-link>
             </li>
           </ul>
         </mt-tab-container-item>
         <mt-tab-container-item id="2">
-          <ul>
-            <li v-for="(item,index) in activeList" :key="index" >
+          <noPage v-show="nopage"></noPage>
+          <ul v-show="!nopage">
+            <li v-for="(item,index) in activitydesc" :key="index" >
               <router-link to="/" class="flex-align-center">
                 <div class="img-box mr">
-                  <img :src="item.img" alt="">
+                  <img :src="item.aimg" alt="">
                 </div>
                 <div class="content">
-                  <p class="title mb">{{item.title}}</p>
-                  <span>{{item.time}}</span>
+                  <p class="title mb">{{item.atitle}}</p>
+                  <span>{{item.addtime}}</span>
                 </div>
               </router-link>
             </li>
@@ -46,11 +48,14 @@
 </style>
 <script>
 import Header from '../base/header-back'
+import noPage from '../base/noPage'
+import api, {uId} from '../../assets/js/api'
 export default {
   data () {
     return {
       tabname: '我的活动',
       selected: '1',
+      nopage: false,
       activeList: [
         {
           img: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658',
@@ -67,11 +72,56 @@ export default {
           title: '这里是发起  活动的标题',
           time: '2018-10-20'
         }
-      ]
+      ],
+      activitydesc: []
     }
   },
   components: {
-    Header
+    Header,
+    noPage
+  },
+  watch: {
+    selected (value) {
+      console.log(value)
+      if (value === 1) {
+        this.getActive()
+      } else {
+        this.getDesc()
+      }
+    }
+  },
+  created () {
+    this.getActive()
+  },
+  methods: {
+    getActive () {
+      let form = this.$qs.stringify({
+        uId: uId
+      })
+      api.ActivityInfoUser(form)
+        .then((res) => {
+          console.log(res)
+          if (res.data.list.length === 0) {
+            this.nopage = true
+          } else {
+            this.activeList = res.data.list
+          }
+        })
+    },
+    getDesc () {
+      let form = this.$qs.stringify({
+        uId: uId
+      })
+      api.activitydescUser(form)
+        .then((res) => {
+          console.log(res)
+          if (res.data.list.length === 0) {
+            this.nopage = true
+          } else {
+            this.activitydesc = res.data.list
+          }
+        })
+    }
   }
 }
 </script>

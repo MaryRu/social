@@ -1,0 +1,95 @@
+// out:false
+.post-item {
+  background-color: #fff;
+  padding: 10px;
+  margin: 10px 0;
+  .post-header {
+    display: flex;
+    margin-bottom: 15px;
+    .avatar {
+      text-align: center;
+      flex: 0;
+      img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+      }
+    }
+    .info {
+      flex: 1;
+      padding: 10px;
+      overflow: hidden;
+      .user {
+        margin-bottom: 5px;
+        position: relative;
+        i {
+          position: absolute;
+          top: 50%;
+          margin-top: -10px;
+        }
+      }
+      .time,
+      .local {
+        color: #ccc;
+        font-size: 12px;
+      }
+    }
+  }
+  .post-content{
+    margin-bottom: 15px;
+    position: relative;
+    .text{
+      margin-bottom: 10px;
+    }
+    .img{
+      .clearfix();
+      margin-left: -1%;
+      img{
+        float: left;
+        width: 32%;
+        margin: 0 0 1% 1%;
+      }
+    }
+  }
+  .post-bottom {
+    .like {
+      padding-left: 30px;
+      position: relative;
+      margin-right: 10px;
+      .VueStar {
+        position: absolute;
+        top: 50%;
+        margin-top: -15px;
+        &.islike .icon.like-icon{
+          background-position: -200px -360px;
+        }
+      }
+    }
+    .comment {
+      padding-left: 30px;
+      position: relative;
+      i {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        margin-top: -15px;
+      }
+    }
+  }
+}
+.my-gallery{
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -3px;
+  margin-top: -3px;
+  figure{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 3px 0 0 3px;
+    flex: 0 0 33.33%;
+    line-height: 0;
+    img{
+      width: 100%;
+    }
+  }
+}

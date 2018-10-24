@@ -16,7 +16,7 @@
         </div>
         <div class="list-content mb">
           <div class="text">
-            <router-link to="/">{{item.tTitle}}</router-link>
+            <router-link :to="{path: '/detail/'+item.tId}">{{item.tTitle}}</router-link>
           </div>
           <div class="thumbnails my-gallery">
             <figure v-for="(img, index) in item.tiebaPictureslist" :key="index" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="thumbnail">
@@ -38,17 +38,13 @@
             </div>
             {{item.tNum}}
           </span>
-          <router-link to="/">
+          <router-link :to="'/detail/'+item.tId">
             <span class="comment flex-align-center">
               <i class="icon icon-comment"></i>{{item.comment_size}}</span>
           </router-link>
         </div>
       </li>
     </ul>
-    <p v-show="loading" class="page-infinite-loading">
-      <mt-spinner type="fading-circle"></mt-spinner>
-      加载中...
-    </p>
   </div>
 </template>
 <style lang="less">
@@ -141,12 +137,11 @@ export default {
           comment_size: '555'
         }
       ],
-      loading: false,
-      page: 1
+      loading: false
     }
   },
   created () {
-    this.groupList(1)
+    this.groupList()
   },
   filters: {
     dataSize (value) {
@@ -169,28 +164,17 @@ export default {
   methods: {
     islike (i) {
     },
-    groupList (page) {
+    groupList () {
       let form = this.$qs.stringify({
-        start: page,
-        length: 3,
         uId: uId
       })
       api.getAllTieba(form)
         .then((res) => {
           console.log(res)
-          this.listDetail = res.data.tiebaList
           if (res.data.length === 0) {
             Toast('没有数据啦~')
           } else {
-            if (page === 1) {
-              this.listDetail = res.data.tiebaList
-              this.page = 2
-            } else {
-              for (let i = 0; i < res.data.tiebaList.length; i++) {
-                this.listDetail.push(res.data.tiebaList[i])
-              }
-              this.page++
-            }
+            this.listDetail = res.data.tiebaList
           }
         })
     }

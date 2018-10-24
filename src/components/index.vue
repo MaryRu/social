@@ -84,7 +84,7 @@
             </div>
             <div class="list-content mb">
               <div class="text">
-                <router-link to="/">{{item.tTitle}}</router-link>
+                <router-link :to="{path: '/detail/'+item.tId}">{{item.tTitle}}</router-link>
               </div>
               <div class="thumbnails my-gallery">
                 <figure v-for="(img, index) in item.tiebaPictureslist" :key="index" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="thumbnail">
@@ -106,7 +106,7 @@
                 </div>
                 {{item.tNum}}
               </span>
-              <router-link to="/">
+              <router-link :to="{path: '/detail/'+item.tId}">
                 <span class="comment flex-align-center">
                   <i class="icon icon-comment"></i>{{item.comment_size}}</span>
               </router-link>

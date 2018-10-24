@@ -42,20 +42,20 @@
       </div>
       <div class="mt card-box flex-between">
         <div class="card">
-          <router-link to="/">
+          <router-link :to="{path: '/'+productIsnewList.pId}">
             <div class="cardImg">
-              <img src="../../assets/images/card1.jpg" alt="">
+              <img :src="productIsnewList.pPic" alt="">
             </div>
-            <span class="tips">人气推荐</span>
+            <span class="tips">{{productIsnewList.pName}}</span>
           </router-link>
         </div>
         <div class="card">
-          <router-link to="/">
+          <router-link :to="{path: '/'+productsIshotList.pId}">
             <div class="cardImg">
-              <img src="../../assets/images/card2.png" alt="">
+              <img :src="productsIshotList.pPic" alt="">
             </div>
           </router-link>
-          <span class="tips">新品体验</span>
+          <span class="tips">{{productsIshotList.pName}}</span>
         </div>
       </div>
       <div class="more mt">
@@ -159,7 +159,15 @@ export default {
         {
           rPic: 'http://ofkzpykzq.bkt.clouddn.com/card1.jpg'
         }
-      ]
+      ],
+      productIsnewList: {
+        pId: 9,
+        pPic: 'http://115.158.20.211:8088/social_project/upload/card2.png'
+      },
+      productsIshotList: {
+        pId: 3,
+        pPic: 'http://115.158.20.211:8088/social_project/upload/card1.png'
+      }
     }
   },
   components: {
@@ -170,7 +178,9 @@ export default {
       .then((res) => {
         console.log(res)
         this.swiperList = res.data.rollpicsList
+        this.productIsnewList = res.data.productIsnewList
+        this.productsIshotList = res.data.productsIshotList
       })
-  },
+  }
 }
 </script>

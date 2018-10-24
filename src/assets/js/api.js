@@ -1,10 +1,9 @@
 import axios from 'axios'
 import { Toast } from 'mint-ui'
 
-var url = 'http://115.158.20.211:8080/social_project/'
+var url = 'http://115.158.20.211:8088/social_project/'
 // var token = localStorage.getItem('token')
-// var uId = localStorage.getItem('uId')
-
+var uId = localStorage.getItem('uId')
 // axios 配置
 axios.defaults.timeout = 5000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -113,5 +112,42 @@ export default {
   selectByUId (params) {
     // 我的礼品卡
     return Post('/gift/selectByUId', params)
+  },
+  getAllfreshsmell () {
+    // 鲜闻
+    return Post('/freshsmell/getAllfreshsmell')
+  },
+  getAllactivity () {
+    // 微趴
+    return Post('/activity/getAllactivity')
+  },
+  getCouponInfoByUser (params) {
+    // 优惠券
+    return Post('/couponInfo/getCouponInfoByUser', params)
+  },
+  getRechargeUser (params) {
+    // 会员消费记录
+    return Post('/recharge/getRechargeUser', params)
+  },
+  getRecordById (params) {
+    // 会员卡
+    return Post('/records/getRecordById', params)
+  },
+  ActivityInfoUser (params) {
+    // 个人发起的活动
+    return Post('/activityInfo/ActivityInfoUser', params)
+  },
+  activitydescUser (params) {
+    // 个人参与的活动
+    return Post('/activitydesc/activitydescUser', params)
+  },
+  getByTid (params) {
+    // 颜络社详情
+    return Post('/tieba/getByTid', params)
+  },
+  addcomment (params) {
+    // 用户评论
+    return Post('/comment/addcomment', params)
   }
 }
+export { uId }

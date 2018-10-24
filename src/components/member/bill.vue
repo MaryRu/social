@@ -49,6 +49,7 @@ ul {
   li {
     border-bottom: 1px solid #ccc;
     padding: .2rem;
+    background-color: #fff;
     &:last-child{
       border-bottom: none;
     }

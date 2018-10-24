@@ -8,23 +8,24 @@
         <mt-tab-item id="3">已过期</mt-tab-item>
       </mt-navbar>
       <mt-tab-container v-model="selected" class="coupon-list">
+        <noPage v-show="nopage"></noPage>
         <mt-tab-container-item id="1">
-          <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="50">
+          <ul v-show="!nopage">
             <li v-for="(no,index) in noUsed" :key="index">
               <div class="quan-item flex-between flex-align-center">
                 <div class="q-price">
                   <p>
                     <em>¥</em>
-                    <strong>{{no.cValue}}</strong>
+                    <strong>{{no.cvalue}}</strong>
                   </p>
-                  <span class="q-limit" data-tips="">满{{no.cValue2}}可用</span>
+                  <span class="q-limit" data-tips="">满{{no.contradition}}可用</span>
                 </div>
                 <div class="q-type">
                   <div class="q-title text-ellipsis">
                     {{no.cName}}
                   </div>
                   <div class="q-time">
-                    {{no.ciAddtime}}--{{no.ciEndtime}}
+                    {{no.ciAddtime}}至{{no.ciEndtime}}
                   </div>
                 </div>
                 <div class="q-ops-box">
@@ -38,21 +39,17 @@
               </div>
             </li>
           </ul>
-          <p v-show="loading" class="page-infinite-loading">
-            <mt-spinner type="fading-circle"></mt-spinner>
-            加载中...
-          </p>
         </mt-tab-container-item>
         <mt-tab-container-item id="2">
-          <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="50">
+          <ul v-show="!nopage">
             <li v-for="(no,index) in noUsed" :key="index" class="useless">
               <div class="quan-item flex-between flex-align-center">
                 <div class="q-price">
                   <p>
                     <em>¥</em>
-                    <strong>{{no.cValue}}</strong>
+                    <strong>{{no.cvalue}}</strong>
                   </p>
-                  <span class="q-limit" data-tips="">满{{no.cValue2}}可用</span>
+                  <span class="q-limit" data-tips="">满{{no.contradition}}可用</span>
                 </div>
                 <div class="q-type">
                   <div class="q-tips">
@@ -61,7 +58,7 @@
                     {{no.cName}}
                   </div>
                   <div class="q-time">
-                    {{no.ciAddtime}}--{{no.ciEndtime}}
+                    {{no.ciAddtime}}至{{no.ciEndtime}}
                   </div>
                 </div>
                 <div class="q-ops-box">
@@ -75,28 +72,24 @@
               </div>
             </li>
           </ul>
-          <p v-show="loading" class="page-infinite-loading">
-            <mt-spinner type="fading-circle"></mt-spinner>
-            加载中...
-          </p>
         </mt-tab-container-item>
         <mt-tab-container-item id="3">
-          <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="50">
+          <ul v-show="!nopage">
             <li v-for="(no,index) in noUsed" :key="index" class="useless">
               <div class="quan-item flex-between flex-align-center">
                 <div class="q-price">
                   <p>
                     <em>¥</em>
-                    <strong>{{no.cValue}}</strong>
+                    <strong>{{no.cvalue}}</strong>
                   </p>
-                  <span class="q-limit" data-tips="">满{{no.cValue2}}可用</span>
+                  <span class="q-limit" data-tips="">满{{no.contradition}}可用</span>
                 </div>
                 <div class="q-type">
                   <div class="q-title text-ellipsis">
                     {{no.cName}}
                   </div>
                   <div class="q-time">
-                    {{no.ciAddtime}}--{{no.ciEndtime}}
+                    {{no.ciAddtime}}至{{no.ciEndtime}}
                   </div>
                 </div>
                 <div class="q-ops-box">
@@ -110,10 +103,6 @@
               </div>
             </li>
           </ul>
-          <p v-show="loading" class="page-infinite-loading">
-            <mt-spinner type="fading-circle"></mt-spinner>
-            加载中...
-          </p>
         </mt-tab-container-item>
       </mt-tab-container>
     </div>
@@ -133,13 +122,16 @@
 </style>
 <script>
 import Header from '../base/header-back'
+import noPage from '../base/noPage'
+import api from '../../assets/js/api'
+let uId = localStorage.getItem('uId')
 export default {
   data () {
     return {
       tabname: '优惠券',
       selected: '1',
       loading: false,
-      page: 1,
+      nopage: false,
       status: 0,
       noUsed: [
         {
@@ -209,12 +201,38 @@ export default {
     }
   },
   components: {
-    Header
+    Header,
+    noPage
+  },
+  watch: {
+    selected (value) {
+      if (value === 1) {
+        this.couponList(0)
+      } else if (value === 2) {
+        this.couponList(1)
+      } else if (value === 3) {
+        this.couponList(2)
+      }
+    }
+  },
+  created () {
+    this.couponList(0)
   },
   methods: {
-    loadMore () {
-      this.loading = true
-      this.loading = false
+    couponList (status) {
+      let form = this.$qs.stringify({
+        uId: uId,
+        status: this.status
+      })
+      api.getCouponInfoByUser(form)
+        .then((res) => {
+          console.log(res)
+          if (res.data.length === 0) {
+            this.nopage = true
+            return false
+          }
+          this.noUsed = res.data
+        })
     }
   }
 }

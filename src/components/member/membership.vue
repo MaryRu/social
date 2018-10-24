@@ -10,13 +10,13 @@
           <div class="card-top flex-align-center flex-between">
             <img src="../../assets/images/logo.png" alt="">
             <div class="info">
-              <p class="name">{{info.name}}</p>
-              <span>{{info.level}}</span>
+              <p class="name">{{records.uname}}</p>
+              <span>{{records.levelname}}</span>
             </div>
           </div>
           <div class="card-content">
             <p>卡内余额</p>
-            <h1>{{info.price}}</h1>
+            <h1>{{records.rBalance}}</h1>
           </div>
         </div>
       </div>
@@ -90,19 +90,30 @@ ul {
 </style>
 <script>
 import Header from '../base/header-back'
+import api, {uId} from '../../assets/js/api'
 export default {
   data () {
     return {
       tabname: '会员卡',
-      info: {
-        name: '歌颂者',
-        level: '青铜会员',
-        price: '0.00'
+      records: {
+        uname: '歌颂者',
+        levelname: '青铜会员',
+        rBalance: '0.00'
       }
     }
   },
   components: {
     Header
+  },
+  created () {
+    let form = this.$qs.stringify({
+      uId: uId
+    })
+    api.getRecordById(form)
+      .then((res) => {
+        console.log(res)
+        this.records = res.data.records
+      })
   }
 }
 </script>
