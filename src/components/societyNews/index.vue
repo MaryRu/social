@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
     <Header :tabname='tabname'></Header>
+    <router-link class="release" to="/release"> 发布活动</router-link>
     <div class="societyNews container">
       <mt-navbar v-model="selected" class="navbar">
         <mt-tab-item id="1">鲜闻</mt-tab-item>
@@ -14,10 +15,12 @@
                 <p class="times">{{item.addtime}}</p>
                 <div class="artic-box">
                   <div class="article-list" v-for="(artic,index) in item.freshSmellsList" :key="index">
-                    <div class="image-box">
-                      <img :src="artic.fPic" alt="">
-                    </div>
-                    <p class="artic-title text-ellipsis">{{artic.fTitle}}</p>
+                    <router-link class="articCon" :to="{path: '/newsContent/'+artic.fId}">
+                      <div class="image-box">
+                        <img :src="artic.fPic" alt="">
+                      </div>
+                      <p class="artic-title text-ellipsis">{{artic.fTitle}}</p> 
+                    </router-link>
                   </div>
                 </div>
               </li>
@@ -28,15 +31,19 @@
           <div class="news-content">
             <ul>
               <li v-for="(item,index) in party" :key="index">
-                <p class="times">{{item.addtime}}</p>
-                <div class="artic-box">
-                  <div class="article-list" v-for="(artic,index) in item.list" :key="index">
-                    <div class="image-box">
-                      <img :src="artic.r1" alt="">
+                <router-link to="/">
+                  <p class="times">{{item.addtime}}</p>
+                  <div class="artic-box">
+                    <div class="article-list" v-for="(artic,index) in item.list" :key="index">
+                      <router-link class="articCon" :to="{path: '/partyContent/'+artic.aId}">
+                        <div class="image-box">
+                          <img :src="artic.r1" alt="">
+                        </div>
+                        <p class="artic-title text-ellipsis">{{artic.aTitle}}</p>
+                      </router-link>
                     </div>
-                    <p class="artic-title text-ellipsis">{{artic.aTitle}}</p>
                   </div>
-                </div>
+                </router-link>
               </li>
             </ul>
           </div>
@@ -48,6 +55,18 @@
 </template>
 <style lang="less" scoped>
 @import '../../assets/less/societyNews/index';
+.release {
+  position: fixed;
+  top: 0.2rem;
+  right: 0.2rem;
+  z-index: 9999;
+  color: #fff;
+}
+.articCon {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
 </style>
 <script>
 import Header from '../base/header'

@@ -8,7 +8,7 @@
           <img :src="info.img" alt="">
         </div>
         <div class="text-box">
-          <router-link to="/">
+          <router-link to="/postEdit">
             <div class="flex-between flex-align-center">
               <p>分享新鲜事</p>
               <div class="flex-align-center">

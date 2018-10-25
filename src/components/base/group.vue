@@ -40,7 +40,7 @@
           </span>
           <router-link :to="'/detail/'+item.tId">
             <span class="comment flex-align-center">
-              <i class="icon icon-comment"></i>{{item.comment_size}}</span>
+              <i class="icon icon-comment"></i>{{item.tComment}}</span>
           </router-link>
         </div>
       </li>
@@ -80,7 +80,7 @@ export default {
           ],
           is_like: '1',
           likes_size: '123',
-          comment_size: '555'
+          tComment: '555'
         },
         {
           id: '1',
@@ -101,7 +101,7 @@ export default {
           ],
           is_like: '1',
           likes_size: '123',
-          comment_size: '555'
+          tComment: '555'
         },
         {
           id: '1',
@@ -119,7 +119,7 @@ export default {
           ],
           is_like: '1',
           likes_size: '123',
-          comment_size: '555'
+          tComment: '555'
         },
         {
           id: '1',
@@ -134,7 +134,7 @@ export default {
           ],
           is_like: '1',
           likes_size: '123',
-          comment_size: '555'
+          tComment: '555'
         }
       ],
       loading: false

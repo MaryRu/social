@@ -6,7 +6,11 @@ import register from '@/components/login/register'
 import group from '@/components/group/index'
 import detail from '@/components/group/detail'
 import reload from '@/components/group/reload'
+import postEdit from '@/components/group/post-edit'
 import societyNews from '@/components/societyNews/index'
+import newsContent from '@/components/societyNews/newsContent'
+import partyContent from '@/components/societyNews/partyContent'
+import release from '@/components/societyNews/releaseActive'
 import member from '@/components/member/index'
 import available from '@/components/home/available'
 import entertain from '@/components/home/entertain'
@@ -165,6 +169,26 @@ export default new Router({
       path: '/reload/:id',
       name: 'reload',
       component: reload
+    },
+    {
+      path: '/postEdit',
+      name: 'postEdit',
+      component: postEdit
+    },
+    {
+      path: '/newsContent/:id',
+      name: 'newsContent',
+      component: newsContent
+    },
+    {
+      path: '/partyContent/:id',
+      name: 'partyContent',
+      component: partyContent
+    },
+    {
+      path: '/release', // 发布活动
+      name: 'release',
+      component: release
     }
     // {
     //   path: '/demo',

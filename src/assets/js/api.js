@@ -148,6 +148,18 @@ export default {
   addcomment (params) {
     // 用户评论
     return Post('/comment/addcomment', params)
+  },
+  chooseLabel (params) {
+    // 用户选择标签
+    return Post('/label/chooseLabel', params)
+  },
+  addTieba (params) {
+    // 发布颜络社
+    return Post('/tieba/addTieba', params)
+  },
+  getFreshById (params) {
+    // 根据ID查找鲜闻
+    return Post('/freshsmell/getFreshById', params)
   }
 }
 export { uId }

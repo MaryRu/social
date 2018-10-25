@@ -38,6 +38,7 @@ textarea,
 menu {
   margin: 0;
   padding: 0;
+  
 }
 
 header,
@@ -73,6 +74,7 @@ img,
 iframe,
 abbr {
   border: 0;
+  font-family: sans-serif;
 }
 
 i,
@@ -115,6 +117,7 @@ button {
 textarea {
   overflow: auto;
   resize: none;
+  font-family: sans-serif;
 }
 
 label,
@@ -144,10 +147,10 @@ body {
   font-size: @base_textSize;
 }
 
-body,
-html {
-  // height: 100%;
-}
+// body,
+// html {
+//   // height: 100%;
+// }
 
 a {
   text-decoration: none;
@@ -472,5 +475,10 @@ input:focus{
     width: 30px;
     height: 30px;
     background-position: -60px -270px;
+  }
+  &.icon-img {
+    width: 30px;
+    height: 30px;
+    background-position: -90px -270px;
   }
 }
