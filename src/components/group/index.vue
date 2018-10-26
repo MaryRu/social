@@ -22,6 +22,7 @@
       </div>
       <group></group>
     </div>
+    <scrollTop></scrollTop>
     <Footer :urlRouter="$route.path" :cartnum='cartLength' ref="footer"></Footer>
   </div>
 </template>
@@ -33,6 +34,7 @@
 <script>
 import Footer from '../base/footer'
 import Header from '../base/header'
+import scrollTop from '../base/scrollTop'
 import group from '../base/group'
 export default {
   data () {
@@ -47,7 +49,8 @@ export default {
   components: {
     Header,
     Footer,
-    group
+    group,
+    scrollTop
   },
   methods: {
   }

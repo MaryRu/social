@@ -108,7 +108,7 @@
               </span>
               <router-link :to="{path: '/detail/'+item.tId}">
                 <span class="comment flex-align-center">
-                  <i class="icon icon-comment"></i>{{item.comment_size}}</span>
+                  <i class="icon icon-comment"></i>{{item.tComment}}</span>
               </router-link>
             </div>
           </li>

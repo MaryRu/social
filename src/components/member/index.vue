@@ -60,6 +60,10 @@
               <p>客服中心</p>
             </router-link>
           </li>
+          <li class="flex-align-center" @click="out">
+            <i class="icon icon-out mr"></i>
+            <p>退出</p>
+          </li>
         </ul>
       </div>
     </div>
@@ -68,8 +72,14 @@
 </template>
 <style lang="less" scoped>
 @import '../../assets/less/member/index';
+.out {
+  background-color: @theme_background;
+  color: #fff;
+  text-align: center;
+}
 </style>
 <script>
+import { MessageBox  } from 'mint-ui'
 import Footer from '../base/footer'
 export default {
   data () {
@@ -83,6 +93,15 @@ export default {
   },
   components: {
     Footer
+  },
+  methods: {
+    out () {
+      MessageBox.confirm('确定退出?', '提示').then(() => {
+        localStorage.clear()
+        sessionStorage.clear()
+        this.$router.replace('/login')
+      })
+    }
   }
 }
 </script>

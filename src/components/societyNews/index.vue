@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <Header :tabname='tabname'></Header>
-    <router-link class="release" to="/release"> 发布活动</router-link>
+    <!-- <router-link class="release" to="/release"> 发布活动</router-link> -->
     <div class="societyNews container">
       <mt-navbar v-model="selected" class="navbar">
         <mt-tab-item id="1">鲜闻</mt-tab-item>

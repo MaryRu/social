@@ -5,23 +5,9 @@
       <el-container style="height: 9.6rem">
         <el-aside width="1.2rem" class="aside">
           <ul>
-            <li>茶1</li>
-            <li>茶2</li>
-            <li>茶3</li>
-            <li>茶4</li>
-            <li>茶5</li>
-            <li>茶</li>
-            <li>茶</li>
-            <li>茶</li>
-            <li>茶</li>
-            <li>茶</li>
-            <li>茶</li>
-            <li>茶</li>
-            <li>茶</li>
-            <li>茶</li>
-            <li>茶</li>
-            <li>茶</li>
-            <li>茶</li>
+            <li @click="select(item.pId)" :class="isSelect ? 'select' : ''" v-for="(item, index) in teaList" :key="index">
+              {{item.pName}}
+            </li>
           </ul>
         </el-aside>
         <el-main>
@@ -85,29 +71,60 @@
   font-size: .26rem;
   font-weight: 600;
 }
-
 .footer {
   background-color: #fff;
   position: fixed;
   bottom: 0;
   width: 100%;
 }
+.select {
+  color: @font_color
+}
 </style>
 
 <script>
 import Header from '../base/header-search'
+import api, { uId } from '../../assets/js/api'
 export default {
   data () {
     return {
-      num1: 1
+      isSelect: false,
+      num1: 1,
+      teaList: [
+        {
+          pName: '减肥茶'
+        },
+        {
+          pName: '减肥茶'
+        },
+        {
+          pName: '减肥茶'
+        },
+        {
+          pName: '减肥茶'
+        },
+        {
+          pName: '减肥茶'
+        }
+      ]
     }
   },
   components: {
     Header
   },
+  created() {
+    api.getAllProduct()
+      .then((res) => {
+        console.log(res)
+        this.teaList = res.data
+      })
+  },
   methods: {
     handleChange (value) {
       console.log(value)
+    },
+    select (item) {
+      console.log(item)
     }
   }
 }

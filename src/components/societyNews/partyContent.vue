@@ -7,7 +7,7 @@
         <span>{{news.fAddtime}}</span>
       </mt-tab-container-item>
       <div class="party">
-        <mt-field label="活动时间" placeholder="活动时间" type="date" v-model="news.fAddtime"></mt-field>
+        <!-- <mt-field label="活动时间" placeholder="活动时间" type="date" v-model="news.fAddtime"></mt-field>
         <mt-field label="活动地点" placeholder="活动地点" type="text" v-model="news.address"></mt-field>
         <mt-field label="参与人数" placeholder="请输入参加人数" type="number" v-model="news.number"></mt-field>
         <mt-field label="活动费用" placeholder="请输入活动费用" type="text" v-model="news.money"></mt-field>
@@ -18,7 +18,8 @@
               <img :src="item.img" alt="">
             </li>
           </ul>
-        </mt-field>
+        </mt-field> -->
+        <div v-html="news.fDesc"></div>
       </div>
       <div class="flex-center">
         <mt-button class="button" type="danger">一键参加</mt-button>
@@ -56,27 +57,7 @@ export default {
       news: {
         fTitle: '这里是标题',
         fAddtime: '2018-10-25',
-        address: '河南省南阳市宛城区长江路80号南阳理工学院',
-        number: 20,
-        money: '30元',
-        introduction: '这里是很长很长的活动介绍，主要说说活动都是干啥的',
-        labelImg: [
-          {
-            img: 'http://img.hb.aicdn.com/a7bc3183547c3b0e0744e4ecd24f63da6e45d6d27ac5-Y2Y0eY_fw658'
-          },
-          {
-            img: 'http://img.hb.aicdn.com/a7bc3183547c3b0e0744e4ecd24f63da6e45d6d27ac5-Y2Y0eY_fw658'
-          },
-          {
-            img: 'http://img.hb.aicdn.com/a7bc3183547c3b0e0744e4ecd24f63da6e45d6d27ac5-Y2Y0eY_fw658'
-          },
-          {
-            img: 'http://img.hb.aicdn.com/a7bc3183547c3b0e0744e4ecd24f63da6e45d6d27ac5-Y2Y0eY_fw658'
-          },
-          {
-            img: 'http://img.hb.aicdn.com/a7bc3183547c3b0e0744e4ecd24f63da6e45d6d27ac5-Y2Y0eY_fw658'
-          }
-        ]
+        fDesc: '<h2 class="rich_media_title" id="activity-name">霸王餐免费吃！一口香到心尖！南阳也有100+元的澳洲黑牛肉了！限量供应！</h2><div id="meta_content" class="rich_media_meta_list">'
       }
     }
   },

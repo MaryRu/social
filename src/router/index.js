@@ -20,6 +20,8 @@ import mycard from '@/components/giftcard/mycard'
 import mall from '@/components/order/index'
 import classify from '@/components/order/classify'
 import homePage from '@/components/member/homePage'
+import homePagenull from '@/components/member/homePagenull'
+import information from '@/components/member/information'
 import personal from '@/components/login/personal'
 import lable from '@/components/login/lable'
 import record from '@/components/member/record'
@@ -114,6 +116,16 @@ export default new Router({
       path: '/homePage',
       name: 'homePage',
       component: homePage
+    },
+    {
+      path: '/homePagenull',
+      name: 'homePagenull',
+      component: homePagenull
+    },
+    {
+      path: '/information',
+      name: 'information',
+      component: information
     },
     {
       path: '/personal',

@@ -160,6 +160,26 @@ export default {
   getFreshById (params) {
     // 根据ID查找鲜闻
     return Post('/freshsmell/getFreshById', params)
+  },
+  getUserById (params) {
+    // 个人主页信息
+    return Post('/user/getUserById', params)
+  },
+  pictureupload (params) {
+    // 上传封面
+    return Post('/pictureupload/upload', params)
+  },
+  editUserByUId (params) {
+    // 修改个人信息
+    return Post('/user/editUserByUId', params)
+  },
+  realNameAuthe (params) {
+    // 实名认证
+    return Post('/user/realNameAuthe', params)
+  },
+  getAllProduct () {
+    // 获取所有商品
+    return Post('/product/getAllProduct')
   }
 }
 export { uId }
