@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Toast } from 'mint-ui'
 
-var url = 'http://115.158.20.211:8088/social_project/'
+var url = 'http://115.158.20.211:8080/social_project/'
 // var token = localStorage.getItem('token')
 var uId = localStorage.getItem('uId')
 // axios 配置
@@ -180,6 +180,42 @@ export default {
   getAllProduct () {
     // 获取所有商品
     return Post('/product/getAllProduct')
+  },
+  getProductBySearch (params) {
+    // 搜索
+    return Post('/product/getProductBySearch', params)
+  },
+  getProductByPid (params) {
+    // 商品详情
+    return Post('/product/getProductByPid', params)
+  },
+  addCart (params) {
+    // 加入购物车
+    return Post('/cart/addCart', params)
+  },
+  getCart (params) {
+    // 用户的购物车
+    return Post('/cart/getCart', params)
+  },
+  deleteCart (params) {
+    // 删除购物车商品
+    return Post('/cart/deleteCart', params)
+  },
+  deleteCartByUid (params) {
+    // 删除购物车全部商品
+    return Post('/cart/deleteCartByUid', params)
+  },
+  getOrderByUser (params) {
+    // 订单列表
+    return Post('/order/getOrderByUser', params)
+  },
+  getOrederByOid (params) {
+    // 通过订单编号获取订单详情
+    return Post('/order/getOrederByOid', params)
+  },
+  givelike (params) {
+    // 通过订单编号获取订单详情
+    return Post('/tieba/givelike', params)
   }
 }
 export { uId }

@@ -24,12 +24,39 @@
   border-bottom: 3px solid @theme_color;
   color: @theme_color;
 }
+.el-menu-item.is-active {
+  color: @theme_color;
+}
+.el-menu-item:focus, .el-menu-item:hover {
+  outline: 0;
+  background-color: #f9ebed;
+}
+.el-menu {
+  border-right: none;
+}
+.el-input-number--mini {
+  width: 90px;
+}
+.el-input-number__decrease,.el-input-number__increase {
+  border-right: none;
+  border-left: none;
+  background-color: #f9ebed;
+  border-radius: 50%;
+}
+.el-popover {
+  padding: 0;
+  width: 100%;
+  left: 0;
+}
 .clearfix(){
   &::after {
     display: block;
     clear: both;
     content: "";
   }
+}
+.mint-popup-bottom {
+  width: 100%;
 }
 .position(){
   position: absolute;

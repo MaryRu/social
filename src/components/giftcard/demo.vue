@@ -1,502 +1,166 @@
 <template>
-  <div class="post-wrap">
-    <mt-header fixed title="帖子详情">
-      <a href="javascript:history.go(-1);" slot="left">
-        <mt-button icon="back"></mt-button>
-      </a>
-    </mt-header>
-    <div class="post-detail">
-      <div class="post-item page-loadmore-listitem">
-        <div class="post-header">
-          <div class="avatar"><img :src="photo.value" alt=""></div>
-          <div class="info">
-            <div class="user">
-              <span>{{user.name}}
-                <i class="icon male-icon"></i>
-              </span>
-            </div>
-            <div>
-              <span class="time">{{item.updated_at | goodTime}}</span>
-            </div>
-          </div>
-        </div>
-        <div class="post-content">
-          <div class="text">{{item.content}}</div>
-          <div class="thumbnails my-gallery">
-            <figure v-for="(img, index) in item.files" :key="index" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="thumbnail">
-              <a :href="img.file_name" itemprop="contentUrl" :data-size="img.file_name | dataSize">
-                <img :src="img.file_name + '?imageView2/5/w/100/h/100'" itemprop="thumbnail" alt="" />
-              </a>
-            </figure>
-          </div>
-        </div>
-        <div class="post-bottom">
-          <span class="like">
-            <div class="VueStar" :class="[isLike == 1 ? 'islike' : '']">
-              <div class="VueStar__ground">
-                <div class="VueStar__icon" @click="islike(item.id)" :class="{'animated tada': !!isLike}">
-                  <i class="icon like-icon"></i>
-                </div>
-                <div class="VueStar__decoration" :class="{ 'VueStar__decoration--active': !!isLike }"></div>
-              </div>
-            </div>
-            {{item.likes_size}}
-          </span>
-          <span class="comment">
-            <i class="icon comment-icon"></i>{{item.comment_size}}</span>
-        </div>
-      </div>
-    </div>
-    <!-- PhotoSwipe插件需要的元素， 一定要有类名 pswp -->
-    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="pswp__bg"></div>
-      <div class="pswp__scroll-wrap">
-        <div class="pswp__container">
-          <div class="pswp__item"></div>
-          <div class="pswp__item"></div>
-          <div class="pswp__item"></div>
-        </div>
-        <!-- 预览区域顶部的默认UI，可以修改 -->
-        <div class="pswp__ui pswp__ui--hidden">
-          <div class="pswp__top-bar">
-            <!--  与图片相关的操作 -->
-            <div class="pswp__counter"></div>
-            <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-            <!--将分享按钮去掉 -->
-            <!--<button class="pswp__button pswp__button--share" title="Share"></button>-->
-            <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-            <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-            <div class="pswp__preloader">
-              <div class="pswp__preloader__icn">
-                <div class="pswp__preloader__cut">
-                  <div class="pswp__preloader__donut"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-            <div class="pswp__share-tooltip"></div>
-          </div>
-          <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-          <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
-          <div class="pswp__caption">
-            <div class="pswp__caption__center"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="comment-wrap">
-      <div class="reply-title">
-        <span>
-          <i class="icon reply-icon"></i>全部评论({{item.comment_size}})</span>
-      </div>
-      <div class="content">
-        <div class="comment-item" v-for="(list, index) in lists" :key="index">
-          <div class="comment-header">
-            <div class="avatar">
-              <img :src="list.user.photo.value" alt="">
-              <p>{{index + 1}}楼</p>
-            </div>
-            <div class="info">
-              <div class="user">
-                <span>{{list.user.name}}
-                  <i class="icon male-icon"></i>
-                </span>
-              </div>
-              <div>
-                <span class="time">{{item.updated_at | goodTime}}</span>
-                <!-- <span class="local">南阳理工学院</span> -->
-              </div>
-            </div>
-            <mt-button>
-              <i class="icon zan-icon"></i>
-            </mt-button>
-          </div>
-          <div class="comment-content">
-            <div class="text">{{list.content}}</div>
-            <!-- <div class="img"><img src="" alt=""></div> -->
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="comment-form">
-      <mt-field class="comment-input" placeholder="评论" v-model="form.comment"></mt-field>
-      <mt-button @click="commentForm" class="comment-btn" type="default">评论</mt-button>
-    </div>
+  <div class="container">
+    <ul class="nav" :class="[isSelected]">
+      <li>
+        
+      </li>
+      <li><a id="navon1" href="javascript:;" @click="navClick">nav1</a> </li>
+      <li><a id="navon2" href="javascript:;" @click="navClick">nav2</a> </li>
+      <li><a id="navon3" href="javascript:;" @click="navClick">nav3</a> </li>
+      <li><a id="navon4" href="javascript:;" @click="navClick">nav4</a> </li>
+      <li><a id="navon5" href="javascript:;" @click="navClick">nav5</a> </li>
+      <li><a id="navon6" href="javascript:;" @click="navClick">nav6</a> </li>
+    </ul>
+    <article>
+      <div id="div0"></div>
+      <div id="div1"></div>
+      <div id="div2"></div>
+      <div id="div3"></div>
+      <div id="div4"></div>
+      <div id="div5"></div>
+      <div id="div6"></div>
+    </article>
   </div>
 </template>
-<style lang="less" scoped>
-@import '../../assets/less/post';
-</style>
-<script>
-import { Toast } from 'mint-ui'
-import PhotoSwipe from 'photoswipe'
-import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default'
-import 'photoswipe/dist/photoswipe.css'
-import 'photoswipe/dist/default-skin/default-skin.css'
-export default {
-  name: 'index',
-  data() {
-    return {
-      item: {
-        updated_at: '2018-12-24',
-        content: '这里是很多很多很多发布的文字，不超过140字',
-        files: [
-          {
-            file_name: 'http://img.hb.aicdn.com/21a8d3bf73d31e67532ce4222dcbf941a36a8ac321c6f-63EPv4_fw658'
-          },
-          {
-            file_name: 'http://img.hb.aicdn.com/21a8d3bf73d31e67532ce4222dcbf941a36a8ac321c6f-63EPv4_fw658'
-          },
-          {
-            file_name: 'http://img.hb.aicdn.com/21a8d3bf73d31e67532ce4222dcbf941a36a8ac321c6f-63EPv4_fw658'
-          },
-          {
-            file_name: 'http://img.hb.aicdn.com/21a8d3bf73d31e67532ce4222dcbf941a36a8ac321c6f-63EPv4_fw658'
-          }
-        ],
-        likes_size: 123456,
-        comment_size: 123
-      },
-      user: {
-        name: '没头脑'
-      },
-      photo: {
-        value: 'http://img.hb.aicdn.com/a7bc3183547c3b0e0744e4ecd24f63da6e45d6d27ac5-Y2Y0eY_fw658'
-      },
-      lists: [
-      ],
-      isLike: '',
-      form: {
-        comment: ''
-      }
-    }
-  },
-  created() {
-    this.getdetail(localStorage.getItem('user_id'));
-  },
-  methods: {
-    getdetail(uid) {
-      let getparams = {}
-      if (!!uid) {
-        getparams.params = {
-          user_id: uid,
-        }
-      }
-      // this.$http.get(url + 'tieba/v1/show?tid=' + this.$route.params.id, getparams)
-      //   .then(response => {
-      //     if (response.data.code == 200) {
-      //       this.item = response.data.data.info;
-      //       this.user = response.data.data.info.user;
-      //       this.photo = response.data.data.info.user.photo;
-      //       this.isLike = response.data.data.is_like;
-      //       this.lists = response.data.data.list.reverse();
-      //     } else {
-      //       Toast({
-      //         message: response.data.message[0],
-      //         position: 'bottom',
-      //         duration: 2000
-      //       });
-      //     }
-      //   })
-      //   .catch(error => {
-      //     if (error.response.data.code == 0) {
-      //       Toast({
-      //         message: '服务器开小差啦（ﾉ´д｀）快去告诉程序猿~',
-      //         position: 'bottom',
-      //         duration: 2000
-      //       });
-      //     } else {
-      //       Toast({
-      //         message: error.response.data.message[0],
-      //         position: 'bottom',
-      //         duration: 2000
-      //       });
-      //     }
-        //   console.log(error.response);
-        // })
-    },
-    commentForm() {
-      if (!!localStorage.getItem('user_id')) {
-        // var formdata = {
-        //   user_id: localStorage.getItem('user_id'),
-        //   token: localStorage.getItem('token'),
-        //   tid: this.$route.params.id,
-        //   content: this.form.comment
-        // }
-        // this.$http.post(url + 'tieba/v1/tieba/comment', formdata)
-        //   .then(response => {
-        //     Toast({
-        //       message: response.data.message[0],
-        //       position: 'bottom',
-        //       duration: 2000
-        //     });
-        //     if (response.data.code == 200) {
-        //       this.form.comment = ''
-        //       this.getdetail(localStorage.getItem('user_id'));
-        //     }
-        //   })
-        //   .catch(error => {
-        //     if (error.response.data.code == 0) {
-        //       Toast({
-        //         message: '服务器开小差啦（ﾉ´д｀）快去告诉程序猿~',
-        //         position: 'bottom',
-        //         duration: 2000
-        //       });
-        //     } else {
-        //       Toast({
-        //         message: error.response.data.message[0],
-        //         position: 'bottom',
-        //         duration: 2000
-        //       });
-        //     }
-        //     console.log(error.response);
-        //   });
-      } else {
-        Toast({
-          message: '请先登录^_^',
-          position: 'bottom',
-          duration: 2000
-        });
-        this.$router.push('/login')
-      }
-    },
-    initPhotoSwipeFromDOM(gallerySelector) {
-      var parseThumbnailElements = function(el) {
-        var thumbElements = el.childNodes,
-          numNodes = thumbElements.length,
-          items = [],
-          figureEl,
-          linkEl,
-          size,
-          item
-        for (var i = 0; i < numNodes; i++) {
-          figureEl = thumbElements[i];
-          if (figureEl.nodeType !== 1) {
-            continue
-          }
-          linkEl = figureEl.children[0];
-          size = linkEl.getAttribute('data-size').split('x')
-          item = {
-            src: linkEl.getAttribute('href'),
-            w: parseInt(size[0], 10),
-            h: parseInt(size[1], 10)
-          };
-          if (figureEl.children.length > 1) {
-            item.title = figureEl.children[1].innerHTML
-          }
-          if (linkEl.children.length > 0) {
-            item.msrc = linkEl.children[0].getAttribute('src')
-          }
-          item.el = figureEl
-          items.push(item)
-        }
-        return items
-      }
-      var closest = function closest(el, fn) {
-        return el && (fn(el) ? el : closest(el.parentNode, fn))
-      }
-      var onThumbnailsClick = function(e) {
-        e = e || window.event
-        e.preventDefault ? e.preventDefault() : e.returnValue = false
-        var eTarget = e.target || e.srcElement
-        var clickedListItem = closest(eTarget, function(el) {
-          return (el.tagName && el.tagName.toUpperCase() === 'FIGURE')
-        });
-
-        if (!clickedListItem) {
-          return;
-        }
-        var clickedGallery = clickedListItem.parentNode,
-          childNodes = clickedListItem.parentNode.childNodes,
-          numChildNodes = childNodes.length,
-          nodeIndex = 0,
-          index
-        for (var i = 0; i < numChildNodes; i++) {
-          if (childNodes[i].nodeType !== 1) {
-            continue
-          }
-          if (childNodes[i] === clickedListItem) {
-            index = nodeIndex
-            break
-          }
-          nodeIndex++
-        }
-
-        if (index >= 0) {
-          openPhotoSwipe(index, clickedGallery)
-        }
-        return false;
-      }
-      var photoswipeParseHash = function() {
-        var hash = window.location.hash.substring(1),
-          params = {}
-        if (hash.length < 5) {
-          return params;
-        }
-        var vars = hash.split('&');
-        for (var i = 0; i < vars.length; i++) {
-          if (!vars[i]) {
-            continue
-          }
-          var pair = vars[i].split('=');
-          if (pair.length < 2) {
-            continue
-          }
-          params[pair[0]] = pair[1];
-        }
-        if (params.gid) {
-          params.gid = parseInt(params.gid, 10)
-        }
-        return params
-      }
-
-      var openPhotoSwipe = function(index, galleryElement, disableAnimation, fromURL) {
-        var pswpElement = document.querySelectorAll('.pswp')[0],
-          gallery,
-          options,
-          items
-        items = parseThumbnailElements(galleryElement);
-        options = {
-          history: false,
-          galleryUID: galleryElement.getAttribute('data-pswp-uid'),
-          getThumbBoundsFn: function(index) {
-            var thumbnail = items[index].el.getElementsByTagName('img')[0],
-              pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
-              rect = thumbnail.getBoundingClientRect()
-            return { x: rect.left, y: rect.top + pageYScroll, w: rect.width }
-          }
-
-        }
-        if (fromURL) {
-          if (options.galleryPIDs) {
-            for (var j = 0; j < items.length; j++) {
-              if (items[j].pid == index) {
-                options.index = j
-                break
-              }
-            }
-          } else {
-            options.index = parseInt(index, 10) - 1
-          }
-        } else {
-          options.index = parseInt(index, 10)
-        }
-        if (isNaN(options.index)) {
-          return ''
-        }
-        if (disableAnimation) {
-          options.showAnimationDuration = 0
-        }
-
-        gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options)
-        gallery.init()
-      }
-      var galleryElements = document.querySelectorAll(gallerySelector)
-      for (var i = 0, l = galleryElements.length; i < l; i++) {
-        galleryElements[i].setAttribute('data-pswp-uid', i + 1)
-        galleryElements[i].onclick = onThumbnailsClick
-      }
-      var hashData = photoswipeParseHash()
-      if (hashData.pid && hashData.gid) {
-        openPhotoSwipe(hashData.pid, galleryElements[hashData.gid - 1], true, true)
-      }
-    },
-    islike(tid) {
-      if (!!localStorage.getItem('user_id')) {
-        var form = {
-          user_id: localStorage.getItem('user_id'),
-          token: localStorage.getItem('token'),
-          tid: tid
-        }
-        this.$http.post(url + 'tieba/v1/tieba/like', form)
-          .then(response => {
-            Toast({
-              message: response.data.message[0],
-              position: 'bottom',
-              duration: 2000
-            });
-            if (response.data.code == 200) {
-              this.isLike = response.data.data.is_like
-            }
-          })
-          .catch(error => {
-            if (error.response.data.code == 0) {
-              Toast({
-                message: '服务器开小差啦（ﾉ´д｀）快去告诉程序猿~',
-                position: 'bottom',
-                duration: 2000
-              });
-            } else {
-              Toast({
-                message: error.response.data.message[0],
-                position: 'bottom',
-                duration: 2000
-              });
-            }
-            console.log(error.response);
-          });
-      } else {
-        Toast({
-          message: '您还未登录',
-          position: 'bottom',
-          duration: 2000
-        });
-        this.$router.push('/login')
-      }
-    }
-  },
-  mounted() {
-  },
-  updated() {
-    this.initPhotoSwipeFromDOM('.my-gallery')
-  },
-  filters: {
-    dataSize: function(value) {
-      var reg1 = new RegExp('(^|&)w=([^&]*)(&|$)', 'i')
-      var reg2 = new RegExp('(^|&)h=([^&]*)(&|$)', 'i')
-      var w, h
-      if (!!value.match(reg1)) {
-        w = unescape(value.match(reg1)[2])
-      } else {
-        w = 400
-      }
-      if (!!value.match(reg2)) {
-        h = unescape(value.match(reg2)[2])
-      } else {
-        h = 400
-      }
-      return w + 'x' + h
-    },
-    goodTime(value) {
-      var now = new Date().getTime(),
-        oldTime = new Date(value).getTime(),
-        difference = now - oldTime,
-        result = '',
-        minute = 1000 * 60,
-        hour = minute * 60,
-        day = hour * 24,
-        halfamonth = day * 15,
-        month = day * 30,
-        year = month * 12,
-
-        _year = difference / year,
-        _month = difference / month,
-        _week = difference / (7 * day),
-        _day = difference / day,
-        _hour = difference / hour,
-        _min = difference / minute;
-      if (_year >= 1) { result = ~~(_year) + " 年前" }
-      else if (_month >= 1) { result = ~~(_month) + " 个月前" }
-      else if (_week >= 1) { result = ~~(_week) + " 周前" }
-      else if (_day >= 1) { result = ~~(_day) + " 天前" }
-      else if (_hour >= 1) { result = ~~(_hour) + " 小时前" }
-      else if (_min >= 1) { result = ~~(_min) + " 分钟前" }
-      else result = "刚刚";
-      return result;
-    }
-  }
+<style scoped>
+#app,body,html{height:100%}
+#app,*{margin:0}
+.nav li a:hover,
+.navon0-selected #navon0,
+.navon1-selected #navon1,
+.navon2-selected #navon2,
+.navon3-selected #navon3,
+.navon4-selected #navon4,
+.navon5-selected #navon5,
+.navon6-selected #navon6{border-bottom:2px solid #0052e4}
+*{padding:0}li{list-style-type:none}
+a{text-decoration:none;outline:0}
+.container{
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  display:flex;
+  overflow:auto;
+  width:600px;
+  height:500px;
+  margin:auto
 }
+.nav{
+  position:fixed;
+  z-index:5;
+  display:inline-flex;
+  flex-wrap:wrap;
+  width:100px;
+  height:inherit;
+  background:#fff
+}
+.nav li{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%
+}
+.nav li a{
+  font-size:18px;
+  display:block;
+  padding:10px 5px;
+  cursor:pointer;
+  color:#3c3c3c
+}
+#div0{background:#ac8989}
+#div1{background:#fd5331}
+#div2{background:#c00ab9}
+#div3{background:#149ce1}
+#div4{background:#f99831}
+#div5{background:#0aff3c}
+#div6{background:#dbe6f7}
+article{
+  display:inline-block;
+  width:80%;
+  margin-left:100px
+}
+article>div{width:100%;height:500px}
+
+</style>
+
+<script>
+export default {
+    name: 'container',
+    data() {
+      return {
+        isSelected: ''
+      }
+    },
+    methods: {
+       // 防抖
+      // debounce(func, wait, immediate) {
+      //   var timeout, args, context, timestamp, result;
+      //   var later = function () {
+      //     // 据上一次触发时间间隔
+      //     var last = new Date() - timestamp;
+      //     // 上次被包装函数被调用时间间隔last小于设定时间间隔wait
+      //     if (last < wait && last > 0) {
+      //       timeout = setTimeout(later, wait - last);
+      //     } else {
+      //       timeout = null;
+      //       // 如果设定为immediate===true，因为开始边界已经调用过了此处无需调用
+      //       if (!immediate) {
+      //         result = func.apply(context, args);
+      //         if (!timeout) context = args = null;
+      //       }
+      //     }
+      //   };
+
+      //   return function () {
+      //     context = this;
+      //     args = arguments;
+      //     timestamp = new Date();
+      //     var callNow = immediate && !timeout;
+      //     // 如果延时不存在，重新设定延时
+      //     if (!timeout) timeout = setTimeout(later, wait);
+      //     if (callNow) {
+      //       result = func.apply(context, args);
+      //       context = args = null;
+      //     }
+
+      //     return result;
+      //   };
+      // },
+      navClick(e) {
+        console.log(e)
+        var scrollBox1 = document.querySelector('.container');
+        scrollBox1.scrollTo(0, [...e.target.id].pop() * 500)
+        this.isSelected = e.target.id + '-selected';
+      }
+    },
+    // mounted() {
+    //   var self = this;
+    //   var liIds = [];
+    //   var doc = document;
+    //   var lis = doc.querySelectorAll('ul li');
+    //   for (var i = 0; i < lis.length; i++) {
+    //     var element = lis[i];
+    //     liIds.push(element.querySelector('a').id);
+    //   }
+
+    //   var $scrollBox = doc.querySelector('.container');
+    //   var scrollCallback = self.debounce(function () {
+    //     var top = $scrollBox.scrollTop; //设置变量top,表示当前滚动条到顶部的值
+    //     var tt = $scrollBox.clientHeight; //设置变量tt,表示当前滚动窗口高度的值
+    //     var num = 0;
+    //     for (var n = 0; n < 7; n++) {
+    //       //在此处通过判断滚动条到顶部的值和当前窗口高度的关系
+    //       //（当前窗口的n倍 <= top <= 当前窗口的n+1倍）来取得和导航索引值的对应关系
+    //       if (top >= n * tt && top <= (n + 1) * tt) {
+    //         num = n;
+    //       }
+    //       self.isSelected = liIds[num] + '-selected';
+    //     }
+
+    //   }, 100)
+    //   $scrollBox.addEventListener('scroll', scrollCallback)
+    // }
+  }
 </script>

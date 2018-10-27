@@ -19,6 +19,8 @@ import giftcard from '@/components/giftcard/index'
 import mycard from '@/components/giftcard/mycard'
 import mall from '@/components/order/index'
 import classify from '@/components/order/classify'
+import search from '@/components/order/search'
+import cartdata from '@/components/order/cartdata'
 import homePage from '@/components/member/homePage'
 import homePagenull from '@/components/member/homePagenull'
 import information from '@/components/member/information'
@@ -32,7 +34,10 @@ import active from '@/components/member/active'
 import verified from '@/components/member/verified'
 import otherHome from '@/components/member/otherHome'
 import forgetPsd from '@/components/login/forgetPassword'
-// import demo from '@/components/giftcard/demo'
+import order from '@/components/order/order'
+import waitpay from '@/components/order/waitpay'
+import orderdown from '@/components/order/orderdown'
+import demo from '@/components/giftcard/demo'
 
 Vue.use(Router)
 
@@ -201,11 +206,36 @@ export default new Router({
       path: '/release', // 发布活动
       name: 'release',
       component: release
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: search
+    },
+    {
+      path: '/cartdata',
+      name: 'cartdata',
+      component: cartdata
+    },
+    {
+      path: '/order',
+      name: 'order',
+      component: order
+    },
+    {
+      path: '/waitpay',
+      name: 'waitpay',
+      component: waitpay
+    },
+    {
+      path: '/orderdown',
+      name: 'orderdown',
+      component: orderdown
+    },
+    {
+      path: '/demo',
+      name: 'demo',
+      component: demo
     }
-    // {
-    //   path: '/demo',
-    //   name: 'demo',
-    //   component: demo
-    // }
   ]
 })

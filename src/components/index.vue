@@ -291,6 +291,11 @@ export default {
         this.cardList = res.data.giftlist
         this.listDetail = res.data.tiebalist
       })
+  },
+  methods: {
+    islike (id,value) {
+      console.log(id)
+    }
   }
 }
 </script>

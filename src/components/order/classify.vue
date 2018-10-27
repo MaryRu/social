@@ -3,35 +3,69 @@
     <Header></Header>
     <div class="container">
       <el-container style="height: 9.6rem">
-        <el-aside width="1.2rem" class="aside">
-          <ul>
-            <li @click="select(item.pId)" :class="isSelect ? 'select' : ''" v-for="(item, index) in teaList" :key="index">
-              {{item.pName}}
-            </li>
-          </ul>
+        <el-aside width="1.5rem" class="aside">
+          <el-row>
+            <el-col >
+              <el-menu 
+                default-active="0"
+                class="el-menu-vertical-demo">
+                <el-menu-item @click="select(item)" :index="''+index" v-for="(item, index) in teaList" :key="index" style="padding-left: 0">
+                  <span slot="title">{{item.pName}}</span>
+                </el-menu-item>
+              </el-menu>
+            </el-col>
+          </el-row>
         </el-aside>
         <el-main>
           <div class="flex">
             <div class="cardImg">
-              <img src="../../assets/images/card1.png" alt="">
+              <img :src="info.pPic" alt="">
             </div>
             <div class="ml">
               <p class="title">
-                青沫茶颜茶品名称*花瓣茶
+                {{info.pName}}
               </p>
-              <span>这里是产品描述</span>
-              <p class="price">￥15.9</p>
-              <el-input-number v-model="num1" @change="handleChange" size="mini" :min="1" :max="10" label="描述文字"></el-input-number>
+              <span>{{info.pDesc}}</span>
+              <p class="price">￥{{info.pPrices}}</p>
+              <el-input-number v-model="info.cartNum" @change="handleChange(info)" size="mini" :min="num1" :max="info.pStock" label=""></el-input-number>
             </div>
           </div>
         </el-main>
       </el-container>
     </div>
-    <el-footer class="footer" style="height: .8rem">
-      <div class="cart">
-        <i class="icon icon-cart"></i>
+    <el-footer class="footer flex-align-center" style="height: .8rem">
+      <div class="cart" @click="cart">
+        <el-badge :value="value" class="item">
+          <i class="icon icon-cart" size="small"></i>
+        </el-badge>
       </div>
+      <p class="allprice price">￥{{allprice}}</p>
+      <el-button type="danger" class="button" @click="toPay()">去结算</el-button>
     </el-footer>
+    <mt-popup v-model="popupVisible" position="bottom" class="mint-popup-4">
+      <div class="cartList">
+        <ul>
+          <li class="flex-align-center flex-end" @click="delectAll">
+            <i class="icon icon-delect"></i>
+            <span class="mr">删除购物车</span>
+          </li>
+          <li class="flex-around flex-align-center" v-for="(item, index) in cartList" :key="index">
+            <p>{{item.pname}}</p>
+            <p class="price">￥{{item.prices}}</p>
+            <el-input-number v-model="item.puNum" @change="cardChange(item)" size="mini" :min="num1" :max="item.pStock" label=""></el-input-number>
+          </li>
+          <li class="popFoot flex-align-center">
+            <div class="cart popCart" @click="cart">
+              <el-badge :value="value" class="item">
+                <i class="icon icon-cart" size="small"></i>
+              </el-badge>
+            </div>
+            <p class="allprice price">￥{{allprice}}</p>
+            <el-button type="danger" class="button" @click="toPay()">去结算</el-button>
+          </li>
+        </ul>
+      </div>
+    </mt-popup>
   </div>
 </template>
 <style lang="less" scoped>
@@ -47,10 +81,13 @@
       line-height: .8rem;
       font-size: .22rem;
       text-align: center;
-      border-bottom: 1px solid #ccc;
-      border-right: 1px solid #ccc;
+      // border-bottom: 1px solid #ccc;
+      // border-right: 1px solid #ccc;
     }
   }
+}
+.allprice {
+  margin-left: 60px;
 }
 .cart {
   width: 30px;
@@ -60,6 +97,16 @@
   position: absolute;
   top: -15px;
   background-color: @theme_background;
+  &.popCart{
+    position: relative;
+    left: .2rem;
+  }
+}
+.button {
+  position: fixed;
+  right: 0;
+  height: .8rem;
+  border-radius: 0;
 }
 .cardImg {
   img {
@@ -80,16 +127,75 @@
 .select {
   color: @font_color
 }
+.cartList {
+  ul {
+    li {
+      border-bottom: 1px solid #f0f0f0;
+      padding: .2rem 0;
+      &:last-child{
+        border-bottom: none;
+      }
+    }
+    .popFoot {
+      padding: 0 .2rem;
+      .allprice{
+        margin-left: 0.2rem;
+      }
+    }
+  }
+}
 </style>
 
 <script>
 import Header from '../base/header-search'
 import api, { uId } from '../../assets/js/api'
+import { Toast } from 'mint-ui'
 export default {
   data () {
     return {
-      isSelect: false,
-      num1: 1,
+      popupVisible: false,
+      allprice: 0,
+      cartList: [
+        {
+          pId: 1,
+          pname: '青沫茶颜茶品名称*花瓣茶',
+          pPrices: '15.9',
+          pStock: 50
+        },
+        {
+          pId: 1,
+          pname: '青沫茶颜茶品名称*花瓣茶',
+          pPrices: '15.9',
+          pStock: 50
+        },
+        {
+          pId: 1,
+          pname: '青沫茶颜茶品名称*花瓣茶',
+          pPrices: '15.9',
+          pStock: 50
+        },
+        {
+          pId: 1,
+          pname: '青沫茶颜茶品名称*花瓣茶',
+          pPrices: '15.9',
+          pStock: 50
+        },
+        {
+          pId: 1,
+          pname: '青沫茶颜茶品名称*花瓣茶',
+          pPrices: '15.9',
+          pStock: 50
+        }
+      ],
+      num1: 0,
+      value: 0,
+      info: {
+        pName: '青沫茶颜茶品名称*花瓣茶',
+        pDesc: '这里是描述',
+        pPic: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658',
+        pStock: 50,
+        pPrices: '15.9'
+      },
       teaList: [
         {
           pName: '减肥茶'
@@ -109,22 +215,115 @@ export default {
       ]
     }
   },
+  computed: {
+
+  },
   components: {
     Header
   },
   created() {
+    // 获取所有商品
     api.getAllProduct()
       .then((res) => {
         console.log(res)
         this.teaList = res.data
+        this.info = this.teaList[0]
+        // this.info.num = this.teaList[0]
+      })
+    // 获取购物车所有商品
+    let form = this.$qs.stringify({
+      uId: uId
+    })
+    api.getCart(form)
+      .then((res) => {
+        console.log(res)
+        this.cartList = res.data
+        this.cartList.forEach((i) => {
+          this.value += i.puNum
+          this.allprice += i.prices*i.puNum
+        })
       })
   },
   methods: {
-    handleChange (value) {
-      console.log(value)
+    delectAll () {
+      let form = this.$qs.stringify({
+        uId: uId
+      })
+      // 删除全部购物车商品
+      api.deleteCartByUid(form)
+        .then((res) => {
+          console.log(res)
+          this.$router.replace('/cartdata')
+        })
     },
-    select (item) {
-      console.log(item)
+    handleChange (info) {
+      console.log(info)
+      // this.value = this.num
+      let form = this.$qs.stringify({
+        uId: uId,
+        pId: info.pId,
+        puNum: info.cartNum
+      })
+      // 加入购物车
+      api.addCart(form)
+        .then((res) => {
+          // console.log(res)
+          this.value = info.cartNum
+          Toast('加入成功')
+        })
+    },
+    select (e) {
+      console.log(e.pId)
+      let form = this.$qs.stringify({
+        pId: e.pId,
+        uId: uId
+      })
+      api.getProductByPid(form)
+        .then((res) => {
+          console.log(res)
+          this.info = res.data.product
+        })
+    },
+    cardChange (item) {
+      let form = this.$qs.stringify({
+        uId: uId,
+        pId: item.pId,
+        puNum: item.puNum
+      })
+      // 加入购物车
+      api.addCart(form)
+        .then((res) => {
+          Toast('加入成功')
+        })
+      if (item.puNum === 0) {
+        let form = this.$qs.stringify({
+          puId: item.puId
+        })
+        api.deleteCart(form)
+          .then((res) => {
+            console.log(res)
+            this.$router.replace('/cartdata')
+          })
+      }
+    },
+    cart () {
+      this.popupVisible = !this.popupVisible
+      // 获取购物车所有商品
+      let form = this.$qs.stringify({
+        uId: uId
+      })
+      api.getCart(form)
+        .then((res) => {
+          console.log(res)
+          this.cartList = res.data
+          this.cartList.forEach((i) => {
+            this.allprice = i.prices*i.puNum
+          })
+        })
+    },
+    toPay () {
+      // 去结算
+      
     }
   }
 }

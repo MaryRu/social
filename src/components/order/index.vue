@@ -32,7 +32,7 @@
           </li>
           <li>
             <div class="">
-              <router-link to="/">
+              <router-link to="/order">
                 <i class="icon icon-order"></i>
                 <p>我的订单</p>
               </router-link>
