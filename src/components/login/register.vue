@@ -134,7 +134,7 @@ export default {
             Toast(res.msg)
           } else {
             localStorage.setItem('uId', res.data.uId)
-            this.$router.replace('/personal')
+            window.location.replace('#/personal')
           }
         })
     }

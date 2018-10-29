@@ -70,17 +70,19 @@
       <div class="group-content">
         <ul>
           <li v-for="(item,index) in listDetail" :key="index">
-            <div class="list-top mb flex-between">
+            <div class="list-top flex-between">
               <div class="flex-between">
                 <div class="img-box">
                   <img :src="item.uimg" alt="">
                 </div>
                 <div class="name-box ml">
-                  <p class="mb title">{{item.uname}}</p>
-                  <span>{{item.tAddtime}}</span>
+                  <div>
+                    <p class="mb title">{{item.uname}}</p>
+                    <span>{{item.tAddtime}}</span>
+                  </div>
                 </div>
               </div>
-              <i class="icon icon-more"></i>
+              <!-- <i class="icon icon-more"></i> -->
             </div>
             <div class="list-content mb">
               <div class="text">
@@ -94,11 +96,11 @@
                 </figure>
               </div>
             </div>
-            <div class="list-bottom flex-align-center flex-between">
-              <span class="like flex-align-center">
-                <div class="VueStar" :class="[item.is_like == 1 ? 'islike' : '']">
+            <div class="list-bottom flex-align-center">
+              <span class="like flex-align-center mr">
+                <div class="VueStar" :class="[item.r1 == 1 ? 'islike' : '']">
                   <div class="VueStar__ground">
-                    <div class="VueStar__icon" @click="islike(item.tId, index)" :class="{'animated tada': !!item.is_like}">
+                    <div class="VueStar__icon" @click="islike(item)" :class="{'animated tada': !!item.is_like}">
                       <i class="icon icon-like"></i>
                     </div>
                     <div class="VueStar__decoration" :class="{ 'VueStar__decoration--active': !!item.is_like }"></div>
@@ -126,6 +128,7 @@ import scrollTop from './base/scrollTop'
 import Footer from './base/footer'
 import group from './base/group'
 import api from '../assets/js/api'
+import { Toast } from 'mint-ui'
 var uId = localStorage.getItem('uId')
 export default {
   data () {
@@ -281,20 +284,35 @@ export default {
     let _l = this.cardList.length
     // this.S_width = _l * 1.28 + (_l - 1) * 0.26
     this.S_width = _l * 2 + (_l - 1) * 1
-    let form = this.$qs.stringify({
-      uId: uId
-    })
-    api.index(form)
-      .then((res) => {
-        console.log(res)
-        this.swiperList = res.data.pixlist
-        this.cardList = res.data.giftlist
-        this.listDetail = res.data.tiebalist
+    if (!uId) {
+      Toast('您还未登录')
+      setTimeout(this.$router.replace('/login', 3000))
+    } else {
+      let form = this.$qs.stringify({
+        uId: uId
       })
+      api.index(form)
+        .then((res) => {
+          console.log(res)
+          this.swiperList = res.data.pixlist
+          this.cardList = res.data.giftlist
+          this.listDetail = res.data.tiebalist
+        })
+    }
   },
   methods: {
-    islike (id,value) {
-      console.log(id)
+    islike (value) {
+      console.log(value)
+      let form = this.$qs.stringify({
+        uId: uId,
+        tId: value.tId
+      })
+      api.givelike(form)
+        .then((res) => {
+          console.log(res)
+        })
+      value.r1 = 1
+      value.tNum++
     }
   }
 }

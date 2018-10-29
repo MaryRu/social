@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Toast } from 'mint-ui'
 
-var url = 'http://115.158.20.211:8080/social_project/'
+var url = 'http://115.158.20.211:8088/social_project/'
 // var token = localStorage.getItem('token')
 var uId = localStorage.getItem('uId')
 // axios 配置
@@ -177,9 +177,9 @@ export default {
     // 实名认证
     return Post('/user/realNameAuthe', params)
   },
-  getAllProduct () {
+  getAllProduct (params) {
     // 获取所有商品
-    return Post('/product/getAllProduct')
+    return Post('/product/getAllProduct', params)
   },
   getProductBySearch (params) {
     // 搜索
@@ -216,6 +216,23 @@ export default {
   givelike (params) {
     // 通过订单编号获取订单详情
     return Post('/tieba/givelike', params)
+  },
+  addOrderByCart (params) {
+    // 在购物车中购买订单
+    return Post('/order/addOrderByCart', params)
+  },
+  givelike (params) {
+    // 用户点赞
+    return Post('/tieba/givelike', params)
+  },
+  getentertainByUser (params) {
+    // 可领招待
+    return Post('/entertain/getentertainByUser', params)
+  },
+  deleteTieba (params) {
+    // 删除发布的颜络社
+    return Post('/tieba/deleteTieba', params)
   }
+
 }
 export { uId }

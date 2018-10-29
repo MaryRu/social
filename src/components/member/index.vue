@@ -3,9 +3,9 @@
     <div class="member">
       <router-link to="/homePage">
         <div class="name-box flex-align-center">
-          <img :src="userInfo.img" alt="" />
+          <img :src="userInfo.uImg" alt="" />
           <div>
-            <p class="ml">{{userInfo.name}}</p>
+            <p class="ml">{{userInfo.uName}}</p>
             <span class="ml">查看个人主页</span>
           </div>
         </div>
@@ -93,6 +93,10 @@ export default {
   },
   components: {
     Footer
+  },
+  created () {
+    this.userInfo = JSON.parse(sessionStorage.getItem('userinfo'))
+    console.log(this.userInfo)
   },
   methods: {
     out () {

@@ -78,7 +78,7 @@
 <script>
 import { Toast } from 'mint-ui'
 import api from '../../assets/js/api'
-var uId = localStorage.getItem('uId')
+let uId = localStorage.getItem('uId')
 export default {
   data () {
     return {
@@ -145,6 +145,7 @@ export default {
         var str = JSON.stringify(this.date)
         var birthday = str.slice(1, 11)
       }
+      console.log(uId)
       let form = this.$qs.stringify({
         uId: uId,
         uName: this.name,
@@ -157,7 +158,6 @@ export default {
         .then((res) => {
           console.log(res)
           localStorage.setItem('token', res.data.token)
-          localStorage.setItem('uId', res.data.uId)
           this.$router.replace('/lable')
         })
     }

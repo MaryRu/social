@@ -52,10 +52,10 @@
           <li class="flex-around flex-align-center" v-for="(item, index) in cartList" :key="index">
             <p>{{item.pname}}</p>
             <p class="price">￥{{item.prices}}</p>
-            <el-input-number v-model="item.puNum" @change="cardChange(item)" size="mini" :min="num1" :max="item.pStock" label=""></el-input-number>
+            <el-input-number v-model="item.puNum" @change="handleChange(item)" size="mini" :min="num1" :max="item.pStock" label=""></el-input-number>
           </li>
           <li class="popFoot flex-align-center">
-            <div class="cart popCart" @click="cart">
+            <div class="cart popCart">
               <el-badge :value="value" class="item">
                 <i class="icon icon-cart" size="small"></i>
               </el-badge>
@@ -155,6 +155,17 @@ export default {
     return {
       popupVisible: false,
       allprice: 0,
+      shopList:[
+        {
+          pId: 1,
+          pic: "http://115.158.20.211:8088/social_project/upload/card1.png",
+          pname: "减肥茶",
+          prices: "50",
+          puId: 16,
+          puNum: 2,
+          uId: 28
+        }
+      ],
       cartList: [
         {
           pId: 1,
@@ -194,7 +205,8 @@ export default {
         pDesc: '这里是描述',
         pPic: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658',
         pStock: 50,
-        pPrices: '15.9'
+        pPrices: '15.9',
+        cartNum: 3
       },
       teaList: [
         {
@@ -221,26 +233,25 @@ export default {
   components: {
     Header
   },
-  created() {
+  created () {
     // 获取所有商品
-    api.getAllProduct()
-      .then((res) => {
-        console.log(res)
-        this.teaList = res.data
-        this.info = this.teaList[0]
-        // this.info.num = this.teaList[0]
-      })
-    // 获取购物车所有商品
     let form = this.$qs.stringify({
       uId: uId
     })
+    api.getAllProduct(form)
+      .then((res) => {
+        // console.log(res)
+        this.teaList = res.data.list
+        this.info = this.teaList[0]
+      })
+    // 获取购物车
     api.getCart(form)
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         this.cartList = res.data
-        this.cartList.forEach((i) => {
-          this.value += i.puNum
-          this.allprice += i.prices*i.puNum
+        this.cartList.forEach((item) => {
+          this.value += item.puNum
+          this.allprice += item.prices*item.puNum
         })
       })
   },
@@ -257,23 +268,29 @@ export default {
         })
     },
     handleChange (info) {
+      // 修改数量
       console.log(info)
-      // this.value = this.num
+      // 加入购物车
       let form = this.$qs.stringify({
         uId: uId,
         pId: info.pId,
-        puNum: info.cartNum
+        puNum: info.cartNum || info.puNum
       })
-      // 加入购物车
       api.addCart(form)
         .then((res) => {
           // console.log(res)
-          this.value = info.cartNum
-          Toast('加入成功')
         })
+      this.cartList.forEach((item) => {
+        if (info.pId === item.pId) {
+          this.info.cartNum = item.puNum
+        }
+      })
+      this.value += 1
+      this.allprice += Number(info.pPrices) || Number(info.prices)
     },
     select (e) {
       console.log(e.pId)
+      // 获取购物车详情
       let form = this.$qs.stringify({
         pId: e.pId,
         uId: uId
@@ -284,28 +301,6 @@ export default {
           this.info = res.data.product
         })
     },
-    cardChange (item) {
-      let form = this.$qs.stringify({
-        uId: uId,
-        pId: item.pId,
-        puNum: item.puNum
-      })
-      // 加入购物车
-      api.addCart(form)
-        .then((res) => {
-          Toast('加入成功')
-        })
-      if (item.puNum === 0) {
-        let form = this.$qs.stringify({
-          puId: item.puId
-        })
-        api.deleteCart(form)
-          .then((res) => {
-            console.log(res)
-            this.$router.replace('/cartdata')
-          })
-      }
-    },
     cart () {
       this.popupVisible = !this.popupVisible
       // 获取购物车所有商品
@@ -315,15 +310,26 @@ export default {
       api.getCart(form)
         .then((res) => {
           console.log(res)
-          this.cartList = res.data
-          this.cartList.forEach((i) => {
-            this.allprice = i.prices*i.puNum
-          })
         })
     },
     toPay () {
       // 去结算
-      
+      let orderArr = []
+      this.cartList.forEach((item) => {
+        let obj = {}
+        obj.puId = item.puId
+        orderArr.push(obj)
+      })
+      let form = this.$qs.stringify({
+        uId: uId,
+        cidlist: JSON.stringify(orderArr)
+      })
+      api.addOrderByCart(form)
+        .then((res) => {
+          console.log(res)
+          // 拿到订单ID，调用支付接口
+          this.$router.push('/success')
+        })
     }
   }
 }

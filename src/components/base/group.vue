@@ -7,12 +7,14 @@
             <div class="img-box">
               <img :src="item.uimg" alt="">
             </div>
-            <div class="name-box ml">
-              <p class="mb title">{{item.uname}}</p>
-              <span>{{item.tAddtime}}</span>
+            <div class="name-box ml flex-align-center">
+              <div>
+                <p class="title">{{item.uname}}</p>
+                <span>{{item.tAddtime}}</span>
+              </div>
             </div>
           </div>
-          <i class="icon icon-more"></i>
+          <!-- <i class="icon icon-more"></i> -->
         </div>
         <div class="list-content mb">
           <div class="text">
@@ -28,9 +30,9 @@
         </div>
         <div class="list-bottom flex-align-center flex-between">
           <span class="like flex-align-center">
-            <div class="VueStar" :class="[item.is_like == 1 ? 'islike' : '']">
+            <div class="VueStar" :class="[item.r1 == 1 ? 'islike' : '']">
               <div class="VueStar__ground">
-                <div class="VueStar__icon" @click="islike(item.plId, index)" :class="{'animated tada': !!item.is_like}">
+                <div class="VueStar__icon" @click="islike(item)" :class="{'animated tada': !!item.is_like}">
                   <i class="icon icon-like"></i>
                 </div>
                 <div class="VueStar__decoration" :class="{ 'VueStar__decoration--active': !!item.is_like }"></div>
@@ -162,7 +164,18 @@ export default {
     }
   },
   methods: {
-    islike (i) {
+    islike (value) {
+      console.log(value)
+      let form = this.$qs.stringify({
+        uId: uId,
+        tId: value.tId
+      })
+      api.givelike(form)
+        .then((res) => {
+          console.log(res)
+        })
+      value.r1 = 1
+      value.tNum++
     },
     groupList () {
       let form = this.$qs.stringify({

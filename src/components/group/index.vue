@@ -36,6 +36,7 @@ import Footer from '../base/footer'
 import Header from '../base/header'
 import scrollTop from '../base/scrollTop'
 import group from '../base/group'
+import api, { uId } from '../../assets/js/api'
 export default {
   data () {
     return {
@@ -51,6 +52,17 @@ export default {
     Footer,
     group,
     scrollTop
+  },
+  created () {
+    let form = this.$qs.stringify({
+      uId: uId
+    })
+    api.getUserById(form)
+      .then((res) => {
+        console.log(res)
+        this.info.img = res.data.users.uImg
+        sessionStorage.setItem('userinfo',JSON.stringify(res.data.users))
+      })
   },
   methods: {
   }

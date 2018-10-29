@@ -1,9 +1,6 @@
 <template>
   <div class="wrapper">
-    <header class="head">
-      <a href="#/mall" class="left"><i class="el-icon-arrow-left"></i></a>
-      <p>{{tabname}}</p>
-    </header>
+    <Header :tabname="tabname"></Header>
     <div class="order">
       <ordertab :urlRouter="$route.path"></ordertab>
       <div class="container">

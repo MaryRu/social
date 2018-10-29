@@ -9,15 +9,15 @@
       <div class="school">
         <mt-cell title="头像">
           <label for="upload-img">
-            <img slot="icon" :src="user.headimg" width="40" height="40">
+            <img slot="icon" :src="user.uImg" width="40" height="40">
           </label>
           <input @change="uploadImg" type="file" accept="image/*" id="upload-img" name="upload-img" hidden="hidden" class="file">
         </mt-cell>
         <mt-cell title="昵称" @click.native="openPrompt" is-link>
-          <span>{{user.name}}</span>
+          <span>{{user.uName}}</span>
         </mt-cell>
         <mt-cell title="个性签名" @click.native="openInt" is-link>
-          <span>{{user.sign}}</span>
+          <span>{{user.uIntroduction}}</span>
         </mt-cell>
       </div>
       <!-- <div class="me">
@@ -45,16 +45,14 @@ export default {
   data() {
     return {
       user: {
-        headimg: '',
-        name: '',
-        sign: ''
+        uImg: '',
+        uName: '',
+        uIntroduction: ''
       }
     }
   },
   created() {
-    this.user.headimg = sessionStorage.getItem('img')
-    this.user.name = sessionStorage.getItem('name')
-    this.user.sign = sessionStorage.getItem('sign')
+    this.user = JSON.parse(sessionStorage.getItem('userinfo'))
   },
   methods: {
     userUpdate(sign, name) {
@@ -64,14 +62,14 @@ export default {
       MessageBox.prompt(' ', '请输入姓名').then(({ value }) => {
         console.log(value)
         if (value) {
-          this.user.name = value
+          this.user.uName = value
         }
       })
     },
     openInt () {
       MessageBox.prompt(' ', '请输入个性签名').then(({ value }) => {
         if (value) {
-          this.user.sign = value
+          this.user.uIntroduction = value
         }
       })
     },
@@ -92,7 +90,7 @@ export default {
             .then((res) => {
               Indicator.close()
               console.log(res)
-              this.user.headimg = res.data.url
+              this.user.uImg = res.data.url
             })
         }
       }
@@ -100,9 +98,9 @@ export default {
     submit () {
       let form = this.$qs.stringify({
         uId: uId,
-        uName: this.user.name,
-        uIntroduction: this.user.sign,
-        uImg: this.user.headimg
+        uName: this.user.uName,
+        uIntroduction: this.user.uIntroduction,
+        uImg: this.user.uImg
       })
       api.editUserByUId(form)
         .then((res) => {

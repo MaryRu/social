@@ -8,8 +8,8 @@
         <mt-tab-item id="3">已过期</mt-tab-item>
       </mt-navbar>
       <mt-tab-container v-model="selected" class="coupon-list">
-        <noPage v-show="nopage"></noPage>
         <mt-tab-container-item id="1">
+          <noPage v-show="nopage"></noPage>
           <ul v-show="!nopage">
             <li v-for="(no,index) in noUsed" :key="index">
               <div class="quan-item flex-between flex-align-center">
@@ -41,6 +41,7 @@
           </ul>
         </mt-tab-container-item>
         <mt-tab-container-item id="2">
+          <noPage v-show="nopage"></noPage>
           <ul v-show="!nopage">
             <li v-for="(no,index) in noUsed" :key="index" class="useless">
               <div class="quan-item flex-between flex-align-center">
@@ -74,6 +75,7 @@
           </ul>
         </mt-tab-container-item>
         <mt-tab-container-item id="3">
+          <noPage v-show="nopage"></noPage>
           <ul v-show="!nopage">
             <li v-for="(no,index) in noUsed" :key="index" class="useless">
               <div class="quan-item flex-between flex-align-center">

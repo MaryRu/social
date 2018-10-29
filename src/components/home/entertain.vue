@@ -6,38 +6,87 @@
         <mt-tab-item id="1">进行中</mt-tab-item>
         <mt-tab-item id="2">待领取</mt-tab-item>
         <mt-tab-item id="3">已完成</mt-tab-item>
-      </mt-navbar>
+      </mt-navbar>      
       <mt-tab-container v-model="selected">
         <mt-tab-container-item id="1">
-          <Progress></Progress>
+          <noPage v-show="nopage"></noPage>
+          <Progress v-show="!nopage"></Progress>
         </mt-tab-container-item>
         <mt-tab-container-item id="2">
-          <Pending></Pending>
+          <noPage v-show="nopage"></noPage>
+          <Pending v-show="!nopage"></Pending>
         </mt-tab-container-item>
         <mt-tab-container-item id="3">
-          <Complete></Complete>
+          <noPage v-show="nopage"></noPage>
+          <Complete v-show="!nopage"></Complete>
         </mt-tab-container-item>
       </mt-tab-container>
     </div>
   </div>
 </template>
+<style lang="less" scoped>
+.page-part {
+  position: fixed;
+  top: .75rem;
+  width: 100%;
+  z-index: 9999;
+}
+.mint-tab-container {
+  margin-top: 1.3rem;
+}
+</style>
+
 <script>
 import Progress from './processing'
 import Pending from './Pending'
 import Complete from './Complete'
+import noPage from '../base/noPage'
 import Header from '../base/header-back'
+import api, { uId } from '../../assets/js/api'
 export default {
   data () {
     return {
       tabname: '我的招待',
-      selected: '1'
+      selected: '1',
+      nopage: false
     }
   },
   components: {
     Header,
     Progress,
     Pending,
-    Complete
+    Complete,
+    noPage
+  },
+  created () {
+    this.enterain(0)
+  },
+  watch: {
+    selected (value) {
+      console.log(value)
+      if (value === 1) {
+        this.enterain(0)
+      } else if (value === 2) {
+        this.enterain(1)
+      } else {
+        this.enterain(2)
+      }
+    }
+  },
+  methods: {
+    enterain (status) {
+      let form = this.$qs.stringify({
+        uId: uId,
+        status: status
+      })
+      api.getentertainByUser(form)
+        .then((res) => {
+          console.log(res)
+          if (res.data.length == 0) {
+            this.nopage = true
+          }
+        })
+    }
   }
 }
 </script>

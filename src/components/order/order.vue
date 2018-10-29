@@ -1,9 +1,6 @@
 <template>
   <div class="wrapper">
-    <header class="head">
-      <a href="#/mall" class="left"><i class="el-icon-arrow-left"></i></a>
-      <p>{{tabname}}</p>
-    </header>
+    <Header :tabname="tabname"></Header>
     <div class="order">
       <ordertab :urlRouter="$route.path"></ordertab>
       <div class="container">
@@ -19,18 +16,18 @@
             <div class="order-content">
               <div class="flex" v-for="(goods,i) in item.list" :key="i">
                 <div class="order-img">
-                  <img :src="goods.pImage" />
+                  <img :src="goods.pics" />
                 </div>
                 <div class="order-text ">
                   <p class="goods-name text-ellipsis">{{goods.pName}}</p>
-                  <p class="goods-num">x{{goods.oiCount}}</p>
-                  <p class="goods-price">¥{{goods.pPrice}}</p>
+                  <p class="goods-num">x{{goods.oiNum}}</p>
+                  <p class="goods-price">¥{{goods.oiSubtotal}}</p>
                 </div>
               </div>
             </div>
             <div class="order-bottom">
               <div class="order-list">
-                <p>共{{item.list.length}}件商品 &nbsp; 合计¥{{item.total}}</p>
+                <p>共{{item.list.length}}件商品 &nbsp; 合计¥{{item.r1}}</p>
               </div>
               <div class="order-btn">
                 <span @click="cancle(item.oId)" v-show="item.waitpay">取消订单</span>

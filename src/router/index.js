@@ -37,6 +37,7 @@ import forgetPsd from '@/components/login/forgetPassword'
 import order from '@/components/order/order'
 import waitpay from '@/components/order/waitpay'
 import orderdown from '@/components/order/orderdown'
+import success from '@/components/order/success'
 import demo from '@/components/giftcard/demo'
 
 Vue.use(Router)
@@ -45,7 +46,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: index
+      component: login
     },
     {
       path: '/index',
@@ -231,6 +232,11 @@ export default new Router({
       path: '/orderdown',
       name: 'orderdown',
       component: orderdown
+    },
+    {
+      path: '/success',
+      name: 'success',
+      component: success
     },
     {
       path: '/demo',

@@ -1,7 +1,8 @@
 <template>
   <div class="pending mt">
     <!-- 待领取 -->
-    <ul>
+    <noPage v-show="nopage"></noPage>
+    <ul v-show="!nopage">
       <li v-for="(item,index) in pending" :key="index" class="mb">
         <div class="imgBox">
           <img :src="item.img" alt="">
@@ -26,9 +27,12 @@
 </style>
 
 <script>
+import noPage from '../base/noPage'
+import api, { uId } from '../../assets/js/api'
 export default {
   data () {
     return {
+      nopage: false,
       headImgBox: false,
       pending: [
         {
@@ -107,6 +111,9 @@ export default {
         }
       ]
     }
+  },
+  components: {
+    noPage
   },
   created () {
     for (let i = 0; i < this.pending.length; i++) {

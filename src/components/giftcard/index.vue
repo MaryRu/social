@@ -11,10 +11,10 @@
         <p class="mb">颜茶 + 祝福 即刻表心意</p>
         <ul class="flex-between flex-wrap" >
           <li v-for="(item,index) in cardList" :key="index">
-            <router-link to="/">
+            <router-link to="/index">
               <div class="cardImg">
-                <img :src="item.gPic" alt="">
-                <p>{{item.gTitle}}</p>
+                <img :src="item.pPic" alt="">
+                <p>{{item.pName}}</p>
               </div>
             </router-link>
           </li>

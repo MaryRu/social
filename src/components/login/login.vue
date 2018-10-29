@@ -64,7 +64,7 @@ export default {
           console.log(res)
           localStorage.setItem('uId', res.data.uId)
           localStorage.setItem('token', res.data.token)
-          this.$router.replace('/')
+          this.$router.replace('/index')
         })
     }
   }

@@ -37,7 +37,7 @@
         </div>
         <ul v-show="!noData" class="flex-align-center flex-wrap mt">
           <li v-for="(item,index) in groupList" :key="index">
-            <router-link to="/">
+            <router-link to="/index">
               <img :src="item.plpic" alt="">
               <p class="text-ellipsis-line">{{item.plname}}</p>
             </router-link>
@@ -49,8 +49,8 @@
           <i class="icon icon-friends mr"></i>
           <p>我的好友</p>
         </div>
-        <div class="noData" v-show="noData">
-          <router-link to="/">
+        <div class="noData" v-show="noFriends">
+          <router-link to="/index">
             <div class="noActive flex-center flex-align-center">
               <i class="icon icon-noFriend"></i>
             </div>
@@ -58,7 +58,7 @@
             <p>快去购买礼品卡送给心仪的她吧~</p>
           </router-link>
         </div>
-        <ul v-show="!noData" class="flex-align-center flex-wrap mt">
+        <ul v-show="!noFriends" class="flex-align-center flex-wrap mt">
           <li v-for="(item,index) in friends" :key="index">
             <router-link to="/otherHome">
               <img :src="item.pic" alt="">
@@ -69,7 +69,7 @@
       </div>
       <div class="mt">
         <!-- 我发布的动态哦 -->
-        <div class="noData" v-show="noData">
+        <div class="noData" v-show="noTiezi">
           <router-link to="/postEdit">
             <div class="noActive flex-center flex-align-center">
               <i class="icon icon-noContent"></i>
@@ -86,12 +86,18 @@
                   <div class="img-box">
                     <img :src="item.uimg" alt="">
                   </div>
-                  <div class="name-box ml">
-                    <p class="mb title">{{item.uname}}</p>
-                    <span>{{item.tAddtime}}</span>
+                  <div class="name-box flex-align-center ml">
+                    <div>
+                      <p class="mb title">{{item.uname}}</p>
+                      <span>{{item.tAddtime}}</span>
+                    </div>
                   </div>
                 </div>
-                <i class="icon icon-more"></i>
+                <!-- <i class="icon icon-more" @click="more(item)"></i> -->
+                <div class="flex-align-center" @click="delect(listDetail, index, item)">
+                  <i class="icon icon-delect"></i>
+                  <!-- <span>删除</span> -->
+                </div>
               </div>
               <div class="list-content mb">
                 <div class="text">
@@ -106,21 +112,23 @@
                 </div>
               </div>
               <div class="list-bottom flex-align-center flex-between">
-                <span class="like flex-align-center">
-                  <div class="VueStar" :class="[item.is_like == 1 ? 'islike' : '']">
-                    <div class="VueStar__ground">
-                      <div class="VueStar__icon" @click="islike(item.tId, index)" :class="{'animated tada': !!item.is_like}">
-                        <i class="icon icon-like"></i>
+                <!-- <div class="flex-around flex-align-center"> -->
+                  <span class="like flex-align-center mr">
+                    <div class="VueStar" :class="[item.is_like == 1 ? 'islike' : '']">
+                      <div class="VueStar__ground">
+                        <div class="VueStar__icon" @click="islike(item.tId, index)" :class="{'animated tada': !!item.is_like}">
+                          <i class="icon icon-like"></i>
+                        </div>
+                        <div class="VueStar__decoration" :class="{ 'VueStar__decoration--active': !!item.is_like }"></div>
                       </div>
-                      <div class="VueStar__decoration" :class="{ 'VueStar__decoration--active': !!item.is_like }"></div>
                     </div>
-                  </div>
-                  {{item.tNum}}
-                </span>
-                <router-link :to="{path: '/detail/'+item.tId}">
-                  <span class="comment flex-align-center">
-                    <i class="icon icon-comment"></i>{{item.tComment}}</span>
-                </router-link>
+                    {{item.tNum}}
+                  </span>
+                  <router-link :to="{path: '/detail/'+item.tId}">
+                    <span class="comment flex-align-center">
+                      <i class="icon icon-comment"></i>{{item.tComment}}</span>
+                  </router-link>
+                <!-- </div> -->
               </div>
             </li>
           </ul>
@@ -174,6 +182,8 @@ export default {
     return {
       tabname: '个人主页',
       noData: false,
+      noTiezi: false,
+      noFriends: false,
       noPic: false,
       users: {
         uName: '这里是昵称',
@@ -259,27 +269,30 @@ export default {
       .then((res) => {
         console.log(res)
         this.users = res.data.users
+        // this.groupList = res.data.plateUsersList
+        // this.friends = res.data.userFriendsList
         if (res.data.users.list === null) {
           this.noPic = true
         }
         if (res.data.plateUsersList.length === 0 ) {
           this.noData = true
         } else {
+          console.log('111')
+          this.noData = false
           this.groupList = res.data.plateUsersList
         }
         if (res.data.userFriendsList.length === 0) {
-          this.noData = true
+          console.log('2222')
+          this.noFriends = true
         } else {
           this.friends = res.data.userFriendsList
         }
         if (res.data.tiebaList.length === 0) {
-          this.noData = true
+          this.noTiezi = true
         } else {
           this.listDetail = res.data.tiebaList
         }
-        sessionStorage.setItem('name',res.data.users.uName)
-        sessionStorage.setItem('sign',res.data.users.uIntroduction)
-        sessionStorage.setItem('img',res.data.users.uImg)
+        sessionStorage.setItem('userinfo',JSON.stringify(res.data.users))
       })
   },
   filters: {
@@ -325,6 +338,20 @@ export default {
               this.$router.replace('/homePagenull')
             })
         }
+      }
+    },
+    delect (list, index, item) {
+      let form = this.$qs.stringify({
+        tId: item.tId
+      })
+      api.deleteTieba(form)
+      .then((res) => {
+        console.log(res)
+      })
+      list.splice(index, 1)
+      if (list.length == 0) {
+        this.noTiezi = true
+        return false
       }
     }
   }
