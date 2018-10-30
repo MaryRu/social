@@ -46,7 +46,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: login
+      component: index
     },
     {
       path: '/index',
@@ -174,7 +174,7 @@ export default new Router({
       component: verified
     },
     {
-      path: '/otherHome',
+      path: '/otherHome/:id',
       name: 'otherHome',
       component: otherHome
     },

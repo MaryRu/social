@@ -105,8 +105,8 @@
                 <!-- <span class="local">南阳理工学院</span> -->
               </div>
             </div>
-            <mt-button>
-              <i class="icon icon-like"></i>
+            <mt-button @click="delect(info.commentsList, index, list)">
+              <i class="icon icon-delect"></i>
             </mt-button>
           </div>
           <div class="comment-content">
@@ -201,6 +201,10 @@ export default {
         })
     },
     commentForm () {
+      if (this.userComment === '') {
+        Toast('请发表你的评论')
+        return false
+      }
       let addcom = this.$qs.stringify({
         uId: uId,
         cContent: this.userComment,
@@ -396,6 +400,19 @@ export default {
         })
         this.$router.push('/login')
       }
+    },
+    delect (itemList, index, item) {
+      console.log(itemList)
+      let form = this.$qs.stringify({
+        cId: item.cId
+      })
+      api.deletecomment(form)
+        .then((res) => {
+          console.log(res)
+          Toast(res.msg)
+        })
+      itemList.splice(index, 1)
+      this.info.tComment --
     }
   },
   updated() {

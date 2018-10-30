@@ -51,7 +51,7 @@
                 <p>{{card.gTitle}}</p>
                 <!-- <span>{{friend.desc}}</span> -->
                 <div class="friends-button mt">
-                  <div class="add-button">
+                  <div class="add-button" @click="buyNow">
                     <p>立即购买</p>
                   </div>
                 </div>
@@ -71,21 +71,23 @@
         <ul>
           <li v-for="(item,index) in listDetail" :key="index">
             <div class="list-top flex-between">
-              <div class="flex-between">
-                <div class="img-box">
-                  <img :src="item.uimg" alt="">
-                </div>
-                <div class="name-box ml">
-                  <div>
-                    <p class="mb title">{{item.uname}}</p>
-                    <span>{{item.tAddtime}}</span>
+              <router-link :to="{path: '/otherHome/'+item.uId}">
+                <div class="flex-between">
+                  <div class="img-box">
+                    <img :src="item.uimg" alt="">
+                  </div>
+                  <div class="name-box ml">
+                    <div>
+                      <p class="mb title">{{item.uname}}</p>
+                      <span>{{item.platename}}  丨</span>  <span>{{item.tAddtime  | goodTime}}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </router-link>
               <!-- <i class="icon icon-more"></i> -->
             </div>
             <div class="list-content mb">
-              <div class="text">
+              <div class="text mb">
                 <router-link :to="{path: '/detail/'+item.tId}">{{item.tTitle}}</router-link>
               </div>
               <div class="thumbnails my-gallery">
@@ -121,6 +123,9 @@
     <Footer :urlRouter="$route.path" :cartnum='cartLength' ref="footer"></Footer>
   </div>
 </template>
+<style lang="less" scoped>
+@import '../assets/less/index';
+</style>
 
 <script>
 import Header from './base/header'
@@ -253,7 +258,11 @@ export default {
           likes_size: '123',
           comment_size: '555'
         }
-      ]
+      ],
+      userInfo: {
+        uImg: '',
+        uName: ''
+      }
     }
   },
   components: {
@@ -278,6 +287,33 @@ export default {
         h = 400
       }
       return w + 'x' + h
+    },
+    goodTime(value) {
+      var now = new Date().getTime(),
+        oldTime = new Date(value).getTime(),
+        difference = now - oldTime,
+        result = '',
+        minute = 1000 * 60,
+        hour = minute * 60,
+        day = hour * 24,
+        halfamonth = day * 15,
+        month = day * 30,
+        year = month * 12,
+
+        _year = difference / year,
+        _month = difference / month,
+        _week = difference / (7 * day),
+        _day = difference / day,
+        _hour = difference / hour,
+        _min = difference / minute
+      if (_year >= 1) { result = ~~(_year) + " 年前" }
+      else if (_month >= 1) { result = ~~(_month) + " 个月前" }
+      else if (_week >= 1) { result = ~~(_week) + " 周前" }
+      else if (_day >= 1) { result = ~~(_day) + " 天前" }
+      else if (_hour >= 1) { result = ~~(_hour) + " 小时前" }
+      else if (_min >= 1) { result = ~~(_min) + " 分钟前" }
+      else result = "刚刚"
+      return result
     }
   },
   created () {
@@ -298,6 +334,13 @@ export default {
           this.cardList = res.data.giftlist
           this.listDetail = res.data.tiebalist
         })
+      // 个人信息
+    api.getUserById(form)
+      .then((res) => {
+        console.log(res)
+        sessionStorage.setItem('uImg',res.data.users.uImg)
+        sessionStorage.setItem('uName',res.data.users.uName)
+      })
     }
   },
   methods: {
@@ -313,11 +356,10 @@ export default {
         })
       value.r1 = 1
       value.tNum++
+    },
+    buyNow () {
+      this.$router.push('/success')
     }
   }
 }
 </script>
-
-<style lang="less" scoped>
-@import '../assets/less/index';
-</style>

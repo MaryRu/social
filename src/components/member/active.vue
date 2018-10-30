@@ -1,27 +1,14 @@
 <template>
   <div class="wrapper">
     <Header :tabname="tabname"></Header>
-    <div class="active">
-      <mt-navbar v-model="selected" class="navbar">
+    <div class="active container">
+      <!-- <mt-navbar v-model="selected" class="navbar">
         <mt-tab-item id="1">我发起的活动</mt-tab-item>
         <mt-tab-item id="2">我参与的活动</mt-tab-item>
       </mt-navbar>
       <mt-tab-container v-model="selected" class="active-list">
         <mt-tab-container-item id="1">
-          <noPage v-show="nopage"></noPage>
-          <ul v-show="!nopage">
-            <li v-for="(item,index) in activeList" :key="index" >
-              <router-link to="/" class="flex-align-center">
-                <div class="img-box mr">
-                  <img :src="item.r1" alt="">
-                </div>
-                <div class="content">
-                  <p class="title mb">{{item.aTitle}}</p>
-                  <span>{{item.aAddtime}}</span>
-                </div>
-              </router-link>
-            </li>
-          </ul>
+          
         </mt-tab-container-item>
         <mt-tab-container-item id="2">
           <noPage v-show="nopage"></noPage>
@@ -39,7 +26,23 @@
             </li>
           </ul>
         </mt-tab-container-item>
-      </mt-tab-container>
+      </mt-tab-container> -->
+      <div class="active-list">
+        <noPage v-show="nopage"></noPage>
+        <ul v-show="!nopage">
+          <li v-for="(item,index) in activeList" :key="index" >
+            <router-link to="/" class="flex-align-center">
+              <div class="img-box mr">
+                <img :src="item.r1" alt="">
+              </div>
+              <div class="content">
+                <p class="title mb">{{item.aTitle}}</p>
+                <span>{{item.aAddtime}}</span>
+              </div>
+            </router-link>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -58,19 +61,19 @@ export default {
       nopage: false,
       activeList: [
         {
-          img: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658',
-          title: '这里是发起活动的标题',
-          time: '2018-10-20'
+          r1: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658',
+          aTitle: '这里是发起活动的标题',
+          aAddtime: '2018-10-20'
         },
         {
-          img: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658',
-          title: '这里是发起  活动的标题',
-          time: '2018-10-20'
+          r1: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658',
+          aTitle: '这里是发起  活动的标题',
+          aAddtime: '2018-10-20'
         },
         {
-          img: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658',
-          title: '这里是发起  活动的标题',
-          time: '2018-10-20'
+          r1: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658',
+          aTitle: '这里是发起  活动的标题',
+          aAddtime: '2018-10-20'
         }
       ],
       activitydesc: []
@@ -84,9 +87,9 @@ export default {
     selected (value) {
       console.log(value)
       if (value === 1) {
-        this.getActive()
+        // this.getActive()
       } else {
-        this.getDesc()
+        // this.getDesc()
       }
     }
   },
@@ -108,20 +111,20 @@ export default {
           }
         })
     },
-    getDesc () {
-      let form = this.$qs.stringify({
-        uId: uId
-      })
-      api.activitydescUser(form)
-        .then((res) => {
-          console.log(res)
-          if (res.data.list.length === 0) {
-            this.nopage = true
-          } else {
-            this.activitydesc = res.data.list
-          }
-        })
-    }
+    // getDesc () {
+    //   let form = this.$qs.stringify({
+    //     uId: uId
+    //   })
+    //   api.activitydescUser(form)
+    //     .then((res) => {
+    //       console.log(res)
+    //       if (res.data.list.length === 0) {
+    //         this.nopage = true
+    //       } else {
+    //         this.activitydesc = res.data.list
+    //       }
+    //     })
+    // }
   }
 }
 </script>

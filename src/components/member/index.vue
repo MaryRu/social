@@ -80,14 +80,15 @@
 </style>
 <script>
 import { MessageBox  } from 'mint-ui'
+import api, { uId } from '../../assets/js/api'
 import Footer from '../base/footer'
 export default {
   data () {
     return {
       cartLength: 3,
       userInfo: {
-        img: 'http://img.hb.aicdn.com/fa8cdd61944741c29b4c3058da93ef1dd52e225e4c39-3tYG3q_fw658',
-        name: '没头脑的不高兴不开心'
+        uImg: 'http://img.hb.aicdn.com/fa8cdd61944741c29b4c3058da93ef1dd52e225e4c39-3tYG3q_fw658',
+        uName: '没头脑的不高兴不开心'
       }
     }
   },
@@ -95,8 +96,15 @@ export default {
     Footer
   },
   created () {
-    this.userInfo = JSON.parse(sessionStorage.getItem('userinfo'))
-    console.log(this.userInfo)
+    let form = this.$qs.stringify({
+      uId: uId
+    })
+    api.getUserById(form)
+      .then((res) => {
+        console.log(res)
+        this.userInfo.uImg = res.data.users.uImg
+        this.userInfo.uName = res.data.users.uName
+      })
   },
   methods: {
     out () {

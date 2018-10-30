@@ -54,15 +54,7 @@ export default {
     scrollTop
   },
   created () {
-    let form = this.$qs.stringify({
-      uId: uId
-    })
-    api.getUserById(form)
-      .then((res) => {
-        console.log(res)
-        this.info.img = res.data.users.uImg
-        sessionStorage.setItem('userinfo',JSON.stringify(res.data.users))
-      })
+    this.info.img = sessionStorage.getItem('uImg')
   },
   methods: {
   }

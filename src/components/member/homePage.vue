@@ -6,23 +6,47 @@
     </router-link>
     <div class="homePage container">
       <div class="topPage">
-        <label class="upload-img" for="upload-img">
+        <label v-show="imgLength" class="upload-img" for="upload-img">
           <img src="../../assets/images/bgImg.png" alt="" v-show="noPic">
-          <mt-swipe :auto="4000" :show-indicators="false">
-            <mt-swipe-item class="slide1" v-for="(item,index) in users.list" :key="index">
-              <img :src="item.puPic" alt="">
-            </mt-swipe-item>
-          </mt-swipe>
         </label>
         <input @change="uploadImg" type="file" accept="image/*" id="upload-img" name="upload-img" hidden="hidden" class="file">
+        <mt-swipe :auto="4000" :show-indicators="false">
+          <mt-swipe-item class="slide1" v-for="(item,index) in users.list" :key="index">
+            <img :src="item.puPic" alt="">
+          </mt-swipe-item>
+        </mt-swipe>
         <div class="headImg">
           <img :src="users.uImg" alt="">
-          <i class="icon icon-camera-select"></i>
+          <!-- <i class="icon icon-camera-select"></i> -->
         </div>
       </div>
       <div class="home-page-info">
         <p>{{users.uName}}</p>
         <span>{{users.uIntroduction}}</span>
+      </div>
+      <div class="nav">
+        <div class="flex-align-center">
+          <i class="icon icon-album mr"></i>
+          <p>我的相册</p>
+        </div>
+        <div class="noData" v-show="noPic">
+          <div class="noActive flex-center flex-align-center">
+            <i class="icon icon-noAlbum"></i>
+          </div>
+          <p class="mt">告诉大家你的近况吧</p>
+        </div>
+        <ul v-show="!noPic" class="flex-align-center flex-wrap mt">
+          <li v-for="(item,index) in users.list" :key="index" class="img-list">
+            <img :src="item.puPic" alt="">
+            <i class="icon icon-cha cha" @click="cha(users.list, index, item)"></i>
+          </li>
+          <li>
+            <label v-show="imgLength" class="upload-img" for="upload-img">
+              <i slot="icon" class="icon icon-img"></i>
+            </label>
+            <input @change="uploadImg" type="file" accept="image/*" id="upload-img" name="upload-img" hidden="hidden" class="file">
+          </li>
+        </ul>
       </div>
       <div class="nav">
         <div class="flex-align-center">
@@ -37,20 +61,20 @@
         </div>
         <ul v-show="!noData" class="flex-align-center flex-wrap mt">
           <li v-for="(item,index) in groupList" :key="index">
-            <router-link to="/index">
+            <router-link to="/group">
               <img :src="item.plpic" alt="">
               <p class="text-ellipsis-line">{{item.plname}}</p>
             </router-link>
           </li>
         </ul>
       </div>
-      <div class="nav">
+      <div class="nav ">
         <div class="flex-align-center">
           <i class="icon icon-friends mr"></i>
           <p>我的好友</p>
         </div>
         <div class="noData" v-show="noFriends">
-          <router-link to="/index">
+          <router-link to="/intimate">
             <div class="noActive flex-center flex-align-center">
               <i class="icon icon-noFriend"></i>
             </div>
@@ -58,14 +82,16 @@
             <p>快去购买礼品卡送给心仪的她吧~</p>
           </router-link>
         </div>
-        <ul v-show="!noFriends" class="flex-align-center flex-wrap mt">
-          <li v-for="(item,index) in friends" :key="index">
-            <router-link to="/otherHome">
-              <img :src="item.pic" alt="">
-              <p class="text-ellipsis-line">{{item.uname}}</p>
-            </router-link>
-          </li>
-        </ul>
+        <div class="friends-content">
+          <ul :style="{width: S_width + 'rem'}" v-show="!noFriends" class="flex-align-center flex-wrap mt">
+            <li v-for="(item,index) in friends" :key="index">
+              <router-link :to="{path: '/otherHome/'+item.uId}">
+                <img :src="item.pic" alt="">
+                <p class="text-ellipsis-line">{{item.uname}}</p>
+              </router-link>
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="mt">
         <!-- 我发布的动态哦 -->
@@ -100,7 +126,7 @@
                 </div>
               </div>
               <div class="list-content mb">
-                <div class="text">
+                <div class="text mb">
                   <router-link :to="{path: '/detail/'+item.tId}">{{item.tTitle}}</router-link>
                 </div>
                 <div class="thumbnails my-gallery">
@@ -114,12 +140,12 @@
               <div class="list-bottom flex-align-center flex-between">
                 <!-- <div class="flex-around flex-align-center"> -->
                   <span class="like flex-align-center mr">
-                    <div class="VueStar" :class="[item.is_like == 1 ? 'islike' : '']">
+                    <div class="VueStar" :class="[item.r1 == 1 ? 'islike' : '']">
                       <div class="VueStar__ground">
-                        <div class="VueStar__icon" @click="islike(item.tId, index)" :class="{'animated tada': !!item.is_like}">
+                        <div class="VueStar__icon" @click="islike(item)" :class="{'animated tada': !!item.r1}">
                           <i class="icon icon-like"></i>
                         </div>
-                        <div class="VueStar__decoration" :class="{ 'VueStar__decoration--active': !!item.is_like }"></div>
+                        <div class="VueStar__decoration" :class="{ 'VueStar__decoration--active': !!item.r1 }"></div>
                       </div>
                     </div>
                     {{item.tNum}}
@@ -155,12 +181,41 @@
     font-size: .3rem;
   }
 }
+.img-list {
+  position: relative;
+}
+.cha {
+  width: 20px;
+  height: 20px;
+  background-color: rgba(0, 0, 0, .5);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 .nav {
   padding: .2rem;
   background-color: #fff;
   border-bottom: 1px solid #f2f2f2;
 }
-
+.friends-content {
+  width: 6rem;
+  overflow-x: scroll;
+  ul {
+    display: flex;
+    li {
+      width: 10%;
+    }
+  }
+  .friendsList {
+    height: auto;
+    margin-left: .15rem;
+    border: 1px solid #ccc;
+    img {
+      width: 100%;
+      height: 2rem;
+    }
+  }
+}
 .noData {
   text-align: center;
 }
@@ -176,7 +231,7 @@ import Header from '../base/header-back'
 import Group from '../base/group'
 import scrollTop from '../base/scrollTop'
 import api, { uId } from '../../assets/js/api'
-import { Indicator } from 'mint-ui'
+import { Toast, Indicator } from 'mint-ui'
 export default {
   data () {
     return {
@@ -185,6 +240,7 @@ export default {
       noTiezi: false,
       noFriends: false,
       noPic: false,
+      imgLength: true,
       users: {
         uName: '这里是昵称',
         uIntroduction: '这里是个性签名',
@@ -262,6 +318,8 @@ export default {
     scrollTop
   },
   created () {
+    let _l = this.friends.length
+    this.S_width = _l * 2 + (_l - 1) * 1
     let form = this.$qs.stringify({
       uId: uId
     })
@@ -269,20 +327,18 @@ export default {
       .then((res) => {
         console.log(res)
         this.users = res.data.users
-        // this.groupList = res.data.plateUsersList
-        // this.friends = res.data.userFriendsList
         if (res.data.users.list === null) {
           this.noPic = true
+        } else if (res.data.users.list.length >= 9) {
+          this.imgLength = false
         }
         if (res.data.plateUsersList.length === 0 ) {
           this.noData = true
         } else {
-          console.log('111')
           this.noData = false
           this.groupList = res.data.plateUsersList
         }
         if (res.data.userFriendsList.length === 0) {
-          console.log('2222')
           this.noFriends = true
         } else {
           this.friends = res.data.userFriendsList
@@ -314,33 +370,49 @@ export default {
     }
   },
   methods: {
-    islike () {
-      
+    islike (value) {
+      console.log(value)
+      let form = this.$qs.stringify({
+        uId: uId,
+        tId: value.tId
+      })
+      api.givelike(form)
+        .then((res) => {
+          console.log(res)
+        })
+      value.r1 = 1
+      value.tNum++
     },
     uploadImg () {
-      var formData = new FormData()
-      var reader = new FileReader()
-      var imgName = this.$el.querySelector('.file').files[0].name
-      reader.readAsDataURL(this.$el.querySelector('.file').files[0]);
-      Indicator.open()
-      reader.onload = (e) => {
-        var image = new Image()
-        image.src = e.target.result
-        image.onload = () => {
-          let form = this.$qs.stringify({
-            uploadFile: image.src,
-            uId: uId
-          })
-          api.pictureupload(form)
-            .then((res) => {
-              console.log(res)
-              setTimeout(() => Indicator.close(), 1000)
-              this.$router.replace('/homePagenull')
+      if (this.users.list == null || this.users.list.length < 9) {
+        var formData = new FormData()
+        var reader = new FileReader()
+        // var imgName = this.$el.querySelector('.file').files[0].name
+        reader.readAsDataURL(this.$el.querySelector('.file').files[0]);
+        Indicator.open()
+        reader.onload = (e) => {
+          var image = new Image()
+          image.src = e.target.result
+          image.onload = () => {
+            let form = this.$qs.stringify({
+              uploadFile: image.src,
+              uId: uId
             })
+            api.pictureupload(form)
+              .then((res) => {
+                console.log(res)
+                setTimeout(() => Indicator.close(), 1000)
+                this.$router.replace('/homePagenull')
+              })
+          }
         }
+      } else if (this.users.list.length >= 9) {
+        this.imgLength = false
+        Toast('最多只能上传9张图片')
       }
     },
     delect (list, index, item) {
+      // 删除帖子
       let form = this.$qs.stringify({
         tId: item.tId
       })
@@ -351,6 +423,23 @@ export default {
       list.splice(index, 1)
       if (list.length == 0) {
         this.noTiezi = true
+        return false
+      }
+    },
+    cha (imgList, index, item) {
+      // 删除背景图片
+      console.log(imgList)
+      let form = this.$qs.stringify({
+        picName: item.puPic,
+        puId: item.puId
+      })
+      api.delete(form)
+        .then((res) => {
+          console.log(res)
+        })
+      imgList.splice(index, 1)
+      if (imgList.length == 0) {
+        this.noPic = true
         return false
       }
     }

@@ -106,6 +106,7 @@ export default {
               }
             })
         }
+        console.log()
       }
     },
     submit () {
@@ -124,7 +125,7 @@ export default {
       }
       let form = this.$qs.stringify({
         uId: uId,
-        picName: this.img,
+        picName: JSON.stringify(this.img),
         uIdNumber: this.idnumber
       })
       api.realNameAuthe(form)

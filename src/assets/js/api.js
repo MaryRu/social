@@ -232,7 +232,22 @@ export default {
   deleteTieba (params) {
     // 删除发布的颜络社
     return Post('/tieba/deleteTieba', params)
+  },
+  deletecomment (params) {
+    // 用户删除评论
+    return Post('/comment/deletecomment',params)
+  },
+  getActivityById (params) {
+    // 根据id查找微趴
+    return Post('/activity/getActivityById',params)
+  },
+  addactivitydesc (params) {
+    // 一键参与
+    return Post('/activitydesc/addactivitydesc',params)
+  },
+  delete (params) {
+    // delete
+    return Post('/picture/delete',params)
   }
-
 }
 export { uId }

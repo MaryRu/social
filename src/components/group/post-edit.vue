@@ -35,6 +35,7 @@
       <div class="img-wrap">
         <div v-for="(img, index) in imglist" :key="index" class="img-list">
           <img :src="img" alt="">
+          <i class="icon icon-cha cha" @click="cha(imglist, index, img)"></i>
         </div>
         <label v-show="imgLength" class="upload-img" for="upload-img">
           <i slot="icon" class="icon icon-img"></i>
@@ -64,6 +65,17 @@
     border: none;
     color: #fff;
     background-color: @theme_background;
+  }
+}
+.img-list {
+  position: relative;
+  .cha {
+    position: absolute;
+    top: 0;
+    right: 0.2rem;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(0, 0, 0, .6);
   }
 }
 </style>
@@ -160,6 +172,17 @@ export default {
         }
         console.log( JSON.stringify(this.imglist))
       }
+    },
+    cha (imgList, index, item) {
+      // 删除背景图片
+      let form = this.$qs.stringify({
+        picName: item
+      })
+      api.delete(form)
+        .then((res) => {
+          console.log(res)
+        })
+      imgList.splice(index, 1)
     }
   }
 }
