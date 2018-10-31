@@ -116,13 +116,19 @@ export default {
     noPage
   },
   created () {
-    for (let i = 0; i < this.pending.length; i++) {
-      if (this.pending[i].headImg.length > 4) {
-        this.headImgBox = true
-        this.pending[i].headImg = this.pending[i].headImg.slice(0, 4)
-        return false
-      }
-    }
+    let form = this.$qs.stringify({
+      uId: uId,
+      status: 1
+    })
+    api.getentertainByUser(form)
+      .then((res) => {
+        console.log(res)
+        if (res.data.length === 0) {
+          this.nopage = true
+          return false
+        }
+        this.pending = res.data
+      })
   }
 }
 </script>

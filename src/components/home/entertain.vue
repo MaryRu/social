@@ -59,34 +59,10 @@ export default {
     noPage
   },
   created () {
-    this.enterain(0)
   },
   watch: {
-    selected (value) {
-      console.log(value)
-      if (value === 1) {
-        this.enterain(0)
-      } else if (value === 2) {
-        this.enterain(1)
-      } else {
-        this.enterain(2)
-      }
-    }
   },
   methods: {
-    enterain (status) {
-      let form = this.$qs.stringify({
-        uId: uId,
-        status: status
-      })
-      api.getentertainByUser(form)
-        .then((res) => {
-          console.log(res)
-          if (res.data.length == 0) {
-            this.nopage = true
-          }
-        })
-    }
   }
 }
 </script>

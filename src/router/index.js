@@ -15,6 +15,8 @@ import member from '@/components/member/index'
 import available from '@/components/home/available'
 import entertain from '@/components/home/entertain'
 import intimate from '@/components/home/intimate'
+import condition from '@/components/home/condition'
+import chat from '@/components/home/chat'
 import giftcard from '@/components/giftcard/index'
 import mycard from '@/components/giftcard/mycard'
 import mall from '@/components/order/index'
@@ -24,6 +26,10 @@ import cartdata from '@/components/order/cartdata'
 import homePage from '@/components/member/homePage'
 import homePagenull from '@/components/member/homePagenull'
 import information from '@/components/member/information'
+import invite from '@/components/member/invite'
+import service from '@/components/member/service'
+import answer from '@/components/member/answer'
+import feedback from '@/components/member/feedback'
 import personal from '@/components/login/personal'
 import lable from '@/components/login/lable'
 import record from '@/components/member/record'
@@ -237,6 +243,36 @@ export default new Router({
       path: '/success',
       name: 'success',
       component: success
+    },
+    {
+      path: '/invite',
+      name: 'invite',
+      component: invite
+    },
+    {
+      path: '/service',
+      name: 'service',
+      component: service
+    },
+    {
+      path: '/answer/:id',
+      name: 'answer',
+      component: answer
+    },
+    {
+      path: '/feedback',
+      name: 'feedback',
+      component: feedback
+    },
+    {
+      path: '/condition/:id',
+      name: 'condition',
+      component: condition
+    },
+    {
+      path: '/chat/:id',
+      name: 'chat',
+      component: chat
     },
     {
       path: '/demo',

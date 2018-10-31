@@ -49,13 +49,13 @@
             </router-link>
           </li>
           <li>
-            <router-link to="/" class="flex-align-center">
+            <router-link to="/invite" class="flex-align-center">
               <i class="icon icon-invite mr"></i>
               <p>邀请有奖</p>
             </router-link>
           </li>
           <li>
-            <router-link to="/" class="flex-align-center">
+            <router-link to="/service" class="flex-align-center">
               <i class="icon icon-service mr"></i>
               <p>客服中心</p>
             </router-link>

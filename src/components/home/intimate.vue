@@ -4,15 +4,17 @@
     <div class="intimate container">
       <ul>
         <li v-for="(item,index) in myFriends" :key="index" class="flex-align-center flex-between">
-          <div class="flex-align-center">
-            <div class="headImg">
-              <img :src="item.headImg" alt="">
+          <router-link :to="{path: '/chat/'+item.id}">
+            <div class="flex-align-center">
+              <div class="headImg">
+                <img :src="item.headImg" alt="">
+              </div>
+              <div class="contentBox">
+                <p class="name">{{item.name}}</p>
+                <span>{{item.content}}</span>
+              </div>
             </div>
-            <div class="contentBox">
-              <p class="name">{{item.name}}</p>
-              <span>{{item.content}}</span>
-            </div>
-          </div>
+          </router-link>
           <p class="task" v-show="item.task == 1">任务</p>
         </li>
       </ul>
@@ -53,24 +55,28 @@ export default {
       tabname: '亲密关系',
       myFriends: [
         {
+          id: '1',
           task: '1',
           headImg: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658',
           name: '昵称',
           content: '你好呀~'
         },
         {
+          id: '2',
           task: '0',
           headImg: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658',
           name: '昵称',
           content: '你好呀~'
         },
         {
+          id: '3',
           task: '0',
           headImg: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658',
           name: '昵称',
           content: '你好呀~'
         },
         {
+          id: '4',
           task: '1',
           headImg: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658',
           name: '昵称',

@@ -248,6 +248,26 @@ export default {
   delete (params) {
     // delete
     return Post('/picture/delete',params)
+  },
+  getAllentertain (params) {
+    // 可领招待
+    return Post('/entertain/getAllentertain',params)
+  },
+  getreceive (params) {
+    // 一键领取加为好友
+    return Post('/entertain/getreceive',params)
+  },
+  editentertain (params) {
+    // 修改条件
+    return Post('/entertain/editentertain',params)
+  },
+  delentertain (params) {
+    // 修改条件
+    return Post('/entertain/delentertain',params)
+  },
+  getStatus (params) {
+    // 我的招待(待领取/已完成)
+    return Post('/entertain/getStatus',params)
   }
 }
 export { uId }
