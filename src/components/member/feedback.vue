@@ -36,7 +36,7 @@
       </div>
       <input type="file" accept="image/*" id="upload-img" name="upload-img" hidden="hidden">
     </div>
-    <div class="button mt">
+    <div class="button mt" @click="submit">
       <mt-button type="danger" class="sub-button">提交</mt-button>
     </div>
   </div>
@@ -145,6 +145,22 @@ export default {
           console.log(res)
         })
       imgList.splice(index, 1)
+    },
+    submit () {
+      if (this.content === '' && this.imglist.length === 0) {
+        Toast('请向我们说明详细意见哦')
+      } else {
+        let form = this.$qs.stringify({
+          content: this.content,
+          picName: JSON.stringify(this.imglist)
+        })
+        api.addAdvice(form)
+          .then((res) => {
+            console.log(res)
+            Toast('提交成功')
+            this.$router.replace('/member')
+          })
+      }
     }
   }
 }

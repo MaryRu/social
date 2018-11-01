@@ -17,6 +17,8 @@ import entertain from '@/components/home/entertain'
 import intimate from '@/components/home/intimate'
 import condition from '@/components/home/condition'
 import chat from '@/components/home/chat'
+import chatContent from '@/components/home/chatContent'
+import task from '@/components/home/task'
 import giftcard from '@/components/giftcard/index'
 import mycard from '@/components/giftcard/mycard'
 import mall from '@/components/order/index'
@@ -273,6 +275,16 @@ export default new Router({
       path: '/chat/:id',
       name: 'chat',
       component: chat
+    },
+    {
+      path: '/chatContent/:id',
+      name: 'chatContent',
+      component: chatContent
+    },
+    {
+      path: '/task/:id',
+      name: 'task',
+      component: task
     },
     {
       path: '/demo',

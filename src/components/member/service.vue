@@ -38,6 +38,7 @@
 </style>
 <script>
 import Header from '../base/header-back'
+import api from '../../assets/js/api'
 export default {
   data () {
     return {
@@ -64,6 +65,13 @@ export default {
   },
   components: {
     Header
-  }
+  },
+  created () {
+    api.getAllnotices()
+      .then((res) => {
+        console.log(res)
+        this.issueList = res.data.list
+      })
+  },
 }
 </script>

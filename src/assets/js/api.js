@@ -268,6 +268,38 @@ export default {
   getStatus (params) {
     // 我的招待(待领取/已完成)
     return Post('/entertain/getStatus',params)
+  },
+  getAllnotices () {
+    // 客服中心
+    return Post('/notices/getAllnotices')
+  },
+  getnoticesById (params) {
+    // 根据ID找答案
+    return Post('/notices/getnoticesById',params)
+  },
+  getUserFriendById (params) {
+    // 某个用户的所有好友
+    return Post('/userFriend/getUserFriendById',params)
+  },
+  addAdvice (params) {
+    // 问题反馈
+    return Post('/advice/addAdvice',params)
+  },
+  getByUid (params) {
+    // 获取两个人的聊天记录
+    return Post('/userchat/getByUid', params)
+  },
+  adduserchat (params) {
+    // 发布聊天
+    return Post('/userchat/adduserchat',params)
+  },
+  getUserFriendBytId (params) {
+    // 展示好友亲密任务
+    return Post('/userFriend/getUserFriendBytId',params)
+  },
+  addTaskFriend (params) {
+    // 发布任务内容
+    return Post('/userFriend/addTaskFriend',params)
   }
 }
 export { uId }

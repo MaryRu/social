@@ -87,8 +87,7 @@ export default {
     return {
       radio2: '',
       imgLength: true,
-      imglist: [
-      ],
+      imglist: [],
       lableList: [
         {
           lId: 1,
