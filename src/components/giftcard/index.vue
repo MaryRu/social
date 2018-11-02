@@ -2,16 +2,16 @@
   <div class="wrapper">
     <Header :tabname="tabname"></Header>
     <div class="container">
-      <mt-swipe :auto="4000" class="swiper">
-        <mt-swipe-item v-for="(swiper,index) in rollpicsList" :key="index">
-          <img :src="swiper.rPic" alt="">
+      <mt-swipe :auto="4000" class="swiper" style="height: 3rem">
+        <mt-swipe-item v-for="(swiper,index) in rollpicsList" :key="index" >
+          <img style="width: 100%; height: 3rem" :src="swiper.rPic" alt="">
         </mt-swipe-item>
       </mt-swipe>
       <div class="mt cardBox">
         <p class="mb">颜茶 + 祝福 即刻表心意</p>
         <ul class="flex-between flex-wrap" >
           <li v-for="(item,index) in cardList" :key="index">
-            <router-link to="/index">
+            <router-link to="/success">
               <div class="cardImg">
                 <img :src="item.pPic" alt="">
                 <p>{{item.pName}}</p>

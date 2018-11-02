@@ -92,7 +92,8 @@ export default {
           text: '你好呀'
         }
       ],
-      friendId: uId
+      friendId: uId,
+      timer: ''
     }
   },
   computed: {
@@ -106,17 +107,32 @@ export default {
     Header
   },
   created() {
-    let form = this.$qs.stringify({
-      uId: uId,
-      fId: this.$route.params.id
-    })
-    api.getByUid(form)
-      .then((res) => {
-        console.log(res)
-        this.contentList = res.data.list
-      })
+    this.chatContent()
+  },
+  mounted () {
+    if (this.timer) {
+      clearInterval(this.timer)
+    } else {
+      this.timer = setInterval(() => {
+        this.chatContent()
+      }, 60000)
+    }
+  },
+  destroyed () {
+    clearInterval(this.timer)
   },
   methods: {
+    chatContent () {
+      let form = this.$qs.stringify({
+        uId: uId,
+        fId: this.$route.params.id
+      })
+      api.getByUid(form)
+        .then((res) => {
+          console.log(res)
+          this.contentList = res.data.list
+        })
+    },
     commentForm () {
       if (this.userComment === '') {
         Toast('给对方说点什么吧')
@@ -132,6 +148,9 @@ export default {
             this.$router.replace('/chatContent/'+this.$route.params.id)
           })
       }
+    },
+    time () {
+      setTimeout(this.$router.replace('/chatContent/'+this.$route.params.id), 3000)
     }
   }
 }

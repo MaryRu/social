@@ -5,9 +5,7 @@
     <ul v-show="!nopage">
       <li v-for="(item,index) in complete" :key="index" class="mb">
         <div class="imgBox">
-          <router-link to="/">
-            <img :src="item.img" alt="">
-          </router-link>
+          <img :src="item.pic" alt="">
         </div>
       </li>
     </ul>
@@ -55,7 +53,7 @@ export default {
           this.nopage = true
           return false
         }
-        this.complete = res.data
+        this.complete = res.data.entertainsList
       })
   }
 }

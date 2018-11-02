@@ -7,10 +7,10 @@
       </router-link>
     </div>
     <div class="footer-item" :class="{active:urlRouter == '/group'}">
-      <router-link to='./group'>
+      <a href="#/group">
         <i class="icon footerIcon footerGroupIcon"></i>
         <p class="footer-title">颜络社</p>
-      </router-link>
+      </a>
     </div>
     <div class="footer-item flex-center" @click="add">
       <div class="addButton flex-center flex-align-center">
@@ -18,31 +18,31 @@
       </div>
     </div>
     <div class="footer-item" :class="{active:urlRouter == '/societyNews'}">
-      <router-link to='./societyNews'>
+      <a href='#/societyNews'>
         <i class="icon footerIcon footerNewsIcon"></i>
         <p class="footer-title">颜粉圈</p>
-      </router-link>
+      </a>
     </div>
     <div class="footer-item" :class="{active:urlRouter == '/member'}">
-      <router-link to='./member'>
+      <a href='#/member'>
         <i class="icon footerIcon footerMemberIcon"></i>
         <p class="footer-title">我的</p>
-      </router-link>
+      </a>
     </div>
     <mt-popup v-model="popupVisible" popup-transition="popup-fade" class="flex-end" >
       <div class="pop-box flex-align-end flex-wrap">
         <div class="flex pop-content">
           <div class="list-box">
-            <router-link to="/mall">
+            <a href="#/mall">
               <img src="../../assets/images/drink.png" alt="">
               <p>点单</p>
-            </router-link>
+            </a>
           </div>
           <div class="list-box">
-            <router-link to="/giftcard">
+            <a href="#/giftcard">
               <img src="../../assets/images/giftCard.png" alt="">
               <p>礼品卡</p>
-            </router-link>
+            </a>
           </div>
         </div>
         <div class="icon icon-close pop-bottom" @click="close"></div>

@@ -62,7 +62,7 @@ export default {
           this.nopage = true
           return false
         }
-        this.processList = res.data
+        this.processList = res.data.entertainsList
       })
   },
   methods: {

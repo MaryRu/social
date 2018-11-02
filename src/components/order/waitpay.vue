@@ -1,6 +1,9 @@
 <template>
   <div class="wrapper">
-    <Header :tabname="tabname"></Header>
+    <header class="head">
+      <a href="#/member" class="left"><i class="el-icon-arrow-left"></i></a>
+      <p>{{tabname}}</p>
+    </header>
     <div class="order">
       <ordertab :urlRouter="$route.path"></ordertab>
       <div class="container">
@@ -16,21 +19,21 @@
             <div class="order-content">
               <div class="flex" v-for="(goods,i) in item.list" :key="i">
                 <div class="order-img">
-                  <img :src="goods.pImage" />
+                  <img :src="goods.pics" />
                 </div>
                 <div class="order-text ">
                   <p class="goods-name text-ellipsis">{{goods.pName}}</p>
-                  <p class="goods-num">x{{goods.oiCount}}</p>
-                  <p class="goods-price">¥{{goods.pPrice}}</p>
+                  <p class="goods-num">x{{goods.oiNum}}</p>
+                  <p class="goods-price">¥{{goods.oiSubtotal}}</p>
                 </div>
               </div>
             </div>
             <div class="order-bottom">
               <div class="order-list">
-                <p>共{{item.list.length}}件商品 &nbsp; 合计¥{{item.total}}</p>
+                <p>共{{item.list.length}}件商品 &nbsp; 合计¥{{item.oTotal}}</p>
               </div>
               <div class="order-btn">
-                <span @click="cancle(item.oId)">取消订单</span>
+                <span @click="cancle(itemPay, index, item)">取消订单</span>
                 <span @click="goBuy(item.oId)">去付款</span>
               </div>
             </div>
@@ -90,37 +93,28 @@ export default {
     Header
   },
   created() {
-    this.getOrder()
+    let form = this.$qs.stringify({
+      uId: uId,
+      oState: 0
+    })
+    api.getOrderByUser(form)
+    .then((res) => {
+      console.log(res)
+      if (res.data.length == 0) {
+        this.havepage = false
+        return false
+      }
+      this.itemPay = res.data
+    })
   },
   methods: {
-    getOrder () {
-      api.getOrderByUser({
-        uId: uId,
-        oState: 0
-      })
-      .then((res) => {
-        console.log(res)
-        if (res.data.length == 0) {
-          this.havepage = false
-          return false
-        }
-        this.itemPay = res.data
-      })  
-    },
-    // cancle (oId) {
-    //   console.log(oId)
-    //   let form = this.$qs.stringify({
-    //     oId: oId,
-    //     oState: 5
-    //   })
-    //   api.updateOrderStatus(form)
-    //   .then((res) => {
-    //     Toast('取消成功')
-    //     setTimeout(this.$router.go(0),3000)
-    //   })
-    // },
     goBuy (oId) {
       console.log(oId)
+      this.$router.push('/success')
+    },
+    cancle (list, index, item) {
+      console.log(list)
+      list.splice(index, 1)
     }
   }
 }

@@ -1,10 +1,11 @@
 <template>
   <div class="information">
-    <mt-header fixed title="修改个人信息">
+    <!-- <mt-header fixed title="修改个人信息">
       <a href="javascript:history.go(-1);" slot="left" >
         <mt-button icon="back"></mt-button>
       </a>
-    </mt-header>
+    </mt-header> -->
+    <Header :tabname="tabname"></Header>
     <div class="content container">
       <div class="school">
         <mt-cell title="头像">
@@ -39,17 +40,22 @@
 }
 </style>
 <script>
+import Header from '../base/header-back'
 import { Toast, MessageBox, Indicator } from 'mint-ui'
 import api,{ uId } from '../../assets/js/api'
 export default {
   data() {
     return {
+      tabname: '修改个人信息',
       user: {
         uImg: '',
         uName: '',
         uIntroduction: ''
       }
     }
+  },
+  components: {
+    Header
   },
   created() {
     this.user = JSON.parse(sessionStorage.getItem('userinfo'))

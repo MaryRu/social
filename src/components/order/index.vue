@@ -2,24 +2,22 @@
   <div class="wrapper">
     <Header></Header>
     <div class="mall container">
-      <mt-swipe :auto="4000" class="swiper">
+      <mt-swipe :auto="4000" class="swiper" style="height: 3rem;">
         <mt-swipe-item v-for="(swiper,index) in swiperList" :key="index">
-          <img :src="swiper.rPic" alt="">
+          <img style="width: 100%; height: 3rem;" :src="swiper.rPic" alt="">
         </mt-swipe-item>
       </mt-swipe>
       <div class="order mt">
-        <router-link to="/classify">
+        <router-link to="/shop">
           <button class="flex-align-center flex-center">
             <i class="icon icon-buy"></i>开始点单
           </button>
         </router-link>
         <ul class="flex-align-center flex-around mt">
-          <li>
+          <li @click="code">
             <div class="">
-              <router-link to="/">
-                <i class="icon icon-QR"></i>
-                <p>会员码</p>
-              </router-link>
+              <i class="icon icon-QR"></i>
+              <p>会员码</p>
             </div>
           </li>
           <li>
@@ -42,20 +40,20 @@
       </div>
       <div class="mt card-box flex-between">
         <div class="card">
-          <router-link :to="{path: '/'+productIsnewList.pId}">
+          <router-link to="/shop">
             <div class="cardImg">
               <img :src="productIsnewList.pPic" alt="">
             </div>
-            <span class="tips">{{productIsnewList.pName}}</span>
+            <span class="tips">人气推荐</span>
           </router-link>
         </div>
         <div class="card">
-          <router-link :to="{path: '/'+productsIshotList.pId}">
+          <router-link to="/shop">
             <div class="cardImg">
               <img :src="productsIshotList.pPic" alt="">
             </div>
           </router-link>
-          <span class="tips">{{productsIshotList.pName}}</span>
+          <span class="tips">新品体验</span>
         </div>
       </div>
       <div class="more mt">
@@ -96,6 +94,9 @@
         </ul>
       </div>
     </div>
+    <mt-popup v-model="popupVisible" popup-transition="popup-fade" class="flex-end" >
+      <img src="../../assets/images/code.png" alt="">
+    </mt-popup>
   </div>
 </template>
 <style lang="less" scoped>
@@ -139,6 +140,12 @@ li {
 .more {
   padding: 0 .2rem;
 }
+.flex-end {
+  img {
+    width: 4rem;
+    height: 4rem;
+  }
+}
 </style>
 <script>
 import Header from '../base/header-search'
@@ -146,6 +153,7 @@ import api from '../../assets/js/api'
 export default {
   data () {
     return {
+      popupVisible: false,
       swiperList: [
         {
           rPic: 'http://ofkzpykzq.bkt.clouddn.com/card1.jpg'
@@ -181,6 +189,11 @@ export default {
         this.productIsnewList = res.data.productIsnewList
         this.productsIshotList = res.data.productsIshotList
       })
+  },
+  methods: {
+    code () {
+      this.popupVisible = true
+    }
   }
 }
 </script>

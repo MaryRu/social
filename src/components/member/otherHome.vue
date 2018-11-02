@@ -35,9 +35,9 @@
                   <div class="img-box">
                     <img :src="item.uimg" alt="">
                   </div>
-                  <div class="name-box flex-align-center ml">
+                  <div class="name-box flex-align-center">
                     <div>
-                      <p class="mb title">{{item.uname}}</p>
+                      <p class="title">{{item.uname}}</p>
                       <span>{{item.tAddtime}}</span>
                     </div>
                   </div>
@@ -84,6 +84,9 @@
 <style lang="less" scoped>
 @import '../../assets/less/index';
 @import '../../assets/less/member/index';
+.name-box {
+  padding: 0;
+}
 .home-page-info {
   padding-top: .8rem; 
   padding-bottom: .2rem;

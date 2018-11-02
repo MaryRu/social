@@ -61,7 +61,7 @@
         </div>
         <ul v-show="!noData" class="flex-align-center flex-wrap mt">
           <li v-for="(item,index) in groupList" :key="index">
-            <router-link to="/group">
+            <router-link :to="{path: '/plate/'+item.plId}">
               <img :src="item.plpic" alt="">
               <p class="text-ellipsis-line">{{item.plname}}</p>
             </router-link>
@@ -112,10 +112,11 @@
                   <div class="img-box">
                     <img :src="item.uimg" alt="">
                   </div>
-                  <div class="name-box flex-align-center ml">
+                  <div class="name-box flex-align-center">
                     <div>
-                      <p class="mb title">{{item.uname}}</p>
-                      <span>{{item.tAddtime}}</span>
+                      <p class="title">{{item.uname}}</p>
+                      <!-- <span>{{item.platename}}  丨</span>  -->
+                       <span>{{item.tAddtime  | goodTime}}</span>
                     </div>
                   </div>
                 </div>
@@ -167,6 +168,9 @@
 <style lang="less" scoped>
 @import '../../assets/less/member/index';
 @import '../../assets/less/group';
+.img-box {
+  padding: 0;
+}
 .setting {
   position: fixed;
   top: .1rem;
@@ -367,6 +371,33 @@ export default {
         h = 400
       }
       return w + 'x' + h
+    },
+    goodTime(value) {
+      var now = new Date().getTime(),
+        oldTime = new Date(value).getTime(),
+        difference = now - oldTime,
+        result = '',
+        minute = 1000 * 60,
+        hour = minute * 60,
+        day = hour * 24,
+        halfamonth = day * 15,
+        month = day * 30,
+        year = month * 12,
+
+        _year = difference / year,
+        _month = difference / month,
+        _week = difference / (7 * day),
+        _day = difference / day,
+        _hour = difference / hour,
+        _min = difference / minute
+      if (_year >= 1) { result = ~~(_year) + " 年前" }
+      else if (_month >= 1) { result = ~~(_month) + " 个月前" }
+      else if (_week >= 1) { result = ~~(_week) + " 周前" }
+      else if (_day >= 1) { result = ~~(_day) + " 天前" }
+      else if (_hour >= 1) { result = ~~(_hour) + " 小时前" }
+      else if (_min >= 1) { result = ~~(_min) + " 分钟前" }
+      else result = "刚刚"
+      return result
     }
   },
   methods: {

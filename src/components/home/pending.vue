@@ -5,14 +5,16 @@
     <ul v-show="!nopage">
       <li v-for="(item,index) in pending" :key="index" class="mb">
         <div class="imgBox">
-          <img :src="item.img" alt="">
+          <img :src="item.pic" alt="">
         </div>
-        <p class="mt">可领取的人</p>
+        <p class="mt">已领取的人</p>
         <div class=" mt flex-align-center">
-          <div v-for="(head,index) in item.headImg" :key="index" class="header-box">
-            <div class="headImg mr">
-              <img :src="head.pic" alt="">
-            </div>
+          <div class="header-box">
+            <router-link :to="{path: '/otherHome/'+item.fId}">
+              <div class="headImg mr">
+                <img :src="item.fimg" alt="">
+              </div>
+            </router-link>
           </div>
           <div class="headImg" v-show="headImgBox">
             <img src="../../assets/images/icon/more.png" alt="">
@@ -127,7 +129,7 @@ export default {
           this.nopage = true
           return false
         }
-        this.pending = res.data
+        this.pending = res.data.entertainsList
       })
   }
 }

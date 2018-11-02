@@ -41,12 +41,14 @@ import coupon from '@/components/member/coupon'
 import active from '@/components/member/active'
 import verified from '@/components/member/verified'
 import otherHome from '@/components/member/otherHome'
+import plate from '@/components/member/plate'
 import forgetPsd from '@/components/login/forgetPassword'
 import order from '@/components/order/order'
 import waitpay from '@/components/order/waitpay'
 import orderdown from '@/components/order/orderdown'
 import success from '@/components/order/success'
-import demo from '@/components/giftcard/demo'
+import shop from '@/components/order/shop'
+import demo from '@/components/home/demo'
 
 Vue.use(Router)
 
@@ -122,7 +124,7 @@ export default new Router({
       component: mall
     },
     {
-      path: '/classify',
+      path: '/classify/:id',
       name: 'classify',
       component: classify
     },
@@ -285,6 +287,16 @@ export default new Router({
       path: '/task/:id',
       name: 'task',
       component: task
+    },
+    {
+      path: '/plate/:id',
+      name: 'plate',
+      component: plate
+    },
+    {
+      path: '/shop',
+      name: 'shop',
+      component: shop
     },
     {
       path: '/demo',

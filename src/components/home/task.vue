@@ -167,6 +167,8 @@ export default {
           api.addTaskFriend(form)
             .then((res) => {
               console.log(res)
+              Toast('提交成功')
+              this.$router.replace('/intimate')
             })
         }
       }

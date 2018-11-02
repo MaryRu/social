@@ -27,7 +27,7 @@
             </div>
             <div class="order-bottom">
               <div class="order-list">
-                <p>共{{item.list.length}}件商品 &nbsp; 合计¥{{item.r1}}</p>
+                <p>共{{item.list.length}}件商品 &nbsp; 合计¥{{item.oTotal}}</p>
               </div>
               <div class="order-btn">
                 <span @click="cancle(item.oId)" v-show="item.waitpay">取消订单</span>

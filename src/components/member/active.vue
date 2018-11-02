@@ -31,13 +31,13 @@
         <noPage v-show="nopage"></noPage>
         <ul v-show="!nopage">
           <li v-for="(item,index) in activeList" :key="index" >
-            <router-link to="/" class="flex-align-center">
+            <router-link :to="{path: '/partyContent/'+item.aId}" class="flex-align-center">
               <div class="img-box mr">
-                <img :src="item.r1" alt="">
+                <img :src="item.aimg" alt="">
               </div>
               <div class="content">
-                <p class="title mb">{{item.aTitle}}</p>
-                <span>{{item.aAddtime}}</span>
+                <p class="title mb">{{item.atitle}}</p>
+                <span>{{item.addtime}}</span>
               </div>
             </router-link>
           </li>
@@ -94,14 +94,28 @@ export default {
     }
   },
   created () {
-    this.getActive()
+    this.getDesc()
   },
   methods: {
-    getActive () {
+    // getActive () {
+    //   let form = this.$qs.stringify({
+    //     uId: uId
+    //   })
+    //   api.ActivityInfoUser(form)
+    //     .then((res) => {
+    //       console.log(res)
+    //       if (res.data.list.length === 0) {
+    //         this.nopage = true
+    //       } else {
+    //         this.activeList = res.data.list
+    //       }
+    //     })
+    // },
+    getDesc () {
       let form = this.$qs.stringify({
         uId: uId
       })
-      api.ActivityInfoUser(form)
+      api.activitydescUser(form)
         .then((res) => {
           console.log(res)
           if (res.data.list.length === 0) {
@@ -110,21 +124,7 @@ export default {
             this.activeList = res.data.list
           }
         })
-    },
-    // getDesc () {
-    //   let form = this.$qs.stringify({
-    //     uId: uId
-    //   })
-    //   api.activitydescUser(form)
-    //     .then((res) => {
-    //       console.log(res)
-    //       if (res.data.list.length === 0) {
-    //         this.nopage = true
-    //       } else {
-    //         this.activitydesc = res.data.list
-    //       }
-    //     })
-    // }
+    }
   }
 }
 </script>

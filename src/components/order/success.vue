@@ -25,7 +25,7 @@
   right: 0;
   text-align: center;
   background: url('../../assets/images/success-bg.png') no-repeat;
-  background-size: contain;
+  background-size: cover;
 }
 .success-box {
   position: absolute;

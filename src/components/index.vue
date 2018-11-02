@@ -2,7 +2,7 @@
   <div class="wrapper">
     <Header :tabname="tabname"></Header>
     <div class="index container">
-      <mt-swipe :auto="4000" class="swiper">
+      <mt-swipe :auto="4000" class="swiper" style="height: 3rem">
         <mt-swipe-item v-for="(swiper,index) in swiperList" :key="index">
           <img :src="swiper.rPic" alt="">
         </mt-swipe-item>
@@ -76,7 +76,7 @@
                   <div class="img-box">
                     <img :src="item.uimg" alt="">
                   </div>
-                  <div class="name-box ml">
+                  <div class="name-box">
                     <div>
                       <p class="mb title">{{item.uname}}</p>
                       <span>{{item.platename}}  丨</span>  <span>{{item.tAddtime  | goodTime}}</span>
@@ -98,7 +98,7 @@
                 </figure>
               </div>
             </div>
-            <div class="list-bottom flex-align-center">
+            <div class="list-bottom flex-align-center flex-between">
               <span class="like flex-align-center mr">
                 <div class="VueStar" :class="[item.r1 == 1 ? 'islike' : '']">
                   <div class="VueStar__ground">
@@ -134,7 +134,6 @@ import Footer from './base/footer'
 import group from './base/group'
 import api from '../assets/js/api'
 import { Toast } from 'mint-ui'
-var uId = localStorage.getItem('uId')
 export default {
   data () {
     return {
@@ -320,9 +319,19 @@ export default {
     let _l = this.cardList.length
     // this.S_width = _l * 1.28 + (_l - 1) * 0.26
     this.S_width = _l * 2 + (_l - 1) * 1
+    // if (!uId) {
+    //   Toast('您还未登录')
+    //   setTimeout(this.$router.replace('/login', 3000))
+    // } else {
+     
+    // }
+     
+  },
+  mounted () {
+    var uId = localStorage.getItem('uId')
     if (!uId) {
       Toast('您还未登录')
-      setTimeout(this.$router.replace('/login', 3000))
+      this.$router.replace('/login')
     } else {
       let form = this.$qs.stringify({
         uId: uId
@@ -335,12 +344,12 @@ export default {
           this.listDetail = res.data.tiebalist
         })
       // 个人信息
-    api.getUserById(form)
-      .then((res) => {
-        console.log(res)
-        sessionStorage.setItem('uImg',res.data.users.uImg)
-        sessionStorage.setItem('uName',res.data.users.uName)
-      })
+      api.getUserById(form)
+        .then((res) => {
+          console.log(res)
+          sessionStorage.setItem('uImg',res.data.users.uImg)
+          sessionStorage.setItem('uName',res.data.users.uName)
+        })
     }
   },
   methods: {

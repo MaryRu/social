@@ -6,12 +6,12 @@
       <ul class="mt" v-show="!nopage">
         <li v-for="(item,index) in cardImg" :key="index" class="mb">
           <div class="cardImg">
-            <img :src="item.img" alt="">
+            <img :src="item.pic" alt="">
           </div>
-          <div class="status" v-show="item.status">
+          <div class="status" v-show="item.status !== 4">
             <img src="../../assets/images/icon/icon_01.png" alt="" v-show="item.status == 1">
-            <img src="../../assets/images/icon/icon_02.png" alt="" v-show="item.status == 2">
-            <img src="../../assets/images/icon/icon_03.png" alt="" v-show="item.status == 3">
+            <img src="../../assets/images/icon/icon_03.png" alt="" v-show="item.status == 2">
+            <img src="../../assets/images/icon/icon_02.png" alt="" v-show="item.status == 3">
           </div>
         </li>
       </ul>
@@ -25,8 +25,10 @@ li {
 }
 .cardImg {
   width: 100%;
+  height: 4rem;
   img {
     width: 100%;
+    height: 100%;
   }
 }
 .status {
@@ -78,7 +80,7 @@ export default {
     })
     api.selectByUId(form)
       .then((res) => {
-        console.log(res.data.giftOrderitemsList)
+        console.log(res)
         if (res.data.giftOrderitemsList.length === 0) {
           this.nopage = true
         } else {

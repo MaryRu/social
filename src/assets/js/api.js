@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { Toast } from 'mint-ui'
 
-var url = 'http://115.158.20.211:8088/social_project/'
+// var url = 'http://47.100.216.85:8080/social_project/'
+var url = 'http://115.158.20.211:8080/social_project'
 // var token = localStorage.getItem('token')
 var uId = localStorage.getItem('uId')
 // axios 配置
@@ -300,6 +301,14 @@ export default {
   addTaskFriend (params) {
     // 发布任务内容
     return Post('/userFriend/addTaskFriend',params)
+  },
+  getByPlid (params) {
+    // 根据板块id查找颜络社
+    return Post('/plate/getByPlid',params)
+  },
+  getAll () {
+    // 获取所有店铺
+    return Post('/stores/getAll')
   }
 }
 export { uId }
