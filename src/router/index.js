@@ -224,7 +224,7 @@ export default new Router({
       component: search
     },
     {
-      path: '/cartdata',
+      path: '/cartdata/:id',
       name: 'cartdata',
       component: cartdata
     },

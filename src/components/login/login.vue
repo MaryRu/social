@@ -22,11 +22,22 @@
         <router-link to="/register"><p>立即注册</p></router-link>
       </div>
     </div>
+    <!-- <div class="footer" v-show="hidshow">
+      移动端点击输入框，弹出键盘，底部被顶起问题
+    </div> -->
+    <!-- <img class="loginBg" src="../../assets/images/login-bg.png" alt=""> -->
   </div>
 </template>
 
 <style lang="less" scoped>
 @import '../../assets/less/login/login';
+.loginBg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 0;
+}
 </style>
 
 <script>
@@ -37,9 +48,39 @@ export default {
     return {
       phone: '',
       password: '',
-      z_tel: /^1(3|4|5|6|7|8|9)\d{9}$/
+      z_tel: /^1(3|4|5|6|7|8|9)\d{9}$/,
+      docmHeight: '0',  //默认屏幕高度
+      showHeight:  '0',  //实时屏幕高度
+      hidshow:true, //显示或者隐藏footer,
+      isResize:false //默认屏幕高度是否已获取
     }
   },
+//   mounted () {
+//     // window.onresize监听页面高度的变化
+//     window.onresize = ()=>{
+//       return ((res) => {
+//         console.log(res)
+//         if (!this.isResize) {
+//           // 默认屏幕高度
+//           this.docmHeight = document.documentElement.clientHeight
+//           this.isResize = true
+//         }
+//         // 实时屏幕高度
+//         this.showHeight = document.body.clientHeight 
+//       })()
+//     }
+//   },
+//   watch: {
+//     showHeight: function () {
+//       console.log('this.docmHeight:'+this.docmHeight)
+//       console.log('this.showHeight:'+this.showHeight)
+//       if (this.docmHeight > this.showHeight) {
+//         this.hidshow = false
+//       } else {
+//         this.hidshow = true
+//       }
+//     }
+//   },
   methods: {
     login () {
       if (!this.phone) {

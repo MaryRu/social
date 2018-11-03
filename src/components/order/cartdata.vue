@@ -6,7 +6,7 @@ export default {
     return{}
   },
   created () {
-    this.$router.replace('/classify')
+    this.$router.replace('/classify/'+this.$route.params.id)
   }
 }
 </script>

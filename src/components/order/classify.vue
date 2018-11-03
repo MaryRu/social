@@ -52,7 +52,7 @@
           <li class="flex-around flex-align-center" v-for="(item, index) in cartList" :key="index">
             <p>{{item.pname}}</p>
             <p class="price">￥{{item.prices}}</p>
-            <el-input-number v-model="item.puNum" @change="handleChange(item)" size="mini" :min="num1" :max="item.pStock" label=""></el-input-number>
+            <el-input-number v-model="item.puNum" @change="handleChange(item)" size="mini" :min="num1" :max="10" label=""></el-input-number>
           </li>
           <li class="popFoot flex-align-center">
             <div class="cart popCart">
@@ -72,6 +72,25 @@
 @import '../../assets/less/group';
 .el-main {
   padding: .2rem;
+}
+.el-input-number__increase {
+  border-left: none;
+  background-color: #f9ebed;
+  border-radius: 50%;
+}
+.el-input-number__decrease {
+  border-right: none;
+  background-color: #f9ebed;
+  border-radius: 50%;
+}
+.el-menu-item.is-active {
+    color: #e97889;
+}
+.el-input--mini .el-input__inner {
+  height: 28px;
+  line-height: 28px;
+  width: 85px;
+  border: none;
 }
 .aside {
   padding-left: 0;
@@ -107,6 +126,7 @@
   right: 0;
   height: .8rem;
   border-radius: 0;
+  width: 2rem;
 }
 .cardImg {
   img {
@@ -131,7 +151,7 @@
   ul {
     li {
       border-bottom: 1px solid #f0f0f0;
-      padding: .2rem 0;
+      padding: .2rem;
       &:last-child{
         border-bottom: none;
       }
@@ -264,7 +284,7 @@ export default {
       api.deleteCartByUid(form)
         .then((res) => {
           console.log(res)
-          this.$router.replace('/cartdata')
+          this.$router.replace('/cartdata/'+this.$route.params.id)
         })
     },
     handleChange (info) {
@@ -310,6 +330,7 @@ export default {
       api.getCart(form)
         .then((res) => {
           console.log(res)
+          this.cartList = res.data
         })
     },
     toPay () {

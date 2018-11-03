@@ -46,9 +46,9 @@
         <div class="friends-content">
           <ul :style="{width: S_width + 'rem'}">
             <li v-for="(card,index) in cardList" :key="index" class="friendsList">
-              <img :src="card.gPic" alt="">
+              <img :src="card.pPic" alt="">
               <div class="name-box">
-                <p>{{card.gTitle}}</p>
+                <p>{{card.pName}}</p>
                 <!-- <span>{{friend.desc}}</span> -->
                 <div class="friends-button mt">
                   <div class="add-button" @click="buyNow">
@@ -328,13 +328,13 @@ export default {
      
   },
   mounted () {
-    var uId = localStorage.getItem('uId')
-    if (!uId) {
+    // var uId = localStorage.getItem('uId')
+    if (!localStorage.getItem('uId')) {
       Toast('您还未登录')
       this.$router.replace('/login')
     } else {
       let form = this.$qs.stringify({
-        uId: uId
+        uId: localStorage.getItem('uId')
       })
       api.index(form)
         .then((res) => {
@@ -356,7 +356,7 @@ export default {
     islike (value) {
       console.log(value)
       let form = this.$qs.stringify({
-        uId: uId,
+        uId: localStorage.getItem('uId'),
         tId: value.tId
       })
       api.givelike(form)

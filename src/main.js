@@ -9,6 +9,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import api from './assets/js/api.js'
+// import Vconsole from 'vconsole'
+// let vConsole = new Vconsole()
+// export default vConsole
 // import VueAMap from 'vue-amap'
 
 Vue.config.productionTip = false

@@ -34,6 +34,10 @@
 .mint-tab-container {
   margin-top: 1.3rem;
 }
+.mint-navbar .mint-tab-item.is-selected {
+  border-bottom: 3px solid #e97889;
+  color: #e97889;
+}
 </style>
 
 <script>
