@@ -105,6 +105,11 @@ export default {
       // 将头像显示
       let $target = e.target || e.srcElement
       let file = $target.files[0]
+      if (file.size / 1024 > 10000) {
+        Toast('图片过大不支持上传')
+      } else {
+        this.imgPreview(file)
+      }
       var reader = new FileReader()
       reader.onload = (data) => {
         let res = data.target || data.srcElement
@@ -119,6 +124,84 @@ export default {
           })
       }
       reader.readAsDataURL(file)
+    },
+    // 获取图片
+    imgPreview (file, callback) {
+      let self = this
+      // 判断是否支持FileReader
+      if (!file || !window.FileReader) return
+      // 创建一个reader
+      var reader = new FileReader()
+      // 将图片转成base64格式
+      reader.readAsDataURL(file)
+      // 读取成功后的回调
+      reader.onloadend = function () {
+        let result = this.result
+        let img = new Image()
+        img.src = result
+        console.log('============未压缩图片===========')
+        console.log(result.length)
+        img.onload = function () {
+          let data = self.compress(img)
+          self.imgUrl = result
+          let blob = self.dataURItoBlob(data)
+          console.log("*******base64转blob对象******")
+          console.log(blob)
+
+          var formData = new FormData()
+          formData.append("file", blob)
+          console.log("********将blob对象转成formData对象********")
+          console.log(formData.get("file"))
+          let config = {
+            headers: { "Content-Type": "multipart/form-data" }
+          }
+          let form = this.$qs.stringify({
+            uploadFile: self.imgUrl
+          })
+          api.upload(form)
+            .then((res) => {
+              console.log(res)
+              this.img = res.data.url
+            })
+        }
+      }
+    },
+    // 压缩图片
+    compress(img) {
+      let canvas = document.createElement("canvas");
+      let ctx = canvas.getContext("2d");
+      let initSize = img.src.length;
+      let width = img.width;
+      let height = img.height;
+      canvas.width = width;
+      canvas.height = height;
+      // 铺底色
+      ctx.fillStyle = "#fff";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, width, height);
+
+      //进行最小压缩
+      let ndata = canvas.toDataURL("image/jpeg", 0.1);
+      // console.log("*******压缩后的图片大小*******");
+      // console.log(ndata)
+      // console.log(ndata.length);
+      return ndata;
+    },
+    // base64转成bolb对象
+    dataURItoBlob(base64Data) {
+      var byteString;
+      if (base64Data.split(",")[0].indexOf("base64") >= 0)
+        byteString = atob(base64Data.split(",")[1]);
+      else byteString = unescape(base64Data.split(",")[1]);
+      var mimeString = base64Data
+        .split(",")[0]
+        .split(":")[1]
+        .split(";")[0];
+      var ia = new Uint8Array(byteString.length);
+      for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+      return new Blob([ia], { type: mimeString });
     },
     submit () {
       if (!this.name) {
