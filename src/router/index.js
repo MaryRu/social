@@ -48,7 +48,6 @@ import waitpay from '@/components/order/waitpay'
 import orderdown from '@/components/order/orderdown'
 import success from '@/components/order/success'
 import shop from '@/components/order/shop'
-import demo from '@/components/home/demo'
 
 Vue.use(Router)
 
@@ -297,11 +296,6 @@ export default new Router({
       path: '/shop',
       name: 'shop',
       component: shop
-    },
-    {
-      path: '/demo',
-      name: 'demo',
-      component: demo
     }
   ]
 })
