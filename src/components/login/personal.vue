@@ -18,7 +18,7 @@
           <li class="info">
             <input type="text" placeholder="请填写个性签名" v-model="sign">
           </li>
-          <div style="width: 50%;height: .8rem;margin: 0 auto;">
+          <div style="width: 50%;height: .8rem;margin: .2rem auto;">
             <el-col>
               <el-date-picker type="date" placeholder="选择生日" v-model="date" style="width: 100%;"></el-date-picker>
             </el-col>
@@ -111,18 +111,6 @@ export default {
         this.imgPreview(file)
       }
       var reader = new FileReader()
-      reader.onload = (data) => {
-        let res = data.target || data.srcElement
-        let uploadImg = res.result
-        let form = this.$qs.stringify({
-          uploadFile: uploadImg
-        })
-        api.upload(form)
-          .then((res) => {
-            console.log(res)
-            this.img = res.data.url
-          })
-      }
       reader.readAsDataURL(file)
     },
     // 获取图片
@@ -141,27 +129,19 @@ export default {
         img.src = result
         console.log('============未压缩图片===========')
         console.log(result.length)
+        
         img.onload = function () {
           let data = self.compress(img)
           self.imgUrl = result
-          let blob = self.dataURItoBlob(data)
-          console.log("*******base64转blob对象******")
-          console.log(blob)
 
           var formData = new FormData()
-          formData.append("file", blob)
-          console.log("********将blob对象转成formData对象********")
-          console.log(formData.get("file"))
-          let config = {
-            headers: { "Content-Type": "multipart/form-data" }
-          }
-          let form = this.$qs.stringify({
-            uploadFile: self.imgUrl
+          let form = self.$qs.stringify({
+            uploadFile: data
           })
           api.upload(form)
             .then((res) => {
               console.log(res)
-              this.img = res.data.url
+              self.img = res.data.url
             })
         }
       }
@@ -186,22 +166,6 @@ export default {
       // console.log(ndata)
       // console.log(ndata.length);
       return ndata;
-    },
-    // base64转成bolb对象
-    dataURItoBlob(base64Data) {
-      var byteString;
-      if (base64Data.split(",")[0].indexOf("base64") >= 0)
-        byteString = atob(base64Data.split(",")[1]);
-      else byteString = unescape(base64Data.split(",")[1]);
-      var mimeString = base64Data
-        .split(",")[0]
-        .split(":")[1]
-        .split(";")[0];
-      var ia = new Uint8Array(byteString.length);
-      for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-      }
-      return new Blob([ia], { type: mimeString });
     },
     submit () {
       if (!this.name) {

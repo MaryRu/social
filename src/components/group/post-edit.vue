@@ -154,23 +154,69 @@ export default {
       } else {
         var formData = new FormData()
         var reader = new FileReader()
-        var imgName = this.$el.querySelector('.file').files[0].name
+        var imgName = this.$el.querySelector('.file').files[0]
         reader.readAsDataURL(this.$el.querySelector('.file').files[0]);
-        reader.onload = (e) => {
-          var image = new Image()
-          image.src = e.target.result
-          image.onload = () => {
-            let form = this.$qs.stringify({
-              uploadFile: image.src
-            })
-            api.upload(form)
-              .then((res) => {
-                this.imglist.push(res.data.url)
-              })
-          }
+        // 判断图片大小
+        if (imgName.size / 1024 > 10000) {
+          Toast('图片过大不支持上传')
+        } else {
+          this.imgPreview(imgName)
         }
-        console.log( JSON.stringify(this.imglist))
       }
+    },
+    // 获取图片
+    imgPreview (file, callback) {
+      let self = this
+      // 判断是否支持FileReader
+      if (!file || !window.FileReader) return
+      // 创建一个reader
+      var reader = new FileReader()
+      // 将图片转成base64格式
+      reader.readAsDataURL(file)
+      // 读取成功后的回调
+      reader.onloadend = function () {
+        let result = this.result
+        let img = new Image()
+        img.src = result
+        console.log('============未压缩图片===========')
+        console.log(result.length)
+        
+        img.onload = function () {
+          let data = self.compress(img)
+          console.log(data.length)
+          self.imgUrl = result
+
+          var formData = new FormData()
+          let form = self.$qs.stringify({
+            uploadFile: data
+          })
+          api.upload(form)
+            .then((res) => {
+              self.imglist.push(res.data.url)
+            })
+        }
+      }
+    },
+    // 压缩图片
+    compress(img) {
+      let canvas = document.createElement("canvas");
+      let ctx = canvas.getContext("2d");
+      let initSize = img.src.length;
+      let width = img.width;
+      let height = img.height;
+      canvas.width = width;
+      canvas.height = height;
+      // 铺底色
+      ctx.fillStyle = "#fff";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, width, height);
+
+      //进行最小压缩
+      let ndata = canvas.toDataURL("image/jpeg", 0.1);
+      console.log("*******压缩后的图片大小*******");
+      // console.log(ndata)
+      console.log(ndata.length);
+      return ndata;
     },
     cha (imgList, index, item) {
       // 删除背景图片
