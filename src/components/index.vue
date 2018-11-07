@@ -158,11 +158,33 @@
         </div>
       </div>
     </div>
+    <!-- 活动pop -->
+    <mt-popup v-model="popupVisible1" popup-transition="popup-fade" class="mint-popup-1">
+      <router-link to="/festival">
+        <div class="active">
+          <img src="../assets/images/active.png" alt="">
+        </div>
+      </router-link>
+    </mt-popup>
     <Footer :urlRouter="$route.path" :cartnum='cartLength' ref="footer"></Footer>
   </div>
 </template>
 <style lang="less" scoped>
 @import '../assets/less/index';
+.mint-popup {
+  background-color: transparent;
+}
+.mint-popup-1 {
+  .active {
+    width: 7rem;
+    height: 7rem;
+    img {
+      margin: auto;
+      display: block;
+      width: 100%;
+    }
+  }
+}
 </style>
 
 <script>
@@ -182,6 +204,7 @@ export default {
       tabname: '青沫茶颜',
       cartLength: 0,
       S_width: 0,
+      popupVisible1: true,
       swiperList: [
         {
           rPic: 'http://img.hb.aicdn.com/ff4107ab24763dda3606faef88139529db3313018147f-i3dfWI_fw658'
