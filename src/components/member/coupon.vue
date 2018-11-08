@@ -13,27 +13,27 @@
           <ul v-show="!nopage">
             <li v-for="(no,index) in noUsed" :key="index">
               <div class="quan-item flex-between flex-align-center">
-                <div class="q-price">
+                <!-- <div class="q-price">
                   <p>
                     <em>¥</em>
                     <strong>{{no.cvalue}}</strong>
                   </p>
                   <span class="q-limit" data-tips="">满{{no.contradition}}可用</span>
-                </div>
+                </div> -->
                 <div class="q-type">
                   <div class="q-title text-ellipsis">
                     {{no.cName}}
                   </div>
                   <div class="q-time">
-                    {{no.ciAddtime}}至{{no.ciEndtime}}
+                    {{no.ciAddtime}} 至 {{no.ciEndtime}}
                   </div>
                 </div>
                 <div class="q-ops-box">
                   <div class="q-opbtns">
-                    <a href="/" class="btn">
+                    <div class="btn" @click="used(noUsed, index, no)">
                       <b></b>
                       <span>去使用</span>
-                    </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -45,13 +45,13 @@
           <ul v-show="!nopage">
             <li v-for="(no,index) in noUsed" :key="index" class="useless">
               <div class="quan-item flex-between flex-align-center">
-                <div class="q-price">
+                <!-- <div class="q-price">
                   <p>
                     <em>¥</em>
                     <strong>{{no.cvalue}}</strong>
                   </p>
                   <span class="q-limit" data-tips="">满{{no.contradition}}可用</span>
-                </div>
+                </div> -->
                 <div class="q-type">
                   <div class="q-tips">
                   </div>
@@ -59,7 +59,7 @@
                     {{no.cName}}
                   </div>
                   <div class="q-time">
-                    {{no.ciAddtime}}至{{no.ciEndtime}}
+                    {{no.ciAddtime}} 至 {{no.ciEndtime}}
                   </div>
                 </div>
                 <div class="q-ops-box">
@@ -79,19 +79,19 @@
           <ul v-show="!nopage">
             <li v-for="(no,index) in noUsed" :key="index" class="useless">
               <div class="quan-item flex-between flex-align-center">
-                <div class="q-price">
+                <!-- <div class="q-price">
                   <p>
                     <em>¥</em>
                     <strong>{{no.cvalue}}</strong>
                   </p>
                   <span class="q-limit" data-tips="">满{{no.contradition}}可用</span>
-                </div>
+                </div> -->
                 <div class="q-type">
                   <div class="q-title text-ellipsis">
                     {{no.cName}}
                   </div>
                   <div class="q-time">
-                    {{no.ciAddtime}}至{{no.ciEndtime}}
+                    {{no.ciAddtime}} 至 {{no.ciEndtime}}
                   </div>
                 </div>
                 <div class="q-ops-box">
@@ -208,11 +208,13 @@ export default {
   },
   watch: {
     selected (value) {
-      if (value === 1) {
+      console.log(value)
+      if (value == 1) {
         this.couponList(0)
-      } else if (value === 2) {
+      } else if (value == 2) {
+        console.log(222)
         this.couponList(1)
-      } else if (value === 3) {
+      } else if (value == 3) {
         this.couponList(2)
       }
     }
@@ -224,7 +226,7 @@ export default {
     couponList (status) {
       let form = this.$qs.stringify({
         uId: uId,
-        status: this.status
+        status: status
       })
       api.getCouponInfoByUser(form)
         .then((res) => {
@@ -234,7 +236,28 @@ export default {
             return false
           }
           this.noUsed = res.data
+          this.nopage = false
+          this.noUsed.forEach((item) => {
+            item.ciAddtime = item.ciAddtime.split(' ')[0]
+            item.ciEndtime = item.ciEndtime.split(' ')[0]
+          })
         })
+    },
+    used (noUsed, index, item) {
+      console.log(item)
+      let form = this.$qs.stringify({
+        uId: uId,
+        cId: item.cId
+      })
+      api.useCoupon(form)
+        .then((res) => {
+          console.log(res)
+        })
+      noUsed.splice(index, 1)
+      if (noUsed.length == 0) {
+        this.nopage = true
+        return false
+      }
     }
   }
 }

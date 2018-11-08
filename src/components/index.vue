@@ -162,7 +162,7 @@
     <mt-popup v-model="popupVisible1" popup-transition="popup-fade" class="mint-popup-1">
       <router-link to="/festival">
         <div class="active">
-          <img src="../assets/images/active.png" alt="">
+          <img src="../assets/images/active1.png" alt="">
         </div>
       </router-link>
     </mt-popup>
@@ -173,11 +173,12 @@
 @import '../assets/less/index';
 .mint-popup {
   background-color: transparent;
+  top: 40%;
 }
 .mint-popup-1 {
   .active {
-    width: 7rem;
-    height: 7rem;
+    width: 5.5rem;
+    height: 5.5rem;
     img {
       margin: auto;
       display: block;

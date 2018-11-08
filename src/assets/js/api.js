@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { Toast } from 'mint-ui'
 // 线上
-var url = 'http://47.100.216.85:8080/social_project/'
+// var url = 'http://47.100.216.85:8080/social_project/'
 // 本地
-// var url = 'http://115.158.20.211:8080/social_project'
+var url = 'http://115.158.20.211:8088/social_project'
 // var token = localStorage.getItem('token')
 var uId = localStorage.getItem('uId')
 // axios 配置
@@ -310,6 +310,18 @@ export default {
   getAll () {
     // 获取所有店铺
     return Post('/stores/getAll')
+  },
+  CouponById (params) {
+    // 获取五折或一折优惠券
+    return Post('/couponInfo/CouponById', params)
+  },
+  receiveCoupon (params) {
+    // 领取优惠券
+    return Post('/couponInfo/receiveCoupon', params)
+  },
+  useCoupon (params) {
+    // 去使用优惠券
+    return Post('/couponInfo/useCoupon', params)
   }
 }
 export { uId }
