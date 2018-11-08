@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login" ref="wrapper" :style="{ height: wrapper + 'px' }">
     <div class="login-top">
       <img src="../../assets/images/login.png" alt="">
     </div>
@@ -24,7 +24,7 @@
     </div>
     <div class="login-bottom">
       <el-row class=""><el-button @click="register" type="danger" class="button">注&nbsp;&nbsp;册</el-button></el-row>
-      <div class="desc">
+      <div class="desc mt">
         注册代表您已阅读并同意 <span>青沫茶颜用户协议</span>
       </div>
     </div>
@@ -47,10 +47,22 @@ export default {
       code: '',
       isSend: false,
       verificationCodeTxt: '获取验证码',
-      z_tel: /^1(3|4|5|6|7|8|9)\d{9}$/
+      z_tel: /^1(3|4|5|6|7|8|9)\d{9}$/,
+      clientHeight: '',
+      wrapper:  640
     }
   },
   created () {
+  },
+  mounted () {
+    this.clientHeight = document.documentElement.clientHeight
+    console.log(this.clientHeight)
+    let that = this
+    window.onresize = function () {
+      if (document.documentElement.clientHeight < that.clientHeight) {
+        that.wrapper = that.clientHeight
+      }
+    }
   },
   methods: {
     // 倒计时

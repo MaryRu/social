@@ -39,7 +39,8 @@
                     <div class="name-box">
                       <div>
                         <p class="mb title">{{item.uname}}</p>
-                        <span>{{item.platename}}  丨</span>  <span>{{item.tAddtime  | goodTime}}</span>
+                        <!-- <span>{{item.platename}}  丨</span>   -->
+                        <span>{{item.tAddtime  | goodTime}}</span>
                       </div>
                     </div>
                   </div>

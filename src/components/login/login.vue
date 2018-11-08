@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login"  ref="wrapper" :style="{ height: wrapper + 'px' }">
     <div class="login-top">
       <img src="../../assets/images/login.png" alt="">
     </div>
@@ -49,38 +49,20 @@ export default {
       phone: '',
       password: '',
       z_tel: /^1(3|4|5|6|7|8|9)\d{9}$/,
-      docmHeight: '0',  //默认屏幕高度
-      showHeight:  '0',  //实时屏幕高度
-      hidshow:true, //显示或者隐藏footer,
-      isResize:false //默认屏幕高度是否已获取
+      clientHeight: '',
+      wrapper:  640
     }
   },
-//   mounted () {
-//     // window.onresize监听页面高度的变化
-//     window.onresize = ()=>{
-//       return ((res) => {
-//         console.log(res)
-//         if (!this.isResize) {
-//           // 默认屏幕高度
-//           this.docmHeight = document.documentElement.clientHeight
-//           this.isResize = true
-//         }
-//         // 实时屏幕高度
-//         this.showHeight = document.body.clientHeight 
-//       })()
-//     }
-//   },
-//   watch: {
-//     showHeight: function () {
-//       console.log('this.docmHeight:'+this.docmHeight)
-//       console.log('this.showHeight:'+this.showHeight)
-//       if (this.docmHeight > this.showHeight) {
-//         this.hidshow = false
-//       } else {
-//         this.hidshow = true
-//       }
-//     }
-//   },
+  mounted () {
+    this.clientHeight = document.documentElement.clientHeight
+    console.log(this.clientHeight)
+    let that = this
+    window.onresize = function () {
+      if (document.documentElement.clientHeight < that.clientHeight) {
+        that.wrapper = that.clientHeight
+      }
+    }
+  },
   methods: {
     login () {
       if (!this.phone) {

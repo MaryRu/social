@@ -118,6 +118,10 @@
   width: 100%;
   z-index: 9999;
 }
+.mint-navbar .mint-tab-item.is-selected {
+  border-bottom: 3px solid #e97889;
+  color: #e97889;
+}
 .coupon .coupon-list {
   margin-top: 1.6rem;
 }

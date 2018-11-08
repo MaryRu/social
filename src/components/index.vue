@@ -12,7 +12,7 @@
           <router-link to="/available">
             <div class="nav-content">
               <img src="../assets/images/nav_01.png" alt="">
-              <p class="mt">可领招待</p>
+              <p class="">可领招待</p>
             </div>
           </router-link>
         </li>
@@ -20,7 +20,7 @@
           <router-link to="/entertain">
             <div class="nav-content">
               <img src="../assets/images/nav_02.png" alt="">
-              <p class="mt">我的招待</p>
+              <p class="">我的招待</p>
             </div>
           </router-link>
         </li>
@@ -28,7 +28,7 @@
           <router-link to="/intimate">
             <div class="nav-content">
               <img src="../assets/images/nav_03.png" alt="">
-              <p class="mt">亲密关系</p>
+              <p class="">亲密关系</p>
             </div>
           </router-link>
         </li>
@@ -36,7 +36,7 @@
           <router-link to="/giftcard">
             <div class="nav-content">
               <img src="../assets/images/nav_04.png" alt="">
-              <p class="mt">礼品卡</p>
+              <p class="">礼品卡</p>
             </div>
           </router-link>
         </li>

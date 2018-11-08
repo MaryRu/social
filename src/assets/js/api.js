@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { Toast } from 'mint-ui'
 // 线上
-// var url = 'http://47.100.216.85:8080/social_project/'
+var url = 'http://47.100.216.85:8080/social_project/'
 // 本地
-var url = 'http://115.158.20.211:8088/social_project'
+// var url = 'http://115.158.20.211:8088/social_project'
 // var token = localStorage.getItem('token')
 var uId = localStorage.getItem('uId')
 // axios 配置

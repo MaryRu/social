@@ -1,19 +1,24 @@
 // out:false
 @import '../variable.less';
+body{
+  min-height: 100%;
+}
 .login {
   // background: url('../../images/login-bg.png') no-repeat;
   // background-size: cover;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  // position: absolute;
+  // top: 0;
+  // bottom: 0;
+  // left: 0;
+  // right: 0;
+  height: 100vh;
+  min-height: 100%;
   background-color: rgba(#61bba0, .3);
   span {
     color: @font_color;
   }
   .login-top {
-    margin-top: 1.2rem;
+    padding-top: 1.2rem;
     text-align: center;
     img{
       width: 2rem;
@@ -46,8 +51,8 @@
       width: 100%;
     }
     .desc {
-      position: fixed;
-      bottom: .2rem;
+      // position: fixed;
+      // bottom: .2rem;
       color: #666;
     }
     .login-forget {

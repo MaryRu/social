@@ -4,16 +4,16 @@
     <div class="container">
       <ul>
         <li class="flex-align-center mb" v-for="(item, index) in couponList" :key="index">
-          <div class="img-box">
+          <div class="pic-box">
             <img :src="item.cPic" alt="">
           </div>
-          <div class="img-desc">
+          <div class="text-desc">
             <p>{{item.cName}}</p>
             <span>{{item.cConditions}}</span>
             <p>剩余{{item.cNum}}张</p>
-            <el-button round class="mt" v-show="item.cNum && item.cType === '0'" @click="submit(item)">立即领取</el-button>
-            <el-button round class="mt" disabled v-show="!item.cNum">暂无优惠券</el-button>
-            <el-button round class="mt" disabled v-show="item.cType === '1'">已领取</el-button>
+            <el-button round class="mt button" v-show="item.cNum && item.cType === '0'" @click="submit(item)">立即领取</el-button>
+            <el-button round class="mt button" disabled v-show="!item.cNum">暂无优惠券</el-button>
+            <el-button round class="mt button" disabled v-show="item.cType === '1'">已领取</el-button>
             <p><span>{{item.cAddtime}} 至 {{item.cEndtime}}</span></p>
           </div>
         </li>
@@ -31,22 +31,25 @@
   ul {
     li {
       background-color: rgba(243, 143, 143, .8);
-      .img-box {
-        width: 3rem;
-        height: 3rem;
+      .pic-box {
+        width: 2.5rem;
+        // height: 3rem;
         img {
           display: block;
           width: 100%;
           height: 100%;
         }
       }
-      .img-desc {
+      .text-desc {
         width: 55%;
         margin: .2rem auto;
         text-align: center;
-        border-radius: .5rem;
         padding: .2rem;
         color: #fff;  
+      }
+      .button {
+        margin-top: .2rem;
+        margin-bottom: .2rem;
       }
     }
   }
