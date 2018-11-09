@@ -87,7 +87,8 @@ export default {
           console.log(res)
           localStorage.setItem('uId', res.data.uId)
           localStorage.setItem('token', res.data.token)
-          this.$router.push('/')
+          // this.$router.push('/')
+          window.location.href = '#/'
         })
     }
   }
