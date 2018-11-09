@@ -3,7 +3,7 @@ import { Toast } from 'mint-ui'
 // 线上
 var url = 'http://47.100.216.85:8080/social_project/'
 // 本地
-// var url = 'http://115.158.20.211:8088/social_project'
+// var url = 'http://115.158.20.211:8080/social_project'
 // var token = localStorage.getItem('token')
 var uId = localStorage.getItem('uId')
 // axios 配置
@@ -134,6 +134,10 @@ export default {
   getRecordById (params) {
     // 会员卡
     return Post('/records/getRecordById', params)
+  },
+  countintegral (params) {
+    // 用户所得积分
+    return Post('/integral/countintegral', params)
   },
   ActivityInfoUser (params) {
     // 个人发起的活动

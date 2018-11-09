@@ -57,7 +57,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: index
+      component: member
     },
     {
       path: '/index',

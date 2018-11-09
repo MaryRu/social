@@ -5,7 +5,10 @@
         <div class="name-box flex-align-center">
           <img :src="userInfo.uImg" alt="" />
           <div>
-            <p class="ml">{{userInfo.uName}}</p>
+            <p class="ml flex-align name">
+              {{userInfo.uName}}
+              <i class="icon icon-vip" v-show="userInfo.uPic === '1'"></i>
+            </p>
             <span class="ml">查看个人主页</span>
           </div>
         </div>
@@ -30,12 +33,12 @@
               <p>会员卡</p>
             </router-link>
           </li>
-          <li>
+          <!-- <li>
             <router-link to="/coupon" class="flex-align-center">
               <i class="icon icon-coupon mr"></i>
               <p>优惠券</p>
             </router-link>
-          </li>
+          </li> -->
           <li>
             <router-link to="/active" class="flex-align-center">
               <i class="icon icon-activity mr"></i>
@@ -72,6 +75,9 @@
 </template>
 <style lang="less" scoped>
 @import '../../assets/less/member/index';
+.name {
+  font-size: .3rem;
+}
 .out {
   background-color: @theme_background;
   color: #fff;
@@ -86,6 +92,7 @@ export default {
   data () {
     return {
       cartLength: 3,
+      vipBage: false,
       userInfo: {
         uImg: 'http://img.hb.aicdn.com/fa8cdd61944741c29b4c3058da93ef1dd52e225e4c39-3tYG3q_fw658',
         uName: '没头脑的不高兴不开心'
@@ -95,15 +102,14 @@ export default {
   components: {
     Footer
   },
-  created () {
+  mounted () {
     let form = this.$qs.stringify({
       uId: uId
     })
     api.getUserById(form)
       .then((res) => {
         console.log(res)
-        this.userInfo.uImg = res.data.users.uImg
-        this.userInfo.uName = res.data.users.uName
+        this.userInfo = res.data.users
       })
   },
   methods: {

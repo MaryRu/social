@@ -1,26 +1,26 @@
 <template>
   <footer class="flex flex-align-center">
-    <div class="footer-item" :class="{active:urlRouter == '/index' || urlRouter == '/'}">
+    <!-- <div class="footer-item" :class="{active:urlRouter == '/index' || urlRouter == '/'}">
       <router-link to='./index'>
         <i class="icon footerIcon footerHomeIcon"></i>
         <p class="footer-title">首页</p>
       </router-link>
-    </div>
-    <div class="footer-item" :class="{active:urlRouter == '/group'}">
+    </div> -->
+    <!-- <div class="footer-item" :class="{active:urlRouter == '/group'}">
       <a href="#/group">
         <i class="icon footerIcon footerGroupIcon"></i>
         <p class="footer-title">颜络社</p>
       </a>
-    </div>
-    <div class="footer-item flex-center" @click="add">
+    </div> -->
+    <!-- <div class="footer-item flex-center" @click="add">
       <div class="addButton flex-center flex-align-center">
         <i class="icon footerIcon footerAddIcon"></i>
       </div>
-    </div>
-    <div class="footer-item" :class="{active:urlRouter == '/societyNews'}">
-      <a href='#/societyNews'>
+    </div> -->
+    <div class="footer-item" :class="{active:urlRouter == '/coupon'}">
+      <a href='#/coupon'>
         <i class="icon footerIcon footerNewsIcon"></i>
-        <p class="footer-title">颜粉圈</p>
+        <p class="footer-title">优惠券</p>
       </a>
     </div>
     <div class="footer-item" :class="{active:urlRouter == '/member'}">
@@ -29,7 +29,7 @@
         <p class="footer-title">我的</p>
       </a>
     </div>
-    <mt-popup v-model="popupVisible" popup-transition="popup-fade" class="flex-end" >
+    <!-- <mt-popup v-model="popupVisible" popup-transition="popup-fade" class="flex-end" >
       <div class="pop-box flex-align-end flex-wrap">
         <div class="flex pop-content">
           <div class="list-box">
@@ -47,7 +47,7 @@
         </div>
         <div class="icon icon-close pop-bottom" @click="close"></div>
       </div>
-    </mt-popup>
+    </mt-popup> -->
   </footer>
 </template>
 
@@ -61,10 +61,10 @@ export default {
   },
   methods: {
     add () {
-      this.popupVisible = true
+      // this.popupVisible = true
     },
     close () {
-      this.popupVisible = false
+      // this.popupVisible = false
     }
   }
 }
@@ -82,7 +82,7 @@ footer {
   box-shadow: 0 -2px 9px rgba(0, 0, 0, .1);
 }
 .footer-item {
-  width: 20%;
+  width: 50%;
   text-align: center;
   position: relative;
 }

@@ -8,7 +8,7 @@
       </header>
       <div class="flex-center flex-align-center img-box">
         <div>
-          <img src="../../assets/images/code.jpg" alt="">
+          <img src="../../assets/images/qrcode.png" alt="">
           <p class="mt">邀请好友获得积分奖励</p>
         </div>
       </div>
@@ -44,6 +44,7 @@
   img {
     width: 4rem;
     height: 4rem;
+    border-radius: 0;
   }
 }
 </style>

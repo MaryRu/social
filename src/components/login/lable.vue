@@ -133,7 +133,7 @@ export default {
         api.addlabel(form)
           .then((res) => {
             console.log(res)
-            this.$router.replace('/index')
+            this.$router.replace('/member')
           })
       }
     }

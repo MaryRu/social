@@ -1,9 +1,9 @@
 <template>
   <div class="post-edit">
     <mt-header>
-      <router-link to="/group" slot="left">
+      <a href="javascript: history.go(-1)" slot="left">
         <i class="el-icon-arrow-left"></i>
-      </router-link>
+      </a>
       <mt-button slot="right" @click="saveForm">
         <!-- <i :class="!!form.content?'active':''" class="icon finish-icon"></i> -->
         发表
@@ -138,7 +138,7 @@ export default {
         api.addTieba(form)
           .then((res) => {
             console.log(res)
-            this.$router.replace('/group')
+            this.$router.replace('/homePage')
           })
       }
     },

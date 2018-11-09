@@ -15,8 +15,8 @@
             </div>
           </div>
           <div class="card-content">
-            <p>卡内余额</p>
-            <h1>{{records.rBalance}}</h1>
+            <p>卡内积分</p>
+            <h1>{{rBalance}}</h1>
           </div>
         </div>
       </div>
@@ -98,8 +98,8 @@ export default {
       records: {
         uname: '歌颂者',
         levelname: '青铜会员',
-        rBalance: '0.00'
-      }
+      },
+      rBalance: '0.00'
     }
   },
   components: {
@@ -111,8 +111,11 @@ export default {
     })
     api.getRecordById(form)
       .then((res) => {
-        console.log(res)
         this.records = res.data.records
+      })
+    api.countintegral(form)
+      .then((res) => {
+        this.rBalance = res.data.count
       })
   }
 }
