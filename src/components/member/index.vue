@@ -94,7 +94,7 @@ export default {
       cartLength: 3,
       vipBage: false,
       userInfo: {
-        uImg: 'http://img.hb.aicdn.com/fa8cdd61944741c29b4c3058da93ef1dd52e225e4c39-3tYG3q_fw658',
+        uImg: '',
         uName: '没头脑的不高兴不开心'
       }
     }

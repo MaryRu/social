@@ -8,7 +8,7 @@ var url = 'http://tkbang.com.cn:8088'
 // var token = localStorage.getItem('token')
 var uId = localStorage.getItem('uId')
 // axios 配置
-// axios.defaults.timeout = 5000
+axios.defaults.timeout = 5000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 axios.defaults.baseURL = url
 
