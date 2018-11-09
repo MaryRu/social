@@ -90,7 +90,7 @@ ul {
 </style>
 <script>
 import Header from '../base/header-back'
-import api, {uId} from '../../assets/js/api'
+import api from '../../assets/js/api'
 export default {
   data () {
     return {
@@ -107,7 +107,7 @@ export default {
   },
   created () {
     let form = this.$qs.stringify({
-      uId: uId
+      uId: localStorage.getItem('uId')
     })
     api.getRecordById(form)
       .then((res) => {

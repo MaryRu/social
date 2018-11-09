@@ -85,8 +85,8 @@
 }
 </style>
 <script>
-import { MessageBox  } from 'mint-ui'
-import api, { uId } from '../../assets/js/api'
+import { MessageBox,Toast } from 'mint-ui'
+import api from '../../assets/js/api'
 import Footer from '../base/footer'
 export default {
   data () {
@@ -102,15 +102,22 @@ export default {
   components: {
     Footer
   },
-  mounted () {
-    let form = this.$qs.stringify({
-      uId: uId
-    })
-    api.getUserById(form)
-      .then((res) => {
-        console.log(res)
-        this.userInfo = res.data.users
+  created () {
+    if (!localStorage.getItem('uId')) {
+      console.log('11')
+      Toast('请先登录')
+      this.$router.push('/login')
+    } else {
+      let form = this.$qs.stringify({
+        uId: localStorage.getItem('uId')
       })
+      api.getUserById(form)
+        .then((res) => {
+          console.log(res)
+          this.userInfo = res.data.users
+        })
+    }
+    
   },
   methods: {
     out () {

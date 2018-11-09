@@ -162,7 +162,6 @@ import Header from '../base/header'
 import noPage from '../base/noPage'
 import Footer from '../base/footer'
 import api from '../../assets/js/api'
-let uId = localStorage.getItem('uId')
 export default {
   data () {
     return {
@@ -273,7 +272,7 @@ export default {
   methods: {
     couponList (status) {
       let form = this.$qs.stringify({
-        uId: uId,
+        uId: localStorage.getItem('uId'),
         status: status
       })
       api.getCouponInfoByUser(form)

@@ -85,10 +85,15 @@ export default {
       api.login(form)
         .then((res) => {
           console.log(res)
-          localStorage.setItem('uId', res.data.uId)
-          localStorage.setItem('token', res.data.token)
-          // this.$router.push('/')
-          window.location.href = '#/'
+          if (res.msg == '0') {
+            this.$router.push('personal')
+          } else {
+            localStorage.setItem('uId', res.data.uId)
+            localStorage.setItem('token', res.data.token)
+            // this.$router.push('/')
+            window.location.href = '#/'
+          }
+          
         })
     }
   }

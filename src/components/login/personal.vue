@@ -86,7 +86,7 @@ export default {
       sex: '',
       name: '',
       sign: '',
-      img: 'http://ofkzpykzq.bkt.clouddn.com/login.png',
+      img: 'http://phuqyyem1.bkt.clouddn.com/login.png',
       imageUrl: ''
     }
   },

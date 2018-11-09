@@ -52,7 +52,7 @@
 <script>
 import Header from '../base/header-back'
 import noPage from '../base/noPage'
-import api, {uId} from '../../assets/js/api'
+import api from '../../assets/js/api'
 export default {
   data () {
     return {
@@ -113,7 +113,7 @@ export default {
     // },
     getDesc () {
       let form = this.$qs.stringify({
-        uId: uId
+        uId: localStorage.getItem('uId')
       })
       api.activitydescUser(form)
         .then((res) => {
