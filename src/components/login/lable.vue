@@ -54,7 +54,6 @@ ul {
 import { Toast } from 'mint-ui'
 import Header from '../base/header-back'
 import api from '../../assets/js/api'
-let uId = localStorage.getItem('uId')
 export default {
   data () {
     return {
@@ -127,7 +126,7 @@ export default {
         Toast('选择属于你的标签吧~')
       } else {
         let form = this.$qs.stringify({
-          uId: uId,
+          uId: localStorage.getItem('uId'),
           lid: this.lable.toString()
         })
         api.addlabel(form)

@@ -78,7 +78,6 @@
 <script>
 import { Toast } from 'mint-ui'
 import api from '../../assets/js/api'
-let uId = localStorage.getItem('uId')
 export default {
   data () {
     return {
@@ -192,9 +191,8 @@ export default {
         var str = JSON.stringify(this.date)
         var birthday = str.slice(1, 11)
       }
-      console.log(uId)
       let form = this.$qs.stringify({
-        uId: uId,
+        uId: localStorage.getItem('uId'),
         uName: this.name,
         uIntroduction: this.sign,
         uSex: this.sex,

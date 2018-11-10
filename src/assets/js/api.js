@@ -1,14 +1,14 @@
 import axios from 'axios'
 import { Toast } from 'mint-ui'
 // 线上
-var url = 'http://tkbang.com.cn:8088'
-// var url = 'http://47.100.216.85:8080/social_project/'
+// var url = 'http://tkbang.com.cn:8088/'
+var url = 'http://47.100.216.85:8080/social_project/'
 // 本地
 // var url = 'http://115.158.20.211:8080/social_project'
 // var token = localStorage.getItem('token')
 var uId = localStorage.getItem('uId')
 // axios 配置
-axios.defaults.timeout = 5000
+// axios.defaults.timeout = 5000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 axios.defaults.baseURL = url
 
@@ -327,6 +327,14 @@ export default {
   useCoupon (params) {
     // 去使用优惠券
     return Post('/couponInfo/useCoupon', params)
+  },
+  selectCoupon (params) {
+    // 搜索优惠券券码
+    return Post('/couponInfo/selectCoupon', params)
+  },
+  getByCiId (params) {
+    // 核销优惠券
+    return Post('/couponInfo/getByCiId', params)
   }
 }
 export { uId }

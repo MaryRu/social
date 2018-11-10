@@ -24,6 +24,7 @@ import verified from '@/components/member/verified'
 import otherHome from '@/components/member/otherHome'
 import forgetPsd from '@/components/login/forgetPassword'
 import festival from '@/components/member/festival'
+import hexiao from '@/components/member/hexiao'
 import demo from '@/components/base/demo'
 
 Vue.use(Router)
@@ -153,6 +154,11 @@ export default new Router({
       path: '/festival',
       name: 'festival',
       component: festival
+    },
+    {
+      path: '/hexiao',
+      name: 'hexiao',
+      component: hexiao
     },
     {
       path: '/demo',

@@ -22,10 +22,6 @@
         <router-link to="/register"><p>立即注册</p></router-link>
       </div>
     </div>
-    <!-- <div class="footer" v-show="hidshow">
-      移动端点击输入框，弹出键盘，底部被顶起问题
-    </div> -->
-    <!-- <img class="loginBg" src="../../assets/images/login-bg.png" alt=""> -->
   </div>
 </template>
 
@@ -55,7 +51,7 @@ export default {
   },
   mounted () {
     this.clientHeight = document.documentElement.clientHeight
-    console.log(this.clientHeight)
+    // console.log(this.clientHeight)
     let that = this
     window.onresize = function () {
       if (document.documentElement.clientHeight < that.clientHeight) {
@@ -85,8 +81,13 @@ export default {
       api.login(form)
         .then((res) => {
           console.log(res)
+          if (this.phone === '18200000000') {
+            this.$router.push('/hexiao')
+            return false
+          }
           if (res.msg == '0') {
             this.$router.push('personal')
+            localStorage.setItem('uId', res.data.uId)
           } else {
             localStorage.setItem('uId', res.data.uId)
             localStorage.setItem('token', res.data.token)
